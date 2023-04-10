@@ -18,7 +18,7 @@ Conceito do problema à se resolver
     {
       "p1": [10, 20],
       "p2": [10, 1000],
-      "direcao": "oeste-leste",
+      "direcao": "leste",
       "faixas": [
         {
             "name": "acostamento",

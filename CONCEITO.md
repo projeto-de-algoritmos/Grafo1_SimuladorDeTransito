@@ -23,18 +23,15 @@ Conceito do problema à se resolver
         {
             "name": "acostamento",
             "relativo": "norte",
-            "index": 0,
         },
         {
             "name": "geral",
             "sentido": "leste",
             "relativo": "norte",
-            "index": 1,
         },
         {
             "name": "acostamento",
             "relativo": "norte",
-            "index": 2,
         },
       ]
     }

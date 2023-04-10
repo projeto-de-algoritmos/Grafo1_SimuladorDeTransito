@@ -81,7 +81,6 @@ class Drawer():
 class Faixa():
     tipo: faixa_tipo
     direção_de_movimento: direcao 
-    index: int
     sentido: direcao
 
 class Pista():
@@ -126,7 +125,6 @@ class FaixaDrawer(DrawItem):
 
     def draw(self, dlt: float, scr: pygame.Surface, p1, p2, direcao: direcao) -> float:
         faixa = self.faixa
-        x,y,w,h: float
 
         cor = COR_FAIXA
         if self.tipo == "acostamento":
@@ -134,16 +132,9 @@ class FaixaDrawer(DrawItem):
     
         # botar setas pra indicar direção?
 
-        if direcao == "leste" or direcao == "oeste":
-            self.x, self.y, self.w, self.h = rect(
-                [p1[0], p1[1] + dlt], [p2[0], p2[1] + dlt]
-            )
-        else:
-            self.x, self.y, self.w, self.h = rect(
-                [p1[0] + dlt, p1[1]], [p2[0] + dlt, p2[1]]
-            )
+        rect = get_params_directional_rect(p1, p2, direcao, dlt)
 
-        pygame.draw.rect(scr, cor, get_params_directional_rect(p1, p2, direcao, dlt))
+        pygame.draw.rect(scr, cor, rect)
 
 class PistaDrawer(DrawItem):
     pista: Pista = None

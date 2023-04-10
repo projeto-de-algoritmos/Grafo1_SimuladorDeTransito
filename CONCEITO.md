@@ -90,6 +90,8 @@ Note como algumas ações são mutualmente exclusivas.
 
 A cada segundo (da simulação), cada player calcula sua melhor estratégia dado o cenário do jogo pra chegar ao seu destino, e executa a ação.
 
+O próximo passo é escolhido por cada carro baseado numa busca DFS ou BFS (à determinar sistema correto).
+
 No caso acima, o que deveria ser feito seria o ato totalmente seguro e recomendado de
 ultrapassar pelo acostamento.
 

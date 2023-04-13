@@ -6,18 +6,23 @@ from enum import Enum
 import traceback
 
 DEBUG = True
+
+
 def dprint(*values: object):
     print("[DEBUG]", *values)
+
 
 def eprint(*values: object):
     traceback.print_stack()
     print("[ERROR]", *values)
+
 
 def enum_list(values: Enum):
     r = []
     for value in values:
         r.append(value.name)
     return sorted(r)
+
 
 point = list[int, int]
 cor = tuple[int, int, int]
@@ -183,7 +188,7 @@ class PistaDrawer(DrawItem):
         else:
             dprint(5)
             eprint("Tipo de faixa irreconhecivel: " +
-                  str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
+                   str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
             exit(1)
 
     def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa, direcao: Direcao) -> float:

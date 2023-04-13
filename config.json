@@ -1,46 +1,43 @@
 {
-    "pistas": [
-      {
-        "p1": [10, 20],
-        "p2": [300, 60],
-        "direcao": "leste",
-        "faixas": [
-          {
-              "tipo": "acostamento",
-              "sentido": "parado",
-              "relativo": "norte"
-          },
-          {
-              "tipo": "geral",
-              "sentido": "leste",
-              "relativo": "norte"
-          },
-          {
-            "tipo": "geral",
-            "sentido": "oeste",
-            "relativo": "norte"
+  "pistas": [
+    {
+      "p1": [10, 20],
+      "p2": [300, 60],
+      "direcao": "leste",
+      "faixas": [
+        {
+          "tipo": "acostamento",
+          "sentido": "parado",
+          "relativo": "norte"
         },
-          {
-              "tipo": "acostamento",
-              "sentido": "parado",
-              "relativo": "norte"
-          }
-        ]
-      }
-    ],
-    "carros": [
-      {
-        "nome": "outro motorista",
-        "pista": 0,
-        "posição": [10, 25],
-        "velocidade": [0, 11.11],
-        "destino": [10, 1000],
-        "personalidade": "segurança acima de tudo",
-        "vingativo": true,
-        "velocidade_relativa_aceitavel": 1.2,
-        "aceleracao": "4.0"
-      }
-    ],
+        {
+          "tipo": "geral",
+          "sentido": "leste",
+          "relativo": "norte"
+        },
+        {
+          "tipo": "geral",
+          "sentido": "oeste",
+          "relativo": "norte"
+        },
+        {
+          "tipo": "acostamento",
+          "sentido": "parado",
+          "relativo": "norte"
+        }
+      ]
+    }
+  ],
+  "carros": {
+    "motorista1": {
+      "nome": "",
+      "pista": 0,
+      "posição": [10, 25],
+      "velocidade": [0, 11.11],
+      "destino": [10, 1000],
+      "velocidade_relativa_maxima": 1.2,
+      "aceleracao": "4.0"
+    },
     "player": {
       "nome": "player",
       "pista": 0,
@@ -49,7 +46,8 @@
       "destino": [10, 1000],
       "personalidade": "seleção natural impera",
       "vingativo": false,
-      "velocidade_relativa_aceitavel": 1.8,
+      "velocidade_relativa_maxima": 1.8,
       "aceleracao": "8.333"
     }
   }
+}

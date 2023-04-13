@@ -30,10 +30,10 @@ cor = tuple[int, int, int]
 Direcao = Enum('Direcao', "leste oeste norte sul parado")
 FaixaTipo = Enum('FaixaTipo', "acostamento geral")
 
-COR_ACOSTAMENTO = (30, 30, 200)
-COR_FAIXA = (15, 200, 15)
+COR_ACOSTAMENTO = (60, 60, 60)
+COR_FAIXA = (15, 15, 15)
 COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
-COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 200, 0)
+COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 LARGURA_DIVISORIA = 2
@@ -132,7 +132,7 @@ def rect(p1: point, p2: point):
     return (x, y, w, h)
 
 
-def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: float):
+def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: float, largura: float):
     x: float
     y: float
     w: float
@@ -140,11 +140,11 @@ def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: flo
 
     if direcao == Direcao["leste"] or direcao == Direcao["oeste"]:
         x, y, w, h = rect(
-            [p1[0], p1[1] + dlt], [p2[0], p2[1] + dlt]
+            [p1[0], p1[1] + dlt], [p2[0], p1[1] + dlt + largura]
         )
     else:
         x, y, w, h = rect(
-            [p1[0] + dlt, p1[1]], [p2[0] + dlt, p2[1]]
+            [p1[0] + dlt, p1[1]], [p1[0] + dlt + largura, p2[1]]
         )
 
     return (x, y, w, h)
@@ -190,6 +190,8 @@ class PistaDrawer(DrawItem):
 
         self.largura_faixas = self.largura_sem_divisoria / self.n_faixas
 
+        dprint(self.largura_faixas)
+
     def draw(self, scr: pygame.Surface):
         last_faixa = None
         dlt = 0.0
@@ -198,9 +200,8 @@ class PistaDrawer(DrawItem):
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
-                dlt = fx*self.largura_faixas
-                self.draw_divisoria(
-                    dlt, scr, last_faixa, faixa, self.pista.direcao)
+                dlt = fx*self.largura_faixas + dv*LARGURA_DIVISORIA
+                self.draw_divisoria(dlt, scr, last_faixa, faixa)
                 dv += 1
 
             dlt = fx*self.largura_faixas + dv*LARGURA_DIVISORIA
@@ -216,27 +217,25 @@ class PistaDrawer(DrawItem):
         elif tipos == ["acostamento", "acostamento"]:
             eprint("acostamento seguido de acostamento")
             exit(1)
-        elif faixa_anterior.tipo == faixa_proxima.tipo:
+        elif faixa_anterior.sentido == faixa_proxima.sentido:
             return COR_DIVISORIA_FAIXA_SENTIDO_IGUAL
-        elif faixa_anterior.sentido != faixa_anterior.sentido:
+        elif faixa_anterior.sentido != faixa_proxima.sentido:
             return COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE
         else:
             eprint("Tipo de faixa irreconhecivel: " +
                    str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
             exit(1)
 
-    def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa, direcao: Direcao) -> float:
+    def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
-        dlt = dlt + LARGURA_DIVISORIA
         rect = get_params_directional_rect(
-            self.pista.p1, self.pista.p2, direcao, dlt)
+            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_DIVISORIA)
+        dprint("draw divisoria color", cor, rect)
 
         pygame.draw.rect(scr, cor, rect)
 
-        return dlt
-
-    def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa) -> float:
+    def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
         cor = COR_FAIXA
         if faixa.tipo == FaixaTipo["acostamento"]:
             cor = COR_ACOSTAMENTO
@@ -244,8 +243,8 @@ class PistaDrawer(DrawItem):
         # botar setas pra indicar direção?
 
         rect = get_params_directional_rect(
-            self.pista.p1, self.pista.p2, self.pista.direcao, dlt)
-
+            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, self.largura_faixas)
+        dprint("draw faixa color", cor, rect)
         pygame.draw.rect(scr, cor, rect)
 
         return dlt

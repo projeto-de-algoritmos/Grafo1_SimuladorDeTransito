@@ -30,8 +30,8 @@ cor = tuple[int, int, int]
 Direcao = Enum('Direcao', "leste oeste norte sul parado")
 FaixaTipo = Enum('FaixaTipo', "acostamento geral")
 
-COR_ACOSTAMENTO = (30, 30, 30)
-COR_FAIXA = (15, 15, 15)
+COR_ACOSTAMENTO = (30, 30, 200)
+COR_FAIXA = (15, 200, 15)
 COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
 COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 200, 0)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
@@ -116,7 +116,6 @@ class Pista():
     p2: point
     direcao: Direcao
     faixas: list[Faixa]
-    step_w: int = None
 
     def __init__(self, p1: point, p2: point, direcao: Direcao, faixas: list[Faixa]):
         self.p1 = p1
@@ -153,40 +152,75 @@ def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: flo
 
 class PistaDrawer(DrawItem):
     pista: Pista = None
+    n_divisorias: int
+    n_faixas: int
+    largura: float
+    largura_sem_divisoria: float
+    largura_faixas: float
+    comprimento: float
+    l_eixo: int
+    c_eixo: int
 
     def __init__(self, pista: Pista):
         self.pista = pista
+        self.n_faixas = len(pista.faixas)
+        self.n_divisorias = self.n_faixas - 1
+
+        if pista.direcao.name == "leste" or pista.direcao.name == "oeste":
+            self.l_eixo = 1
+            self.c_eixo = 0
+        else:
+            self.l_eixo = 0
+            self.c_eixo = 1
+
+        self.largura = -min(pista.p1[self.l_eixo], pista.p2[self.l_eixo]) + \
+            max(pista.p1[self.l_eixo], pista.p2[self.l_eixo])
+
+        self.largura_sem_divisoria = self.largura - \
+            LARGURA_DIVISORIA * self.n_divisorias
+
+        self.comprimento = -min(pista.p1[self.c_eixo], pista.p2[self.c_eixo]) + max(
+            pista.p1[self.c_eixo], pista.p2[self.c_eixo])
+
+        if self.largura <= 0:
+            eprint("impossível de desenhar pista, largura é 0")
+        if self.largura_sem_divisoria <= 0:
+            eprint(
+                "impossível de desenhar pista, largura não comporta suas faixas e divisorias")
+
+        self.largura_faixas = self.largura_sem_divisoria / self.n_faixas
 
     def draw(self, scr: pygame.Surface):
         last_faixa = None
-        dlt = 0
+        dlt = 0.0
+        fx = 0
+        dv = 0
+
         for faixa in self.pista.faixas:
             if last_faixa is not None:
-                dlt = dlt + \
-                    self.draw_divisoria(
-                        dlt, scr, last_faixa, faixa, self.pista.direcao)
+                dlt = fx*self.largura_faixas
+                self.draw_divisoria(
+                    dlt, scr, last_faixa, faixa, self.pista.direcao)
+                dv += 1
 
-            dlt = dlt = self.draw_faixa(dlt, scr, faixa)
+            dlt = fx*self.largura_faixas + dv*LARGURA_DIVISORIA
+            self.draw_faixa(dlt, scr, faixa)
 
             last_faixa = faixa
+            fx += 1
 
     def get_cor_divisoria(self, faixa_anterior: Faixa, faixa_proxima: Faixa) -> cor:
         tipos = enum_list([faixa_anterior.tipo, faixa_proxima.tipo])
         if tipos == ["acostamento", "geral"]:
-            dprint(1)
             return COR_DIVISORIA_FAIXA_ACOSTAMENTO
         elif tipos == ["acostamento", "acostamento"]:
-            dprint(2)
             eprint("acostamento seguido de acostamento")
             exit(1)
         elif faixa_anterior.tipo == faixa_proxima.tipo:
-            dprint(3)
             return COR_DIVISORIA_FAIXA_SENTIDO_IGUAL
         elif faixa_anterior.sentido != faixa_anterior.sentido:
-            dprint(4)
             return COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE
         else:
-            dprint(5)
             eprint("Tipo de faixa irreconhecivel: " +
                    str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
             exit(1)
@@ -196,7 +230,7 @@ class PistaDrawer(DrawItem):
 
         dlt = dlt + LARGURA_DIVISORIA
         rect = get_params_directional_rect(
-            faixa_anterior.p1, faixa_anterior.p2, direcao, dlt)
+            self.pista.p1, self.pista.p2, direcao, dlt)
 
         pygame.draw.rect(scr, cor, rect)
 
@@ -210,9 +244,11 @@ class PistaDrawer(DrawItem):
         # botar setas pra indicar direção?
 
         rect = get_params_directional_rect(
-            self.pista.p1, self.pista.p2, faixa.sentido, dlt)
+            self.pista.p1, self.pista.p2, self.pista.direcao, dlt)
 
         pygame.draw.rect(scr, cor, rect)
+
+        return dlt
 
 
 def read_and_parse_json_file(path="config.json"):

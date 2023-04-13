@@ -250,6 +250,18 @@ class PistaDrawer(DrawItem):
         return dlt
 
 
+class Car():
+    pista: Pista
+
+
+class CarDrawer():
+    pass
+
+
+class Simulacao():
+    pass
+
+
 def read_and_parse_json_file(path="config.json"):
     with open(path, "r") as f:
         data = json.load(f)

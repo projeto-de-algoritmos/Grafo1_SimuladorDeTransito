@@ -1,8 +1,3 @@
-## Wikipedia Crossreferencer
-
-- Já começei e tem um código decente.
-- Grafos são naturalmente aplicáveis
-
 ## Simulador de Caminho Ótimo no Transito (Teoria dos Jogos)
 
 - começar do zero
@@ -91,9 +86,3 @@ O próximo passo é escolhido por cada carro baseado numa busca DFS ou BFS (à d
 
 No caso acima, o que deveria ser feito seria o ato totalmente seguro e recomendado de
 ultrapassar pelo acostamento.
-
-## Poker Oracle
-
-- Joga uma partida de poker contra máquina, onde você pode usar análises complexas de jogadas (e a máquina também)
-- Parece mais complicado do que parece
-- Precisa de DFS ou BFS pra fazer isso mesmo?

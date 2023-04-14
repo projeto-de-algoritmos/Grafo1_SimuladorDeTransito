@@ -4,10 +4,10 @@
 **Conteúdo da Disciplina**: Projetos de Algoritmos<br>
 
 ## Alunos
-|Matrícula | Aluno |
-| -- | -- |
-| 18/0027239  |  Renato Britto Araujo |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| Matrícula  | Aluno                |
+| ---------- | -------------------- |
+| 18/0027239 | Renato Britto Araujo |
+| xx/xxxxxx  | xxxx xxxx xxxxx      |
 
 ## Sobre 
 
@@ -34,7 +34,7 @@ Pela alta quantidade de computação e baixa prioridade de desenvolvimento em pe
 
 Além disso, existe um parâmetro chamado de ***tick***, que indica quantos milissegundos de simulação cada passo irá tomar. Quanto mais segundos, menos intesa é a computação porque menos passos são calculados.
 
-A configuração é feita a partir de uma arquivo json. No geral, criar uma configuração nova requer algum esforço, e portanto recomenda-se usar alguma dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `make load_cenario name=cenario/{nome_do_cenario}.json` para adicionar a configuração desejada (ou copie manualmente).  
+O cenário é feita a partir de um arquivo json. No geral, criar um cenário novo requer algum esforço, e portanto recomenda-se usar algum dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `make load_cenario file=cenario/{nome_do_cenario}.json` para adicionar o cenário desejado (ou copie manualmente).  
 
 O projeto também contem um possui uma interface gráfica, onde a simulação é executava visualmente para ficar intuitivo o uso.
 
@@ -87,7 +87,7 @@ Ou
 make run
 ```
 
-Note que o cenário carregado no arquivo `config.json` por padrão pode ser inválido.
+Note que o cenário carregado no arquivo `cenario.json` por padrão pode ser inválido.
 
 ### Gerenciar cenários
 
@@ -98,12 +98,12 @@ make list_cenarios
 
 Carregar um cenário
 ```
-make load_cenario name=cenario/{nome_do_cenario}.json  
+make load_cenario file=cenario/{nome_do_cenario}.json  
 ```
 
 Salvar um cenário
 ```
-make save_cenario name=cenario/{nome_do_cenario}.json
+make save_cenario file=cenario/{nome_do_cenario}.json
 ```
 
 ## Outros 

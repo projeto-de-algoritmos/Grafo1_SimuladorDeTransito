@@ -4,10 +4,10 @@ list_cenarios:
 	@echo ""
 
 save_cenario:
-	cat config.json > cenarios/$(name).json
+	cat cenario.json > $(file)
 
 load_cenario:
-	cat cenarios/$(name).json > config.json
+	cat $(file) > cenario.json
 
 run:
-	python3 src/main.py
+	python3 -m src

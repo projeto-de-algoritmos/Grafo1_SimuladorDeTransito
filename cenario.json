@@ -1,0 +1,52 @@
+{
+  "pistas": [
+    {
+      "p1": [50, 50],
+      "p2": [500, 100],
+      "direcao": "leste",
+      "velocidade_maxima": 80,
+      "faixas": [
+        {
+          "tipo": "acostamento",
+          "sentido": "parado",
+          "relativo": "norte"
+        },
+        {
+          "tipo": "geral",
+          "sentido": "leste",
+          "relativo": "norte"
+        },
+        {
+          "tipo": "geral",
+          "sentido": "oeste",
+          "relativo": "norte"
+        },
+        {
+          "tipo": "acostamento",
+          "sentido": "parado",
+          "relativo": "norte"
+        }
+      ]
+    }
+  ],
+  "carros": {
+    "motorista1": {
+      "nome": "",
+      "pista": 0,
+      "posição": [10, 25],
+      "velocidade": [0, 11.11],
+      "destino": [10, 1000],
+      "velocidade_relativa_maxima_aceitavel": 1.2,
+      "aceleracao": "4.0"
+    },
+    "player": {
+      "nome": "player",
+      "pista": 0,
+      "posição": [10, 20],
+      "velocidade": [0, 16.66],
+      "destino": [10, 1000],
+      "velocidade_relativa_maxima_aceitavel": 1.8,
+      "aceleracao": "8.333"
+    }
+  }
+}

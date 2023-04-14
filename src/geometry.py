@@ -14,7 +14,6 @@ segment = list[point, point]
 linha = list[point, point]
 poligno = list[point]
 
-
 def distancia_euclidiana(p1: point, p2: point):
     return math.sqrt((p1[X] - p2[X]) ** 2 + (p1[Y] - p2[Y]) ** 2)
 

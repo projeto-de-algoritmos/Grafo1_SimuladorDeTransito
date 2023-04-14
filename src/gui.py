@@ -1,8 +1,9 @@
 import pygame
 import datetime
 import time
-from sim import *
-from geometry import *
+
+from .sim import *
+from .geometry import *
 
 # tempo
 SEC_IN_MICROSECONDS = 10e6
@@ -16,7 +17,7 @@ COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 # tamanho
 LARGURA_DIVISORIA = 2
-LARGURA_FAIXA = 20
+LARGURA_FAIXA = 6
 
 
 def get_rect_from_points(p1: point, p2: point):
@@ -104,6 +105,8 @@ class PistaDrawer(DrawItem):
         fx = 0
         dv = 0
 
+        print("\n")
+
         for faixa in self.pista.faixas:
             if last_faixa is not None:
                 dlt = fx*LARGURA_FAIXA + dv*LARGURA_DIVISORIA
@@ -138,7 +141,7 @@ class PistaDrawer(DrawItem):
         v12 = get_vetor(p1, p2)
         v12 = rotacionar_vetor_horario(v12, rad=math.pi/2)
         v12 = normalizar_vetor(v12)
-        v12 = multiplica_vetor(v12, self.largura/2)
+        v12 = multiplica_vetor(v12, -self.largura/2)
 
         # ponto base do retangulo da pista
         pb = soma_vetor(p1, v12)
@@ -149,31 +152,28 @@ class PistaDrawer(DrawItem):
         vdelta = multiplica_vetor(vdelta, dlt)
 
         # vetor de deslocamento da largura da faixa ou divisoria
-        vlargura = normalizar_vetor(vdelta)
-        vlargura = multiplica_vetor(vdelta, clargura)
+        vlargura = multiplica_vetor(v12, -1)
+        vlargura = normalizar_vetor(v12)
+        vlargura = multiplica_vetor(vlargura, clargura)
 
         # pontos do retangulo da faixa ou divisoria, onde ret1 é mais próximo de pb que ret2
         ret1 = soma_vetor(pb, vdelta)
         ret2 = soma_vetor(ret1, vlargura)
         ret3 = soma_vetor(ret1, get_vetor(p1, p2))
-        ret4 = soma_vetor(ret4, get_vetor(p1, p2))
+        ret4 = soma_vetor(ret2, get_vetor(p1, p2))
 
         # pontos do retangulo da faixa ou divisoria
-        return [ret1, ret2, ret3, ret4]
+        # note como a ordem dos pontos é expressa como um polígno retangular
+        return [ret1, ret2, ret4, ret3]
 
     def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
-        rect = get_rect_with_direcao_and_delta(
-            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_DIVISORIA)
-        dprint("draw divisoria color", cor, rect)
-
         rect = self.montar_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA)
 
-        pygame.draw.polygon(
-            rect_srfc.
-        )
+        dprint("draw divisoria color", cor, rect)
+        pygame.draw.polygon(scr, cor, rect)
 
     def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
         cor = COR_FAIXA
@@ -182,10 +182,11 @@ class PistaDrawer(DrawItem):
 
         # botar setas pra indicar direção?
 
-        rect = get_rect_with_direcao_and_delta(
-            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_FAIXA)
+        rect = self.montar_retangulo(
+            self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
+
         dprint("draw faixa color", cor, rect)
-        pygame.draw.rect(scr, cor, rect)
+        pygame.draw.polygon(scr, cor, rect)
 
         return dlt
 

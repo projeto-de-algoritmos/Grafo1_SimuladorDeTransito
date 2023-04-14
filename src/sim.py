@@ -1,7 +1,8 @@
 import json
 from enum import Enum
 import traceback
-from geometry import point
+
+from .geometry import point
 
 DEBUG = True
 
@@ -64,8 +65,8 @@ class Simulation():
 
     running: bool = False
 
-    def __init__(self, config_file="config.json"):
-        pistas, carros = self.read(config_file)
+    def __init__(self, cenario_file):
+        pistas, carros = self.read(cenario_file)
         self.pistas = pistas
         self.carros = carros
 
@@ -74,8 +75,8 @@ class Simulation():
     def get_pistas_and_carros(self):
         return self.pistas, self.carros
 
-    def read(self, config_file="config.json"):
-        data = self.read_and_parse_json_file(config_file)
+    def read(self, cenario_file):
+        data = self.read_and_parse_json_file(cenario_file)
 
         pistas = []
 

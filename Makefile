@@ -1,3 +1,11 @@
+venv:
+	python -m venv .venv
+	@echo "Para ativar o ambiente virtual, execute:"
+	@echo "source .venv/bin/activate"
+
+deps:
+	pip3 install -r requirements.txt
+
 list_cenarios:
 	@echo ""
 	@ls cenarios/* | awk 'gsub("cenarios/","")' | awk 'gsub(".json","")'

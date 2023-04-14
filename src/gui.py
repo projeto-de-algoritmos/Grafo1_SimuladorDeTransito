@@ -63,7 +63,7 @@ class Drawer():
         self.draw_items = draw_items
         self.draw_items_locked = False
 
-    def draw(self, scr: pygame.Surface):
+    def draw(self, scr: pygame.Surface, scale: int = 1):
         self.draw_items_locked = True
 
         scr.fill((255, 255, 255))
@@ -192,24 +192,38 @@ class PistaDrawer(DrawItem):
 
 
 class GUI():
-    max_fps: float = 60
     step_time = None
     last_time = None
-
-    scr: pygame.Surface = None
     running = False
     drawer = None
 
+    resolution: vetor
+    virtual_resolution: vetor
+    fullscreen: bool
+    render_scale: int
+    max_fps: float
+
+    scr: pygame.Surface = None
+
     pending_update = None
 
-    def __init__(self, max_fps=60):
+    def __init__(self, max_fps=60, resolution=[600, 500], fullscreen=False, render_scale=2):
         pygame.init()
         self.running = True
         self.max_fps = max_fps
         self.step_time = datetime.timedelta(seconds=1/self.max_fps)
+        self.resolution = resolution
+        self.virtual_resolution = multiplica_vetor(resolution, render_scale)
+        self.fullscreen = fullscreen
+        self.render_scale = render_scale
 
         self.drawer = Drawer([])
-        self.scr = pygame.display.set_mode((600, 500))
+        self.scr = pygame.display.set_mode(tuple(resolution))
+
+        if self.fullscreen:
+            pygame.display.toggle_fullscreen()
+        
+        
 
     def render(self):
         self.apply_pending_update()
@@ -220,7 +234,7 @@ class GUI():
             if event.type == pygame.QUIT:
                 raise Exception("user closed program")
 
-        self.drawer.draw(self.scr)
+        self.drawer.draw(self.scr, scale=self.render_scale)
 
         if self.last_time is not None:
             diff = datetime.datetime.now() - self.last_time

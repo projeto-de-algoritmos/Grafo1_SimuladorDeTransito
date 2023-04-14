@@ -4,11 +4,7 @@ X = 0
 Y = 1
 VETOR_RAIZ = [0,0]
 
-class Point():
-    x: int
-    y: int
-
-
+vetor = list[int,int]
 point = list[int, int]
 segment = list[point, point]
 linha = list[point, point]

@@ -108,9 +108,13 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 
 ## Outros 
 
+### Configuração do app
+
+É feita com injeção de dependências na main. Os parametros estão em `config.json`.
+
 [TODO]
-- Trocar sistema de pista retangular por pontos. (cada pista é representada por uma linha, e o renderizador se dá o trabalho de calcular o retângulo)
-- O renderizador faz pistas diagonais. Agora a direção dos carros não será leste ou oeste, e sim posição relativa na própria pista.
+- Criar arquivo de configuração do app para injeção de dependências
+- Criar sistema de logging
 - Criar sistema simulador
 - Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
 - Desenhar carro como dependente da pista em que está.

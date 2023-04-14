@@ -2,6 +2,7 @@ import pygame
 import datetime
 import time
 from sim import *
+from geometry import *
 
 # tempo
 SEC_IN_MICROSECONDS = 10e6
@@ -82,9 +83,6 @@ class Drawer():
 class PistaDrawer(DrawItem):
     pista: Pista = None
 
-    p1: point
-    p2: point
-
     n_divisorias: int
     n_faixas: int
     largura: float
@@ -97,17 +95,8 @@ class PistaDrawer(DrawItem):
         self.n_faixas = len(pista.faixas)
         self.n_divisorias = self.n_faixas - 1
 
-        if pista.direcao.name == "leste" or pista.direcao.name == "oeste":
-            self.l_eixo = 1
-            self.c_eixo = 0
-        else:
-            self.l_eixo = 0
-            self.c_eixo = 1
-
         self.largura = LARGURA_DIVISORIA*self.n_divisorias + LARGURA_FAIXA*self.n_faixas
-
-        self.comprimento = -min(pista.p1[self.c_eixo], pista.p2[self.c_eixo]) + max(
-            pista.p1[self.c_eixo], pista.p2[self.c_eixo])
+        self.comprimento = distancia_euclidiana(self.pista.p1, self.pista.p2)
 
     def draw(self, scr: pygame.Surface):
         last_faixa = None
@@ -143,6 +132,35 @@ class PistaDrawer(DrawItem):
                    str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
             exit(1)
 
+    def montar_retangulo(self, p1: point, p2: point, dlt: float, clargura: float) -> poligno:
+
+        # vetor perpendicular a pista, seu tamanho é metade da largura da pista
+        v12 = get_vetor(p1, p2)
+        v12 = rotacionar_vetor_horario(v12, rad=math.pi/2)
+        v12 = normalizar_vetor(v12)
+        v12 = multiplica_vetor(v12, self.largura/2)
+
+        # ponto base do retangulo da pista
+        pb = soma_vetor(p1, v12)
+
+        # vetor de deslocamento do ponto mais proximo a pb da faixa ou divisoria em relacao a pista
+        vdelta = multiplica_vetor(v12, -1)
+        vdelta = normalizar_vetor(vdelta)
+        vdelta = multiplica_vetor(vdelta, dlt)
+
+        # vetor de deslocamento da largura da faixa ou divisoria
+        vlargura = normalizar_vetor(vdelta)
+        vlargura = multiplica_vetor(vdelta, clargura)
+
+        # pontos do retangulo da faixa ou divisoria, onde ret1 é mais próximo de pb que ret2
+        ret1 = soma_vetor(pb, vdelta)
+        ret2 = soma_vetor(ret1, vlargura)
+        ret3 = soma_vetor(ret1, get_vetor(p1, p2))
+        ret4 = soma_vetor(ret4, get_vetor(p1, p2))
+
+        # pontos do retangulo da faixa ou divisoria
+        return [ret1, ret2, ret3, ret4]
+
     def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
@@ -150,7 +168,12 @@ class PistaDrawer(DrawItem):
             self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_DIVISORIA)
         dprint("draw divisoria color", cor, rect)
 
-        pygame.draw.rect(scr, cor, rect)
+        rect = self.montar_retangulo(
+            self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA)
+
+        pygame.draw.polygon(
+            rect_srfc.
+        )
 
     def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
         cor = COR_FAIXA

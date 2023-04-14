@@ -1,6 +1,7 @@
 import json
 from enum import Enum
 import traceback
+from geometry import point
 
 DEBUG = True
 
@@ -23,7 +24,6 @@ def enum_list(values: Enum):
     return sorted(r)
 
 
-point = list[int, int]
 cor = tuple[int, int, int]
 
 Direcao = Enum('Direcao', "leste oeste norte sul parado")

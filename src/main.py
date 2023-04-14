@@ -1,6 +1,6 @@
 from gui import GUI
 from sim import Simulation
-
+from sim import eprint
 
 def main():
     sim = Simulation(config_file="config.json")
@@ -12,7 +12,15 @@ def main():
 
         pistas, carros = sim.get_pistas_and_carros()
         gui.update(pistas, carros)
-        gui.render()
+        
+        try:
+            gui.render()
+        except Exception as e:
+            if str(e) == "user closed program":
+                break
+            else:
+                eprint("falha inesperada ao renderizar", e)
+                break
 
     gui.exit()
 

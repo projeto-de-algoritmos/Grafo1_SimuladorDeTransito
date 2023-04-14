@@ -109,9 +109,15 @@ make save_cenario name=cenario/{nome_do_cenario}.json
 ## Outros 
 
 [TODO]
-- Trocar sistema de pista retangular por pontos.
-- Desenhar carro, levando conta a pista. 
-- Cada carro deve estar dentro do sistema de pistas, portanto cada carro é um objeto visualmente "dependente" da pista.
+- Trocar sistema de pista retangular por pontos. (cada pista é representada por uma linha, e o renderizador se dá o trabalho de calcular o retângulo)
+- O renderizador faz pistas diagonais. Agora a direção dos carros não será leste ou oeste, e sim posição relativa na própria pista.
+- Criar sistema simulador
+- Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
+- Desenhar carro como dependente da pista em que está.
+- Criar interaface gráfica com seguintes operações:
+  - Pausar/Resumir a simulação
+  - Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
+  - Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
 
 [IGNORE]
 

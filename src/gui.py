@@ -15,7 +15,8 @@ COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 # tamanho
 LARGURA_DIVISORIA = 2
-LARGURA_FAIXA = 10
+LARGURA_FAIXA = 20
+
 
 def get_rect_from_points(p1: point, p2: point):
     x = min(p1[0], p2[0])
@@ -78,15 +79,15 @@ class Drawer():
         self.draw_items = draw_items
 
 
-
-
 class PistaDrawer(DrawItem):
     pista: Pista = None
+
+    p1: point
+    p2: point
+
     n_divisorias: int
     n_faixas: int
     largura: float
-    largura_sem_divisoria: float
-    largura_faixas: float
     comprimento: float
     l_eixo: int
     c_eixo: int
@@ -103,24 +104,10 @@ class PistaDrawer(DrawItem):
             self.l_eixo = 0
             self.c_eixo = 1
 
-        self.largura = -min(pista.p1[self.l_eixo], pista.p2[self.l_eixo]) + \
-            max(pista.p1[self.l_eixo], pista.p2[self.l_eixo])
-
-        self.largura_sem_divisoria = self.largura - \
-            LARGURA_DIVISORIA * self.n_divisorias
+        self.largura = LARGURA_DIVISORIA*self.n_divisorias + LARGURA_FAIXA*self.n_faixas
 
         self.comprimento = -min(pista.p1[self.c_eixo], pista.p2[self.c_eixo]) + max(
             pista.p1[self.c_eixo], pista.p2[self.c_eixo])
-
-        if self.largura <= 0:
-            eprint("impossível de desenhar pista, largura é 0")
-        if self.largura_sem_divisoria <= 0:
-            eprint(
-                "impossível de desenhar pista, largura não comporta suas faixas e divisorias")
-
-        self.largura_faixas = self.largura_sem_divisoria / self.n_faixas
-
-        dprint(self.largura_faixas)
 
     def draw(self, scr: pygame.Surface):
         last_faixa = None
@@ -130,11 +117,11 @@ class PistaDrawer(DrawItem):
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
-                dlt = fx*self.largura_faixas + dv*LARGURA_DIVISORIA
+                dlt = fx*LARGURA_FAIXA + dv*LARGURA_DIVISORIA
                 self.draw_divisoria(dlt, scr, last_faixa, faixa)
                 dv += 1
 
-            dlt = fx*self.largura_faixas + dv*LARGURA_DIVISORIA
+            dlt = fx*LARGURA_FAIXA + dv*LARGURA_DIVISORIA
             self.draw_faixa(dlt, scr, faixa)
 
             last_faixa = faixa
@@ -159,7 +146,7 @@ class PistaDrawer(DrawItem):
     def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
-        rect = get_params_directional_rect(
+        rect = get_rect_with_direcao_and_delta(
             self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_DIVISORIA)
         dprint("draw divisoria color", cor, rect)
 
@@ -172,8 +159,8 @@ class PistaDrawer(DrawItem):
 
         # botar setas pra indicar direção?
 
-        rect = get_params_directional_rect(
-            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, self.largura_faixas)
+        rect = get_rect_with_direcao_and_delta(
+            self.pista.p1, self.pista.p2, self.pista.direcao, dlt, LARGURA_FAIXA)
         dprint("draw faixa color", cor, rect)
         pygame.draw.rect(scr, cor, rect)
 
@@ -207,7 +194,7 @@ class GUI():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return SystemExit("user closed program")
+                raise Exception("user closed program")
 
         self.drawer.draw(self.scr)
 
@@ -218,7 +205,7 @@ class GUI():
                 wait_time = (self.step_time - diff) / SEC_IN_MICROSECONDS
                 time.sleep(wait_time.seconds)
 
-    def exit():
+    def exit(self):
         pygame.quit()
 
     def update(self, pistas: list[Pista], carros: list[Carro]):

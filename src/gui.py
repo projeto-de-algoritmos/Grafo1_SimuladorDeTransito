@@ -15,13 +15,31 @@ COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 # tamanho
 LARGURA_DIVISORIA = 2
+LARGURA_FAIXA = 10
 
-
-def rect(p1: point, p2: point):
+def get_rect_from_points(p1: point, p2: point):
     x = min(p1[0], p2[0])
     y = min(p1[1], p2[1])
     w = max(p1[0], p2[0]) - x
     h = max(p1[1], p2[1]) - y
+    return (x, y, w, h)
+
+
+def get_rect_with_direcao_and_delta(p1: point, p2: point, direcao: Direcao, dlt: float, largura: float):
+    x: float
+    y: float
+    w: float
+    h: float
+
+    if direcao == Direcao["leste"] or direcao == Direcao["oeste"]:
+        x, y, w, h = get_rect_from_points(
+            [p1[0], p1[1] + dlt], [p2[0], p1[1] + dlt + largura]
+        )
+    else:
+        x, y, w, h = get_rect_from_points(
+            [p1[0] + dlt, p1[1]], [p1[0] + dlt + largura, p2[1]]
+        )
+
     return (x, y, w, h)
 
 
@@ -30,8 +48,7 @@ class DrawItem():
         pass
 
     def draw(self, scr: pygame.Surface):
-        eprint("FAILED TO IMPLEMENT DRAW")
-        exit(1)
+        eprint("draw called on abstract drawitem", cexit=True)
 
 
 class Drawer():
@@ -61,22 +78,6 @@ class Drawer():
         self.draw_items = draw_items
 
 
-def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: float, largura: float):
-    x: float
-    y: float
-    w: float
-    h: float
-
-    if direcao == Direcao["leste"] or direcao == Direcao["oeste"]:
-        x, y, w, h = rect(
-            [p1[0], p1[1] + dlt], [p2[0], p1[1] + dlt + largura]
-        )
-    else:
-        x, y, w, h = rect(
-            [p1[0] + dlt, p1[1]], [p1[0] + dlt + largura, p2[1]]
-        )
-
-    return (x, y, w, h)
 
 
 class PistaDrawer(DrawItem):
@@ -177,10 +178,6 @@ class PistaDrawer(DrawItem):
         pygame.draw.rect(scr, cor, rect)
 
         return dlt
-
-
-class CarDrawer():
-    pass
 
 
 class GUI():

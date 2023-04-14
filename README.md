@@ -17,11 +17,10 @@ O objetivo do projeto é **calcular a estratégia ótima que carros dirigindo em
 
 Isso é feito a partir de um processo de **simulação**. Cada carro possui parâmetros de como irá dirigir (por exemplo, a velocidade máxima que ele se sente confortável em acelerar dentro da via), e o projeto **assume que todos os carros querem chegar ao seu destino o mais rápido possível**.
 
-As decisões que um carro pode tomar são:
+As decisões que um carro pode tomar são apenas 3, cada uma caso a possibilidade se faça presente:
 - Virar para esquerda.
 - Virar para direita.
-- Seguir para outra pista caso a possibilidade esteja presente.
-- 
+- Seguir para outra pista.
 
 Para cada passo da simulação, cada carro irá **assumir que cada outro carro não irá mudar seu atual estado atual** (ou seja, vai continuar seguindo em frente sem virar, mesmo se houver um carro mais devagar na frente). Com isso, é possível prever exatamente como o "futuro" de cada passo da simulação na perpectiva de um carro em específico será. Com isso, cada carro faz um **BFS** no seu espaço de possibilidades até descobrir qual caminho custa menos passos (por isso o BFS é usado) para decidir sua ação no presente momento. O nome atribuído à essa decisão é de: ***decisão ótima local*** (uma única decisão ótima local requer muita computação para ser calculada).
 
@@ -35,7 +34,7 @@ Pela alta quantidade de computação e baixa prioridade de desenvolvimento em pe
 
 Além disso, existe um parâmetro chamado de ***tick***, que indica quantos milissegundos de simulação cada passo irá tomar. Quanto mais segundos, menos intesa é a computação porque menos passos são calculados.
 
-A configuração é feita a partir de uma arquivo json. No geral, criar uma configuração nova requer algum esforço, e portanto recomenda-se usar alguma dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `./load_cenario name=cenario/{nome_do_cenario}.json` para adicionar a configuração desejada (ou copie manualmente).  
+A configuração é feita a partir de uma arquivo json. No geral, criar uma configuração nova requer algum esforço, e portanto recomenda-se usar alguma dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `make load_cenario name=cenario/{nome_do_cenario}.json` para adicionar a configuração desejada (ou copie manualmente).  
 
 O projeto também contem um possui uma interface gráfica, onde a simulação é executava visualmente para ficar intuitivo o uso.
 
@@ -47,6 +46,12 @@ Essa parametrização dos atributos da simulação nesse projeto foi feito à pa
 
 Uma potencial expansão do projeto seria incluir na decisão ótima local um certo nível de iterações de cálculo da decisão ótima local de outros carros. Ou seja, cada carro calculará uma decisão ótima local mais simples para cada outro carro durante cada passo da simulação separadamente (como um motorista faria). Claramente, a complexidade assintótica disso é alta demais e preferi não o fazer.
 
+O programa deve ser capaz de dar instruções em texto do que deveria ser feito.
+
+Todos os carros médios tem 4 metros de comprimento.
+Todos os carros mantem um distância mínima de 1 metro.
+Todos os carros calculam e mudam de velocidade instantaneamenete.
+
 ## Screenshots
 <!-- Adicione 3 ou mais screenshots do projeto em funcionamento. -->
 
@@ -57,7 +62,49 @@ Uma potencial expansão do projeto seria incluir na decisão ótima local um cer
 <!-- Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários. -->
 
 ## Uso 
-<!-- Explique como usar seu projeto caso haja algum passo a passo após o comando de execução. -->
+
+### Configurar ambiente
+
+Você pode usar um virtual environment ou rodar na sua máquina instalando o pacote diretamente de com pip.
+
+```
+pip install -r requirements.txt
+```
+
+Dependências: `pygame`.
+
+### Executar
+
+Basta rodar:
+
+```bash
+python src/main.py
+```
+
+Ou
+
+```bash
+make run
+```
+
+Note que o cenário carregado no arquivo `config.json` por padrão pode ser inválido.
+
+### Gerenciar cenários
+
+Ver cenários
+```
+make list_cenarios
+```
+
+Carregar um cenário
+```
+make load_cenario name=cenario/{nome_do_cenario}.json  
+```
+
+Salvar um cenário
+```
+make save_cenario name=cenario/{nome_do_cenario}.json
+```
 
 ## Outros 
 

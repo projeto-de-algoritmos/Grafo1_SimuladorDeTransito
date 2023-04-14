@@ -3,8 +3,8 @@ from sim import Simulation
 
 
 def main():
-    sim = Simulation()
-    gui = GUI()
+    sim = Simulation(config_file="config.json")
+    gui = GUI(max_fps=60)
 
     while sim.running:
         sim.jump_to_next_tick()

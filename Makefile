@@ -1,3 +1,8 @@
+list_cenarios:
+	@echo ""
+	@ls cenarios/* | awk 'gsub("cenarios/","")' | awk 'gsub(".json","")'
+	@echo ""
+
 save_cenario:
 	cat config.json > cenarios/$(name).json
 

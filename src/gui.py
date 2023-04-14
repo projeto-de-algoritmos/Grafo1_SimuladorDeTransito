@@ -1,42 +1,28 @@
 import pygame
 import datetime
 import time
-import json
-from enum import Enum
-import traceback
+from sim import *
 
-DEBUG = True
+# tempo
+SEC_IN_MICROSECONDS = 10e6
 
-
-def dprint(*values: object):
-    print("[DEBUG]", *values)
-
-
-def eprint(*values: object):
-    traceback.print_stack()
-    print("[ERROR]", *values)
-
-
-def enum_list(values: Enum):
-    r = []
-    for value in values:
-        r.append(value.name)
-    return sorted(r)
-
-
-point = list[int, int]
-cor = tuple[int, int, int]
-
-Direcao = Enum('Direcao', "leste oeste norte sul parado")
-FaixaTipo = Enum('FaixaTipo', "acostamento geral")
-
+# cor
 COR_ACOSTAMENTO = (60, 60, 60)
 COR_FAIXA = (15, 15, 15)
 COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
 COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
+# tamanho
 LARGURA_DIVISORIA = 2
+
+
+def rect(p1: point, p2: point):
+    x = min(p1[0], p2[0])
+    y = min(p1[1], p2[1])
+    w = max(p1[0], p2[0]) - x
+    h = max(p1[1], p2[1]) - y
+    return (x, y, w, h)
 
 
 class DrawItem():
@@ -51,11 +37,15 @@ class DrawItem():
 class Drawer():
     x: int = 0
     draw_items: list[DrawItem]
+    draw_items_locked: bool = False
 
     def __init__(self, draw_items: list[DrawItem] = []):
         self.draw_items = draw_items
+        self.draw_items_locked = False
 
     def draw(self, scr: pygame.Surface):
+        self.draw_items_locked = True
+
         scr.fill((255, 255, 255))
 
         for draw_item in self.draw_items:
@@ -63,73 +53,12 @@ class Drawer():
 
         pygame.display.flip()
 
+        self.draw_items_locked = False
 
-class GUI():
-    MAX_FPS = 60
-    SEC_IN_MICROSECONDS = 10e6
-    STEP_TIME = SEC_IN_MICROSECONDS / MAX_FPS
-
-    scr: pygame.Surface = None
-    running = False
-    drawer = None
-
-    def __init__(self, drawer: Drawer = Drawer()):
-        pygame.init()
-        self.scr = pygame.display.set_mode((600, 500))
-        self.running = True
-        self.drawer = drawer
-
-    def run(self):
-        while self.running:
-            ti = datetime.datetime.now()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-
-            self.drawer.draw(self.scr)
-
-            diff = datetime.datetime.now() - ti
-            diff = diff.microseconds
-
-            if self.STEP_TIME > diff:
-                wait_time = (self.STEP_TIME - diff) / self.SEC_IN_MICROSECONDS
-                time.sleep(wait_time)
-
-    def exit():
-        pygame.quit()
-
-
-class Faixa():
-    tipo: FaixaTipo
-    direcao_de_movimento: Direcao
-    sentido: Direcao
-
-    def __init__(self, tipo: FaixaTipo, relativo: Direcao, sentido: Direcao):
-        self.tipo = FaixaTipo(tipo)
-        self.relativo = Direcao(relativo)
-        self.sentido = Direcao(sentido)
-
-
-class Pista():
-    p1: point
-    p2: point
-    direcao: Direcao
-    faixas: list[Faixa]
-
-    def __init__(self, p1: point, p2: point, direcao: Direcao, faixas: list[Faixa]):
-        self.p1 = p1
-        self.p2 = p2
-        self.direcao = direcao
-        self.faixas = faixas
-
-
-def rect(p1: point, p2: point):
-    x = min(p1[0], p2[0])
-    y = min(p1[1], p2[1])
-    w = max(p1[0], p2[0]) - x
-    h = max(p1[1], p2[1]) - y
-    return (x, y, w, h)
+    def set(self, draw_items: list[DrawItem]):
+        if self.draw_items_locked:
+            raise Exception("Cannot set draw items while drawing")
+        self.draw_items = draw_items
 
 
 def get_params_directional_rect(p1: point, p2: point, direcao: Direcao, dlt: float, largura: float):
@@ -250,48 +179,67 @@ class PistaDrawer(DrawItem):
         return dlt
 
 
-class Car():
-    pista: Pista
-
-
 class CarDrawer():
     pass
 
 
-class Simulacao():
-    pass
+class GUI():
+    max_fps: float = 60
+    step_time = None
+    last_time = None
 
+    scr: pygame.Surface = None
+    running = False
+    drawer = None
 
-def read_and_parse_json_file(path="config.json"):
-    with open(path, "r") as f:
-        data = json.load(f)
-        return data
+    pending_update = None
 
+    def __init__(self, max_fps=60):
+        pygame.init()
+        self.running = True
+        self.max_fps = max_fps
+        self.step_time = datetime.timedelta(seconds=1/self.max_fps)
 
-def execute():
-    data = read_and_parse_json_file()
+        self.drawer = Drawer([])
+        self.scr = pygame.display.set_mode((600, 500))
 
-    pistas = []
+    def render(self):
+        self.apply_pending_update()
 
-    for pista in data["pistas"]:
-        faixas = []
-        for faixa in pista["faixas"]:
-            faixa_obj = Faixa(
-                FaixaTipo[faixa["tipo"]], Direcao[faixa["relativo"]], Direcao[faixa["sentido"]])
-            faixas.append(faixa_obj)
+        self.last_time = datetime.datetime.now()
 
-        pista = Pista(
-            p1=pista["p1"],
-            p2=pista["p2"],
-            direcao=Direcao[pista["direcao"]],
-            faixas=faixas
-        )
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return SystemExit("user closed program")
 
-        pistas.append(pista)
+        self.drawer.draw(self.scr)
 
-    gui = GUI(Drawer([PistaDrawer(pista)]))
-    gui.run()
+        if self.last_time is not None:
+            diff = datetime.datetime.now() - self.last_time
 
+            if self.step_time > diff:
+                wait_time = (self.step_time - diff) / SEC_IN_MICROSECONDS
+                time.sleep(wait_time.seconds)
 
-if __name__ == '__main__':
-    execute()
+    def exit():
+        pygame.quit()
+
+    def update(self, pistas: list[Pista], carros: list[Carro]):
+        self.pending_update = {"pistas": pistas, "carros": carros}
+
+        try:
+            draw_items = []
+            draw_items += [PistaDrawer(pista) for pista in pistas]
+            self.drawer.set(draw_items)
+        except Exception as e:
+            if self.drawer.draw_items_locked == True:
+                return
+            else:
+                eprint("falha inesperada na atualização de figuras a se desenhar", e)
+
+        self.pending_update = None
+
+    def apply_pending_update(self):
+        if self.pending_update is not None:
+            self.update(self.pending_update["pistas"],
+                        self.pending_update["carros"])

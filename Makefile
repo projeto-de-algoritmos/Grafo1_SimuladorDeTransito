@@ -3,3 +3,6 @@ save_cenario:
 
 load_cenario:
 	cat cenarios/$(name).json > config.json
+
+run:
+	python3 src/main.py

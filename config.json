@@ -2,7 +2,7 @@
   "pistas": [
     {
       "p1": [10, 20],
-      "p2": [300, 60],
+      "p2": [300, 20],
       "direcao": "leste",
       "velocidade_maxima": 80,
       "faixas": [

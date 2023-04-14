@@ -35,7 +35,7 @@ Pela alta quantidade de computação e baixa prioridade de desenvolvimento em pe
 
 Além disso, existe um parâmetro chamado de ***tick***, que indica quantos milissegundos de simulação cada passo irá tomar. Quanto mais segundos, menos intesa é a computação porque menos passos são calculados.
 
-A configuração é feita a partir de uma arquivo json. No geral, criar uma configuração nova requer algum esforço, e portanto recomenda-se usar alguma dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `./set_cenario CENARIO=cenario/{nome_do_cenario}.json` para adicionar a configuração desejada (ou copie manualmente).  
+A configuração é feita a partir de uma arquivo json. No geral, criar uma configuração nova requer algum esforço, e portanto recomenda-se usar alguma dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `./load_cenario name=cenario/{nome_do_cenario}.json` para adicionar a configuração desejada (ou copie manualmente).  
 
 O projeto também contem um possui uma interface gráfica, onde a simulação é executava visualmente para ficar intuitivo o uso.
 
@@ -60,8 +60,13 @@ Uma potencial expansão do projeto seria incluir na decisão ótima local um cer
 <!-- Explique como usar seu projeto caso haja algum passo a passo após o comando de execução. -->
 
 ## Outros 
-<!-- Quaisquer outras informações sobre seu projeto podem ser descritas abaixo. -->
 
+[TODO]
+- Trocar sistema de pista retangular por pontos.
+- Desenhar carro, levando conta a pista. 
+- Cada carro deve estar dentro do sistema de pistas, portanto cada carro é um objeto visualmente "dependente" da pista.
+
+[IGNORE]
 
 
 

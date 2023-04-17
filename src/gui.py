@@ -181,13 +181,23 @@ class PistaDrawer(DrawItem):
         # cria os 2 ponto "de cima" no retangulo do carro
         cret1 = get_vetor(ret1, ret2)
         cret1 = normalizar_vetor(cret1)
-        cret2 = multiplica_vetor(cret1, carro.posicao + COMPRIMENTO_CARRO)
-        cret1 = multiplica_vetor(cret1, carro.posicao)
+        cret2 = multiplica_vetor(cret1, -carro.posicao - COMPRIMENTO_CARRO)
+        cret1 = multiplica_vetor(cret1, -carro.posicao)
 
         # pega o vetor do ponto de cima em relacao ao ponto de baixo
         v12 = get_vetor(ret1, ret3)
+        v12 = normalizar_vetor(v12)
+        v12 = multiplica_vetor(v12, LARGURA_CARRO)
+        print(v12)
         cret3 = soma_vetor(cret1, v12)
         cret4 = soma_vetor(cret2, v12)
+
+        cret1 = soma_vetor(cret1, ret1)
+        cret2 = soma_vetor(cret2, ret1)
+        cret3 = soma_vetor(cret3, ret1)
+        cret4 = soma_vetor(cret4, ret1)
+
+        print([cret1, cret2, cret4, cret3])
 
         return [cret1, cret2, cret4, cret3]
 

@@ -4,11 +4,12 @@ import traceback
 
 from .geometry import point
 
-DEBUG = True
+DEBUG = False
 
 
 def dprint(*values: object):
-    print("[DEBUG]", *values)
+    if DEBUG:
+        print("[DEBUG]", *values)
 
 
 def eprint(*values: object, cexit=True):
@@ -18,7 +19,7 @@ def eprint(*values: object, cexit=True):
         exit(1)
 
 
-def enum_list(values: Enum):
+def enum_list(values: list[Enum]):
     r = []
     for value in values:
         r.append(value.name)
@@ -27,11 +28,12 @@ def enum_list(values: Enum):
 
 cor = tuple[int, int, int]
 
-Direcao = Enum('Direcao', "normal contrario")
-FaixaTipo = Enum('FaixaTipo', "acostamento geral")
+Direcao = Enum("Direcao", "normal contrario")
+FaixaTipo = Enum("FaixaTipo", "acostamento geral")
 
 
-class Faixa():
+class Faixa:
+    pista: "Pista"
     tipo: FaixaTipo
     sentido: Direcao
 
@@ -40,7 +42,7 @@ class Faixa():
         self.sentido = Direcao(sentido)
 
 
-class Pista():
+class Pista:
     p1: point
     p2: point
     faixas: list[Faixa]
@@ -49,15 +51,47 @@ class Pista():
         self.p1 = p1
         self.p2 = p2
         self.faixas = faixas
+        for faixa in self.faixas:
+            faixa.pista = self
 
 
-class Carro():
+class Carro:
     pista: Pista
+    faixa: Faixa
+
+    nome: str
+    posicao: float
+    velocidade: float
+    destino: point
+    velocidade_relativa_maxima_aceitavel: float
+
+    # currently unused
+    aceleracao: float
+
+    def __init__(
+        self,
+        pista: Pista,
+        faixa: Faixa,
+        nome: str,
+        posicao: float,
+        velocidade: float,
+        destino: point,
+        max_rvel: float,
+        aceleracao: float,
+    ):
+        self.nome = nome
+        self.pista = pista
+        self.faixa = faixa
+        self.posicao = posicao
+        self.velocidade = velocidade
+        self.destino = destino
+        self.max_rvel = max_rvel
+        self.aceleracao = aceleracao
 
 
-class Simulation():
+class Simulation:
     pistas: list[Pista]
-    carros: list[Carro]
+    carros: dict[str, Carro]
 
     running: bool = False
 
@@ -87,15 +121,33 @@ class Simulation():
                     FaixaTipo[faixa["tipo"]], Direcao[faixa["sentido"]])
                 faixas.append(faixa_obj)
 
-            pista = Pista(
-                p1=pista["p1"],
-                p2=pista["p2"],
-                faixas=faixas
-            )
+            pista = Pista(p1=pista["p1"], p2=pista["p2"], faixas=faixas)
 
             pistas.append(pista)
 
-        carros = []
+        carros = {}
+        dprint(pista.faixas)
+        for carro in data["carros"]:
+            pista: Pista = pistas[carro["pista"]]
+            dprint(pista.faixas, carro["faixa"])
+            faixa = pista.faixas[carro["faixa"]]
+            nome = carro["nome"]
+
+            carro_obj = Carro(
+                nome=nome,
+                pista=pista,
+                faixa=faixa,
+                posicao=carro["posicao"],
+                velocidade=carro["velocidade"],
+                destino=carro["destino"],
+                max_rvel=carro["max_rvel"],
+                aceleracao=carro["aceleracao"],
+            )
+
+            if carros.get(nome) is not None:
+                eprint(f"Carro {nome} já existe!")
+
+            carros[nome] = carro_obj
 
         return pistas, carros
 

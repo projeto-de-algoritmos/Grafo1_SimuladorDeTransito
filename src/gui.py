@@ -16,8 +16,8 @@ COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 # tamanho
-LARGURA_DIVISORIA = 2
-LARGURA_FAIXA = 6
+LARGURA_DIVISORIA = 3
+LARGURA_FAIXA = 10
 
 SCALE = 1
 
@@ -89,7 +89,7 @@ class PistaDrawer(DrawItem):
         fx = 0
         dv = 0
 
-        print("\n")
+        dprint("\n")
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
@@ -178,7 +178,8 @@ class PistaDrawer(DrawItem):
 
         # botar setas pra indicar direção?
 
-        rect = self.montar_retangulo(self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
+        rect = self.montar_retangulo(
+            self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
 
         dprint("draw faixa color", cor, rect)
         self.draw_polygon(scr, cor, rect)
@@ -259,4 +260,5 @@ class GUI:
 
     def apply_pending_update(self):
         if self.pending_update is not None:
-            self.update(self.pending_update["pistas"], self.pending_update["carros"])
+            self.update(self.pending_update["pistas"],
+                        self.pending_update["carros"])

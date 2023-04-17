@@ -40,7 +40,7 @@ O projeto também contem um possui uma interface gráfica, onde a simulação é
 
 ### Informações secundárias (lê se quiser kk)
 
-A velocidade máxima que um carro estará é dada pela função `velocidade_relativa_maxima_aceitavel * velocidade_da_via`, sendo assim a velocidade da pista influenciará todos os carros.
+A velocidade máxima que um carro estará é dada pela função `velocidade_relativa_maxima_aceitavel * velocidade_da_via`, sendo assim a velocidade da pista influenciará todos os carros. Ni cenário, a chave que indica a velocidade relativa máxima aceitável é `max_rvel`.
 
 Essa parametrização dos atributos da simulação nesse projeto foi feito à partir do tempo que gastei no trânsito vindo para a faculdade. Ou seja, tentei minimizar o número de parâmetros aqui sem detraír valor da qualidade da simulação. E a qualidade da simulação é razoável porque fiz um processo de [wargaming](https://www.rand.org/topics/wargaming.html) dos processos que acontecem na vida real no trânsito antes de começar o projeto.
 
@@ -113,11 +113,10 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
 [TODO]
-- Criar arquivo de configuração do app para injeção de dependências
-- Criar sistema de logging
-- Criar sistema simulador
-- Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
 - Desenhar carro como dependente da pista em que está.
+- Criar sistema simulador
+- Criar sistema de logging
+- Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
 - Criar interaface gráfica com seguintes operações:
   - Pausar/Resumir a simulação
   - Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)

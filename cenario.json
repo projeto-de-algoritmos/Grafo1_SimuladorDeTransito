@@ -50,6 +50,7 @@
   "carros": [
     {
       "nome": "motorista1",
+      "cor": "#77ff00",
       "pista": 0,
       "faixa": 1,
       "posicao": 20,
@@ -60,6 +61,7 @@
     },
     {
       "nome": "player",
+      "cor": "#ff0000",
       "pista": 0,
       "faixa": 1,
       "posicao": 25,

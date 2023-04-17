@@ -46,20 +46,30 @@ class Pista:
     p1: point
     p2: point
     faixas: list[Faixa]
+    carros: list["Carro"]
 
-    def __init__(self, p1: point, p2: point, faixas: list[Faixa]):
+    def __init__(
+        self, p1: point, p2: point, faixas: list[Faixa], carros: list["Carro"]
+    ):
         self.p1 = p1
         self.p2 = p2
         self.faixas = faixas
         for faixa in self.faixas:
             faixa.pista = self
+        self.carros = carros
+        for carro in self.carros:
+            carro.pista = self
+            carro.faixa = self.faixas[carro.faixa_i]
 
 
 class Carro:
     pista: Pista
     faixa: Faixa
+    pista_i: int
+    faixa_i: int
 
     nome: str
+    cor: str = "#FF0000"
     posicao: float
     velocidade: float
     destino: point
@@ -70,9 +80,10 @@ class Carro:
 
     def __init__(
         self,
-        pista: Pista,
-        faixa: Faixa,
+        pista_i: int,
+        faixa_i: int,
         nome: str,
+        cor: str,
         posicao: float,
         velocidade: float,
         destino: point,
@@ -80,8 +91,9 @@ class Carro:
         aceleracao: float,
     ):
         self.nome = nome
-        self.pista = pista
-        self.faixa = faixa
+        self.cor = cor
+        self.pista_i = pista_i
+        self.faixa_i = faixa_i
         self.posicao = posicao
         self.velocidade = velocidade
         self.destino = destino
@@ -107,36 +119,22 @@ class Simulation:
         self.tick_rate = tick_rate
 
     def get_pistas_and_carros(self):
-        return self.pistas, self.carros
+        return self.pistas
 
     def read(self, cenario_file):
         data = self.read_and_parse_json_file(cenario_file)
 
         pistas = []
+        carros: dict[str, Carro] = {}
 
-        for pista in data["pistas"]:
-            faixas = []
-            for faixa in pista["faixas"]:
-                faixa_obj = Faixa(
-                    FaixaTipo[faixa["tipo"]], Direcao[faixa["sentido"]])
-                faixas.append(faixa_obj)
-
-            pista = Pista(p1=pista["p1"], p2=pista["p2"], faixas=faixas)
-
-            pistas.append(pista)
-
-        carros = {}
-        dprint(pista.faixas)
         for carro in data["carros"]:
-            pista: Pista = pistas[carro["pista"]]
-            dprint(pista.faixas, carro["faixa"])
-            faixa = pista.faixas[carro["faixa"]]
             nome = carro["nome"]
 
             carro_obj = Carro(
                 nome=nome,
-                pista=pista,
-                faixa=faixa,
+                cor=carro["cor"],
+                pista_i=carro["pista"],
+                faixa_i=carro["faixa"],
                 posicao=carro["posicao"],
                 velocidade=carro["velocidade"],
                 destino=carro["destino"],
@@ -148,6 +146,23 @@ class Simulation:
                 eprint(f"Carro {nome} já existe!")
 
             carros[nome] = carro_obj
+
+        for i in range(len(data["pistas"])):
+            pista = data["pistas"][i]
+            faixas = []
+            for faixa in pista["faixas"]:
+                faixa_obj = Faixa(FaixaTipo[faixa["tipo"]], Direcao[faixa["sentido"]])
+                faixas.append(faixa_obj)
+
+            pista_carros = list(
+                filter(lambda carro: i == carro.pista_i, carros.values())
+            )
+
+            pista = Pista(
+                p1=pista["p1"], p2=pista["p2"], faixas=faixas, carros=pista_carros
+            )
+
+            pistas.append(pista)
 
         return pistas, carros
 

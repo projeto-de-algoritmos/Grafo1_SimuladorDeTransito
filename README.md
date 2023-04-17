@@ -51,6 +51,7 @@ O programa deve ser capaz de dar instruções em texto do que deveria ser feito.
 Todos os carros médios tem 4 metros de comprimento.
 Todos os carros mantem um distância mínima de 1 metro.
 Todos os carros calculam e mudam de velocidade instantaneamenete.
+A posição de um carro é dada pela sua frente.
 
 ## Screenshots
 <!-- Adicione 3 ou mais screenshots do projeto em funcionamento. -->

@@ -18,6 +18,8 @@ COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 # tamanho
 LARGURA_DIVISORIA = 3
 LARGURA_FAIXA = 10
+LARGURA_CARRO = 8
+COMPRIMENTO_CARRO = 13
 
 SCALE = 1
 
@@ -83,6 +85,11 @@ class PistaDrawer(DrawItem):
         )
         self.comprimento = distancia_euclidiana(self.pista.p1, self.pista.p2)
 
+    def get_dlt_carro_na_faixa(self, faixa_index: int) -> float:
+        return (
+            faixa_index * LARGURA_FAIXA + (min(faixa_index - 1, 0)) * LARGURA_DIVISORIA
+        )
+
     def draw(self, scr: pygame.Surface):
         last_faixa = None
         dlt = 0.0
@@ -102,6 +109,9 @@ class PistaDrawer(DrawItem):
 
             last_faixa = faixa
             fx += 1
+
+        for carro in self.pista.carros:
+            self.draw_carro(scr, carro)
 
     def get_cor_divisoria(self, faixa_anterior: Faixa, faixa_proxima: Faixa) -> cor:
         tipos = enum_list([faixa_anterior.tipo, faixa_proxima.tipo])
@@ -123,7 +133,7 @@ class PistaDrawer(DrawItem):
             )
             exit(1)
 
-    def montar_retangulo(
+    def montar_faixa_divisoria_retangulo(
         self, p1: point, p2: point, dlt: float, clargura: float
     ) -> poligno:
         # vetor perpendicular a pista, seu tamanho é metade da largura da pista
@@ -155,6 +165,32 @@ class PistaDrawer(DrawItem):
         # note como a ordem dos pontos é expressa como um polígno retangular
         return [ret1, ret2, ret4, ret3]
 
+    def montar_carro_retangulo(self, carro: Carro) -> poligno:
+        dlt = (
+            carro.faixa_i * LARGURA_FAIXA
+            + (min(carro.faixa_i - 1, 0)) * LARGURA_DIVISORIA
+        )
+        dlt -= LARGURA_CARRO / 2.0
+
+        ret1, ret2, _, ret3 = self.montar_faixa_divisoria_retangulo(
+            self.pista.p1, self.pista.p2, dlt, LARGURA_CARRO
+        )
+
+        print(ret1, ret2, ret3)
+
+        # cria os 2 ponto "de cima" no retangulo do carro
+        cret1 = get_vetor(ret1, ret2)
+        cret1 = normalizar_vetor(cret1)
+        cret2 = multiplica_vetor(cret1, carro.posicao + COMPRIMENTO_CARRO)
+        cret1 = multiplica_vetor(cret1, carro.posicao)
+
+        # pega o vetor do ponto de cima em relacao ao ponto de baixo
+        v12 = get_vetor(ret1, ret3)
+        cret3 = soma_vetor(cret1, v12)
+        cret4 = soma_vetor(cret2, v12)
+
+        return [cret1, cret2, cret4, cret3]
+
     def draw_divisoria(
         self,
         dlt: float,
@@ -164,7 +200,7 @@ class PistaDrawer(DrawItem):
     ):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
-        rect = self.montar_retangulo(
+        rect = self.montar_faixa_divisoria_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA
         )
 
@@ -178,13 +214,20 @@ class PistaDrawer(DrawItem):
 
         # botar setas pra indicar direção?
 
-        rect = self.montar_retangulo(
-            self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
+        rect = self.montar_faixa_divisoria_retangulo(
+            self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA
+        )
 
         dprint("draw faixa color", cor, rect)
         self.draw_polygon(scr, cor, rect)
 
         return dlt
+
+    def draw_carro(self, scr: pygame.Surface, carro: Carro):
+        rect = self.montar_carro_retangulo(carro)
+
+        dprint("draw car", cor, rect)
+        self.draw_polygon(scr, carro.cor, rect)
 
 
 class GUI:
@@ -243,8 +286,8 @@ class GUI:
     def exit(self):
         pygame.quit()
 
-    def update(self, pistas: list[Pista], carros: list[Carro]):
-        self.pending_update = {"pistas": pistas, "carros": carros}
+    def update(self, pistas: list[Pista]):
+        self.pending_update = {"pistas": pistas}
 
         try:
             draw_items = []
@@ -260,5 +303,4 @@ class GUI:
 
     def apply_pending_update(self):
         if self.pending_update is not None:
-            self.update(self.pending_update["pistas"],
-                        self.pending_update["carros"])
+            self.update(self.pending_update["pistas"])

@@ -19,42 +19,24 @@ COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 LARGURA_DIVISORIA = 2
 LARGURA_FAIXA = 6
 
-
-def get_rect_from_points(p1: point, p2: point):
-    x = min(p1[0], p2[0])
-    y = min(p1[1], p2[1])
-    w = max(p1[0], p2[0]) - x
-    h = max(p1[1], p2[1]) - y
-    return (x, y, w, h)
+SCALE = 1
 
 
-def get_rect_with_direcao_and_delta(p1: point, p2: point, direcao: Direcao, dlt: float, largura: float):
-    x: float
-    y: float
-    w: float
-    h: float
-
-    if direcao == Direcao["leste"] or direcao == Direcao["oeste"]:
-        x, y, w, h = get_rect_from_points(
-            [p1[0], p1[1] + dlt], [p2[0], p1[1] + dlt + largura]
-        )
-    else:
-        x, y, w, h = get_rect_from_points(
-            [p1[0] + dlt, p1[1]], [p1[0] + dlt + largura, p2[1]]
-        )
-
-    return (x, y, w, h)
-
-
-class DrawItem():
+class DrawItem:
     def __init__(self):
         pass
 
     def draw(self, scr: pygame.Surface):
         eprint("draw called on abstract drawitem", cexit=True)
 
+    def draw_polygon(self, scr, cor, rect):
+        for item in rect:
+            item[0] /= SCALE
+            item[1] /= SCALE
+        pygame.draw.polygon(scr, cor, rect)
 
-class Drawer():
+
+class Drawer:
     x: int = 0
     draw_items: list[DrawItem]
     draw_items_locked: bool = False
@@ -96,7 +78,9 @@ class PistaDrawer(DrawItem):
         self.n_faixas = len(pista.faixas)
         self.n_divisorias = self.n_faixas - 1
 
-        self.largura = LARGURA_DIVISORIA*self.n_divisorias + LARGURA_FAIXA*self.n_faixas
+        self.largura = (
+            LARGURA_DIVISORIA * self.n_divisorias + LARGURA_FAIXA * self.n_faixas
+        )
         self.comprimento = distancia_euclidiana(self.pista.p1, self.pista.p2)
 
     def draw(self, scr: pygame.Surface):
@@ -109,11 +93,11 @@ class PistaDrawer(DrawItem):
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
-                dlt = fx*LARGURA_FAIXA + dv*LARGURA_DIVISORIA
+                dlt = fx * LARGURA_FAIXA + dv * LARGURA_DIVISORIA
                 self.draw_divisoria(dlt, scr, last_faixa, faixa)
                 dv += 1
 
-            dlt = fx*LARGURA_FAIXA + dv*LARGURA_DIVISORIA
+            dlt = fx * LARGURA_FAIXA + dv * LARGURA_DIVISORIA
             self.draw_faixa(dlt, scr, faixa)
 
             last_faixa = faixa
@@ -131,17 +115,22 @@ class PistaDrawer(DrawItem):
         elif faixa_anterior.sentido != faixa_proxima.sentido:
             return COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE
         else:
-            eprint("Tipo de faixa irreconhecivel: " +
-                   str(faixa_anterior.tipo) + " " + str(faixa_proxima.tipo))
+            eprint(
+                "Tipo de faixa irreconhecivel: "
+                + str(faixa_anterior.tipo)
+                + " "
+                + str(faixa_proxima.tipo)
+            )
             exit(1)
 
-    def montar_retangulo(self, p1: point, p2: point, dlt: float, clargura: float) -> poligno:
-
+    def montar_retangulo(
+        self, p1: point, p2: point, dlt: float, clargura: float
+    ) -> poligno:
         # vetor perpendicular a pista, seu tamanho é metade da largura da pista
         v12 = get_vetor(p1, p2)
-        v12 = rotacionar_vetor_horario(v12, rad=math.pi/2)
+        v12 = rotacionar_vetor_horario(v12, rad=math.pi / 2)
         v12 = normalizar_vetor(v12)
-        v12 = multiplica_vetor(v12, -self.largura/2)
+        v12 = multiplica_vetor(v12, -self.largura / 2)
 
         # ponto base do retangulo da pista
         pb = soma_vetor(p1, v12)
@@ -166,14 +155,21 @@ class PistaDrawer(DrawItem):
         # note como a ordem dos pontos é expressa como um polígno retangular
         return [ret1, ret2, ret4, ret3]
 
-    def draw_divisoria(self,  dlt: float, scr: pygame.Surface, faixa_anterior: Faixa, faixa_proxima: Faixa):
+    def draw_divisoria(
+        self,
+        dlt: float,
+        scr: pygame.Surface,
+        faixa_anterior: Faixa,
+        faixa_proxima: Faixa,
+    ):
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
         rect = self.montar_retangulo(
-            self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA)
+            self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA
+        )
 
         dprint("draw divisoria color", cor, rect)
-        pygame.draw.polygon(scr, cor, rect)
+        self.draw_polygon(scr, cor, rect)
 
     def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
         cor = COR_FAIXA
@@ -182,16 +178,15 @@ class PistaDrawer(DrawItem):
 
         # botar setas pra indicar direção?
 
-        rect = self.montar_retangulo(
-            self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
+        rect = self.montar_retangulo(self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA)
 
         dprint("draw faixa color", cor, rect)
-        pygame.draw.polygon(scr, cor, rect)
+        self.draw_polygon(scr, cor, rect)
 
         return dlt
 
 
-class GUI():
+class GUI:
     step_time = None
     last_time = None
     running = False
@@ -207,23 +202,24 @@ class GUI():
 
     pending_update = None
 
-    def __init__(self, max_fps=60, resolution=[600, 500], fullscreen=False, render_scale=2):
+    def __init__(
+        self, max_fps=60, resolution=[600, 500], fullscreen=False, render_scale=2
+    ):
         pygame.init()
         self.running = True
         self.max_fps = max_fps
-        self.step_time = datetime.timedelta(seconds=1/self.max_fps)
+        self.step_time = datetime.timedelta(seconds=1 / self.max_fps)
         self.resolution = resolution
         self.virtual_resolution = multiplica_vetor(resolution, render_scale)
         self.fullscreen = fullscreen
         self.render_scale = render_scale
+        SCALE = self.render_scale
 
         self.drawer = Drawer([])
         self.scr = pygame.display.set_mode(tuple(resolution))
 
         if self.fullscreen:
             pygame.display.toggle_fullscreen()
-        
-        
 
     def render(self):
         self.apply_pending_update()
@@ -263,5 +259,4 @@ class GUI():
 
     def apply_pending_update(self):
         if self.pending_update is not None:
-            self.update(self.pending_update["pistas"],
-                        self.pending_update["carros"])
+            self.update(self.pending_update["pistas"], self.pending_update["carros"])

@@ -45,13 +45,30 @@ def deg_pra_rad(deg: float):
 
 def normalizar_vetor(v: point, base: point = [0, 0]):
     nv = [v[X] - base[X], v[Y] - base[Y]]
-    nv[X] /= distancia_euclidiana(base, v)
-    nv[Y] /= distancia_euclidiana(base, v)
+    nv[X] /= distancia_euclidiana([0, 0], v)
+    nv[Y] /= distancia_euclidiana([0, 0], v)
+    return [nv[X] + base[X], nv[Y] + base[Y]]
+
+
+def normaliza_multiplica_vetor(v: point, fator: float, base: point = [0, 0]):
+    nv = [v[X] - base[X], v[Y] - base[Y]]
+    nv[X] *= fator
+    nv[X] /= distancia_euclidiana([0, 0], v)
+    nv[Y] *= fator
+    nv[Y] /= distancia_euclidiana([0, 0], v)
     return [nv[X] + base[X], nv[Y] + base[Y]]
 
 
 def get_vetor(p1: point, p2: point):
     return [p2[X] - p1[X], p2[Y] - p1[Y]]
+
+
+def quadrado_vetor(v: vetor):
+    return [v[X] ** 2, v[Y] ** 2]
+
+
+def raiz_quadrada_vetor(v: vetor):
+    return [v[X] ** (1.0 / 2.0), v[Y] ** (1.0 / 2.0)]
 
 
 def multiplica_vetor(v: point, n: float):

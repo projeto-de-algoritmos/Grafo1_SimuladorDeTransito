@@ -155,17 +155,22 @@ class PistaDrawer(DrawItem):
             + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0
         )
 
-        ret1, ret2, ret4, ret3 = self.montar_faixa_divisoria_retangulo(
+        # Monta um retângulo como seria o de uma faixa
+        ret1, ret2, ret4, _ = self.montar_faixa_divisoria_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_CARRO
         )
 
+        dprint(ret1[Y], ret2[Y])
+
+        # [BUG] aqui o carro começa a variar no eixo Y quanto mais longe eles está da origem do vetor ret1. Acho que é porque ocorre a normalização do vetor, que estraga a sua direção
+
         # cria os 2 ponto "de cima" no retangulo do carro
-        cret1 = get_vetor(ret1, ret4)
-        cret1 = normalizar_vetor(cret1)
-        cret2 = multiplica_vetor(cret1, carro.posicao + COMPRIMENTO_CARRO)
-        cret1 = multiplica_vetor(cret1, carro.posicao)
-        cret1 = soma_vetor(cret1, ret1)
-        cret2 = soma_vetor(cret2, ret1)
+        cret1 = normaliza_multiplica_vetor(
+            ret4, carro.posicao + COMPRIMENTO_CARRO, ret1
+        )
+        cret2 = normaliza_multiplica_vetor(ret4, carro.posicao, ret1)
+
+        dprint(cret1[Y], cret2[Y])
 
         # pega o vetor do ponto de cima em relacao ao ponto de baixo
         v12 = get_vetor(ret1, ret2)
@@ -209,7 +214,7 @@ class PistaDrawer(DrawItem):
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo(carro)
 
-        dprint("draw car", rect[3])
+        # dprint("draw car", rect[3])
         self.draw_polygon(scr, carro.cor, rect)
 
 

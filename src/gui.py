@@ -144,7 +144,7 @@ class PistaDrawer(DrawItem):
         return [ret1, ret2, ret4, ret3]
 
     def montar_carro_retangulo2(self, carro: Carro):
-        dlt = (
+        dlt: float = (
             carro.faixa_i * LARGURA_FAIXA
             + min(carro.faixa_i, 0) * LARGURA_DIVISORIA
             + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0

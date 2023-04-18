@@ -5,24 +5,6 @@ import time
 from .sim import *
 from .geometry import *
 
-# tempo
-SEC_IN_MICROSECONDS = 10e6
-
-# cor
-COR_ACOSTAMENTO = (60, 60, 60)
-COR_FAIXA = (15, 15, 15)
-COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
-COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
-COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
-
-# tamanho
-LARGURA_DIVISORIA = 3
-LARGURA_FAIXA = 10
-LARGURA_CARRO = 8
-COMPRIMENTO_CARRO = 13
-
-SCALE = 1
-
 
 class DrawItem:
     def __init__(self):
@@ -96,7 +78,7 @@ class PistaDrawer(DrawItem):
         fx = 0
         dv = 0
 
-        dprint("\n")
+        dprint(" ")
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
@@ -166,38 +148,29 @@ class PistaDrawer(DrawItem):
         return [ret1, ret2, ret4, ret3]
 
     def montar_carro_retangulo(self, carro: Carro) -> poligno:
+        # pega a posição do carro na pista como se fosse uma faixa (limitada em tamanho no eixo do comprimento da pista)
         dlt = (
             carro.faixa_i * LARGURA_FAIXA
-            + (min(carro.faixa_i - 1, 0)) * LARGURA_DIVISORIA
+            + carro.faixa_i * LARGURA_DIVISORIA
+            + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0
         )
-        dlt -= LARGURA_CARRO / 2.0
 
-        ret1, ret2, _, ret3 = self.montar_faixa_divisoria_retangulo(
+        ret1, ret2, ret4, ret3 = self.montar_faixa_divisoria_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_CARRO
         )
 
-        print(ret1, ret2, ret3)
-
         # cria os 2 ponto "de cima" no retangulo do carro
-        cret1 = get_vetor(ret1, ret2)
+        cret1 = get_vetor(ret1, ret4)
         cret1 = normalizar_vetor(cret1)
-        cret2 = multiplica_vetor(cret1, -carro.posicao - COMPRIMENTO_CARRO)
-        cret1 = multiplica_vetor(cret1, -carro.posicao)
-
-        # pega o vetor do ponto de cima em relacao ao ponto de baixo
-        v12 = get_vetor(ret1, ret3)
-        v12 = normalizar_vetor(v12)
-        v12 = multiplica_vetor(v12, LARGURA_CARRO)
-        print(v12)
-        cret3 = soma_vetor(cret1, v12)
-        cret4 = soma_vetor(cret2, v12)
-
+        cret2 = multiplica_vetor(cret1, carro.posicao + COMPRIMENTO_CARRO)
+        cret1 = multiplica_vetor(cret1, carro.posicao)
         cret1 = soma_vetor(cret1, ret1)
         cret2 = soma_vetor(cret2, ret1)
-        cret3 = soma_vetor(cret3, ret1)
-        cret4 = soma_vetor(cret4, ret1)
 
-        print([cret1, cret2, cret4, cret3])
+        # pega o vetor do ponto de cima em relacao ao ponto de baixo
+        v12 = get_vetor(ret1, ret2)
+        cret3 = soma_vetor(cret1, v12)
+        cret4 = soma_vetor(cret2, v12)
 
         return [cret1, cret2, cret4, cret3]
 
@@ -214,7 +187,7 @@ class PistaDrawer(DrawItem):
             self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA
         )
 
-        dprint("draw divisoria color", cor, rect)
+        # dprint("draw divisoria color", cor, rect)
         self.draw_polygon(scr, cor, rect)
 
     def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
@@ -236,7 +209,7 @@ class PistaDrawer(DrawItem):
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo(carro)
 
-        dprint("draw car", cor, rect)
+        dprint("draw car", carro.cor, rect)
         self.draw_polygon(scr, carro.cor, rect)
 
 

@@ -2,9 +2,9 @@ import json
 from enum import Enum
 import traceback
 
-from .geometry import point
-
-DEBUG = False
+from .geometry import *
+from .gui import *
+from .const import *
 
 
 def dprint(*values: object):
@@ -60,6 +60,9 @@ class Pista:
         for carro in self.carros:
             carro.pista = self
             carro.faixa = self.faixas[carro.faixa_i]
+
+    def get_comprimento(self):
+        return distancia_euclidiana(self.p1, self.p2)
 
 
 class Carro:
@@ -175,4 +178,7 @@ class Simulation:
         pass
 
     def update(self):
-        pass
+        for carro in self.carros.values():
+            carro.posicao += carro.velocidade / self.tick_rate
+            if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
+                carro.posicao = 0

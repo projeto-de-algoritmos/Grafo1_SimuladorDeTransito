@@ -61,8 +61,21 @@ class Pista:
             carro.pista = self
             carro.faixa = self.faixas[carro.faixa_i]
 
+        self.validate()
+
     def get_comprimento(self):
         return distancia_euclidiana(self.p1, self.p2)
+
+    def validate(self):
+        conds: list[bool] = [
+            self.p1[X] < 0,
+            self.p2[X] < 0,
+            self.p1[Y] < 0,
+            self.p2[Y] < 0,
+        ]
+        for cond in conds:
+            if cond:
+                eprint("Pista fora do mapa")
 
 
 class Carro:

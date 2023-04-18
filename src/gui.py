@@ -14,9 +14,10 @@ class DrawItem:
         eprint("draw called on abstract drawitem", cexit=True)
 
     def draw_polygon(self, scr, cor, rect):
+        global RENDER_SCALE
         for item in rect:
-            item[0] /= SCALE
-            item[1] /= SCALE
+            item[0]  # *= RENDER_SCALE
+            item[1]  # *= RENDER_SCALE
         pygame.draw.polygon(scr, cor, rect)
 
 
@@ -66,11 +67,6 @@ class PistaDrawer(DrawItem):
             LARGURA_DIVISORIA * self.n_divisorias + LARGURA_FAIXA * self.n_faixas
         )
         self.comprimento = distancia_euclidiana(self.pista.p1, self.pista.p2)
-
-    def get_dlt_carro_na_faixa(self, faixa_index: int) -> float:
-        return (
-            faixa_index * LARGURA_FAIXA + (min(faixa_index - 1, 0)) * LARGURA_DIVISORIA
-        )
 
     def draw(self, scr: pygame.Surface):
         last_faixa = None
@@ -147,37 +143,34 @@ class PistaDrawer(DrawItem):
         # note como a ordem dos pontos é expressa como um polígno retangular
         return [ret1, ret2, ret4, ret3]
 
-    def montar_carro_retangulo(self, carro: Carro) -> poligno:
-        # pega a posição do carro na pista como se fosse uma faixa (limitada em tamanho no eixo do comprimento da pista)
+    def montar_carro_retangulo2(self, carro: Carro):
         dlt = (
             carro.faixa_i * LARGURA_FAIXA
-            + carro.faixa_i * LARGURA_DIVISORIA
+            + min(carro.faixa_i, 0) * LARGURA_DIVISORIA
             + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0
         )
 
-        # Monta um retângulo como seria o de uma faixa
-        ret1, ret2, ret4, _ = self.montar_faixa_divisoria_retangulo(
+        r1, r2, r3, r4 = self.montar_faixa_divisoria_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_CARRO
         )
 
-        dprint(ret1[Y], ret2[Y])
+        d1 = carro.posicao / self.comprimento  # deve estar em [0,1]
+        d2 = (carro.posicao + LARGURA_CARRO) / self.comprimento  # deve estar em [0,1]
 
-        # [BUG] aqui o carro começa a variar no eixo Y quanto mais longe eles está da origem do vetor ret1. Acho que é porque ocorre a normalização do vetor, que estraga a sua direção por causa de calculos floating point
+        # ideia seria pegar a média ponderada dos pontos
+        # que são calculados no retângulo da faixa
+        # baseado na posição (aka. quilometragem) do carro na pista
 
-        # cria os 2 ponto "de cima" no retangulo do carro
-        cret1 = normaliza_multiplica_vetor(
-            ret4, carro.posicao + COMPRIMENTO_CARRO, ret1
-        )
-        cret2 = normaliza_multiplica_vetor(ret4, carro.posicao, ret1)
+        x1 = math.fabs(r1[X] - r4[X]) * d1 + min(r1[X], r4[X])
+        x2 = math.fabs(r1[X] - r4[X]) * d2 + min(r1[X], r4[X])
+        x3 = math.fabs(r2[X] - r3[X]) * d1 + min(r2[X], r3[X])
+        x4 = math.fabs(r2[X] - r3[X]) * d2 + min(r2[X], r3[X])
+        y1 = math.fabs(r2[Y] - r3[Y]) * d1 + min(r2[Y], r3[Y])
+        y2 = math.fabs(r2[Y] - r3[Y]) * d2 + min(r2[Y], r3[Y])
+        y3 = math.fabs(r1[Y] - r4[Y]) * d1 + min(r1[Y], r4[Y])
+        y4 = math.fabs(r1[Y] - r4[Y]) * d2 + min(r1[Y], r4[Y])
 
-        dprint(cret1[Y], cret2[Y])
-
-        # pega o vetor do ponto de cima em relacao ao ponto de baixo
-        v12 = get_vetor(ret1, ret2)
-        cret3 = soma_vetor(cret1, v12)
-        cret4 = soma_vetor(cret2, v12)
-
-        return [cret1, cret2, cret4, cret3]
+        return [[x1, y1], [x2, y2], [x4, y4], [x3, y3]]
 
     def draw_divisoria(
         self,
@@ -212,7 +205,7 @@ class PistaDrawer(DrawItem):
         return dlt
 
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
-        rect = self.montar_carro_retangulo(carro)
+        rect = self.montar_carro_retangulo2(carro)
 
         # dprint("draw car", rect[3])
         self.draw_polygon(scr, carro.cor, rect)
@@ -245,13 +238,15 @@ class GUI:
         self.virtual_resolution = multiplica_vetor(resolution, render_scale)
         self.fullscreen = fullscreen
         self.render_scale = render_scale
-        SCALE = self.render_scale
 
         self.drawer = Drawer([])
         self.scr = pygame.display.set_mode(tuple(resolution))
 
         if self.fullscreen:
             pygame.display.toggle_fullscreen()
+
+        global RENDER_SCALE
+        RENDER_SCALE = render_scale
 
     def render(self):
         self.apply_pending_update()

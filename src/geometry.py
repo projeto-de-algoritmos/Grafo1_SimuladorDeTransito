@@ -2,6 +2,13 @@ import math
 from .const import *
 
 
+def adjust_zero_num(x: float, ref: float = 0):
+    if math.fabs(x - ref) <= ZERO_DIST:
+        return 0.0
+    else:
+        return x
+
+
 def distancia_euclidiana(p1: point, p2: point):
     return math.sqrt((p1[X] - p2[X]) ** 2 + (p1[Y] - p2[Y]) ** 2)
 
@@ -54,14 +61,33 @@ def normalizar_vetor(v: point, base: point = [0, 0]):
     return [nv[X] + base[X], nv[Y] + base[Y]]
 
 
+kt = 0
+
+
 def normaliza_multiplica_vetor(v: point, fator: float, base: point = [0, 0]):
     nv = [v[X] - base[X], v[Y] - base[Y]]
-    nv[X] *= fator * fator
-    nv[X] /= distancia_euclidiana_quadrado([0, 0], v)
-    nv[Y] *= fator * fator
-    nv[Y] /= distancia_euclidiana_quadrado([0, 0], v)
-    nv[X] = math.sqrt(nv[X])
-    nv[Y] = math.sqrt(nv[Y])
+    d = distancia_euclidiana([0, 0], v)
+    global kt
+    if kt is None:
+        kt = 0
+    if kt == 0:
+        print(nv[Y], fator, nv[Y] * fator)
+        # print(nv[Y] * fator, nv[Y] / d, fator / d)
+        kt = 1
+    else:
+        kt = 0
+
+    v = fator / d
+    px = nv[X] / math.fabs(nv[X])
+    py = nv[Y] / math.fabs(nv[Y])
+    px = round(px, 0)
+    py = round(py, 0)
+    print(nv[Y], v**2)
+    nv[X] *= nv[X] * v**2
+    nv[Y] *= nv[Y] * v**2
+    nv[X] = math.sqrt(nv[X]) * px
+    nv[Y] = math.sqrt(nv[Y]) * py
+
     return [nv[X] + base[X], nv[Y] + base[Y]]
 
 

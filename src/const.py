@@ -24,6 +24,7 @@ COMPRIMENTO_CARRO = 13
 X = 0
 Y = 1
 VETOR_RAIZ = [0, 0]
+ZERO_DIST = 1e-6
 
 # tipos geometricos
 vetor = list[float, float]

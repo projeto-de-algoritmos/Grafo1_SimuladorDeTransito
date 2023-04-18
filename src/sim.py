@@ -72,7 +72,7 @@ class Carro:
     faixa_i: int
 
     nome: str
-    cor: str = "#FF0000"
+    cor: str
     posicao: float
     velocidade: float
     destino: point

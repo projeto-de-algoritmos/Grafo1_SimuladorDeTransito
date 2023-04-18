@@ -1,5 +1,5 @@
 # config
-DEBUG = False
+DEBUG = True
 
 # render config
 SCALE = 1
@@ -26,8 +26,8 @@ Y = 1
 VETOR_RAIZ = [0, 0]
 
 # tipos geometricos
-vetor = list[int, int]
-point = list[int, int]
+vetor = list[float, float]
+point = list[float, float]
 segment = list[point, point]
 linha = list[point, point]
 poligno = list[point]

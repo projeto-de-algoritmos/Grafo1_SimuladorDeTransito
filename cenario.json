@@ -58,7 +58,9 @@
       "destino": [10, 1000],
       "max_rvel": 1.2,
       "aceleracao": "4.0"
-    },
+    }
+  ],
+  "carros_ignore": [
     {
       "nome": "player",
       "cor": "#ff0000",

@@ -78,7 +78,7 @@ class PistaDrawer(DrawItem):
         fx = 0
         dv = 0
 
-        dprint(" ")
+        # dprint(" ")
 
         for faixa in self.pista.faixas:
             if last_faixa is not None:
@@ -201,7 +201,7 @@ class PistaDrawer(DrawItem):
             self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA
         )
 
-        dprint("draw faixa color", cor, rect)
+        # dprint("draw faixa color", cor, rect)
         self.draw_polygon(scr, cor, rect)
 
         return dlt
@@ -209,7 +209,7 @@ class PistaDrawer(DrawItem):
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo(carro)
 
-        dprint("draw car", carro.cor, rect)
+        dprint("draw car", carro.cor, rect[3])
         self.draw_polygon(scr, carro.cor, rect)
 
 

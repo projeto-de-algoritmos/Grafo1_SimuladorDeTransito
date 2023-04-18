@@ -6,6 +6,10 @@ def distancia_euclidiana(p1: point, p2: point):
     return math.sqrt((p1[X] - p2[X]) ** 2 + (p1[Y] - p2[Y]) ** 2)
 
 
+def distancia_euclidiana_quadrado(p1: point, p2: point):
+    return (p1[X] - p2[X]) ** 2 + (p1[Y] - p2[Y]) ** 2
+
+
 def ponto_de_aproximacao_maxima_ponto_de_segmento(l: segment, p: point):
     raise NotImplementedError
 
@@ -52,10 +56,12 @@ def normalizar_vetor(v: point, base: point = [0, 0]):
 
 def normaliza_multiplica_vetor(v: point, fator: float, base: point = [0, 0]):
     nv = [v[X] - base[X], v[Y] - base[Y]]
-    nv[X] *= fator
-    nv[X] /= distancia_euclidiana([0, 0], v)
-    nv[Y] *= fator
-    nv[Y] /= distancia_euclidiana([0, 0], v)
+    nv[X] *= fator * fator
+    nv[X] /= distancia_euclidiana_quadrado([0, 0], v)
+    nv[Y] *= fator * fator
+    nv[Y] /= distancia_euclidiana_quadrado([0, 0], v)
+    nv[X] = math.sqrt(nv[X])
+    nv[Y] = math.sqrt(nv[Y])
     return [nv[X] + base[X], nv[Y] + base[Y]]
 
 

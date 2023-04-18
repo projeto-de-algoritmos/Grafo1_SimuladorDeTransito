@@ -162,7 +162,7 @@ class PistaDrawer(DrawItem):
 
         dprint(ret1[Y], ret2[Y])
 
-        # [BUG] aqui o carro começa a variar no eixo Y quanto mais longe eles está da origem do vetor ret1. Acho que é porque ocorre a normalização do vetor, que estraga a sua direção
+        # [BUG] aqui o carro começa a variar no eixo Y quanto mais longe eles está da origem do vetor ret1. Acho que é porque ocorre a normalização do vetor, que estraga a sua direção por causa de calculos floating point
 
         # cria os 2 ponto "de cima" no retangulo do carro
         cret1 = normaliza_multiplica_vetor(

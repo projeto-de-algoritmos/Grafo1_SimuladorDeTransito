@@ -209,7 +209,7 @@ class PistaDrawer(DrawItem):
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo(carro)
 
-        dprint("draw car", carro.cor, rect[3])
+        dprint("draw car", rect[3])
         self.draw_polygon(scr, carro.cor, rect)
 
 

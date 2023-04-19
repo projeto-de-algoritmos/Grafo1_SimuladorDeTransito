@@ -148,6 +148,7 @@ class PistaDrawer(DrawItem):
             carro.faixa_i * LARGURA_FAIXA
             + min(carro.faixa_i, 0) * LARGURA_DIVISORIA
             + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0
+            + FATOR_AJUSTE_CARRO_VISUAL
         )
 
         r1, r2, r3, r4 = self.montar_faixa_divisoria_retangulo(
@@ -157,6 +158,13 @@ class PistaDrawer(DrawItem):
         d1 = carro.posicao / self.comprimento  # deve estar em [0,1]
         d2 = (carro.posicao + LARGURA_CARRO) / self.comprimento  # deve estar em [0,1]
 
+        d1y = d1
+        d2y = d2
+
+        if self.pista.p1[Y] > self.pista.p2[Y]:
+            d1y = 1.0 - d1y
+            d2y = 1.0 - d2y
+
         # ideia seria pegar a média ponderada dos pontos
         # que são calculados no retângulo da faixa
         # baseado na posição (aka. quilometragem) do carro na pista
@@ -165,12 +173,18 @@ class PistaDrawer(DrawItem):
         x2 = math.fabs(r1[X] - r4[X]) * d2 + min(r1[X], r4[X])
         x3 = math.fabs(r2[X] - r3[X]) * d1 + min(r2[X], r3[X])
         x4 = math.fabs(r2[X] - r3[X]) * d2 + min(r2[X], r3[X])
-        y1 = math.fabs(r2[Y] - r3[Y]) * d1 + min(r2[Y], r3[Y])
-        y2 = math.fabs(r2[Y] - r3[Y]) * d2 + min(r2[Y], r3[Y])
-        y3 = math.fabs(r1[Y] - r4[Y]) * d1 + min(r1[Y], r4[Y])
-        y4 = math.fabs(r1[Y] - r4[Y]) * d2 + min(r1[Y], r4[Y])
 
-        return [[x1, y1], [x2, y2], [x4, y4], [x3, y3]]
+        y1 = math.fabs(r2[Y] - r3[Y]) * d1y + min(r2[Y], r3[Y])
+        y2 = math.fabs(r2[Y] - r3[Y]) * d2y + min(r2[Y], r3[Y])
+        y3 = math.fabs(r1[Y] - r4[Y]) * d1y + min(r1[Y], r4[Y])
+        y4 = math.fabs(r1[Y] - r4[Y]) * d2y + min(r1[Y], r4[Y])
+
+        ret1 = [x1, y1]
+        ret2 = [x2, y2]
+        ret3 = [x3, y3]
+        ret4 = [x4, y4]
+
+        return [ret1, ret2, ret4, ret3]
 
     def draw_divisoria(
         self,

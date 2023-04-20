@@ -5,6 +5,7 @@ import traceback
 from .geometry import *
 from .gui import *
 from .const import *
+from .algoritmos import *
 
 
 def dprint(*values: object):
@@ -78,43 +79,58 @@ class Pista:
                 eprint("Pista fora do mapa")
 
 
-class Carro:
-    pista: Pista
-    faixa: Faixa
-    pista_i: int
-    faixa_i: int
+class Local:
+    pista: int
+    faixa: int
+    posicao: float
 
+    def __init__(self, pista: int, faixa: int, posicao: float):
+        self.pista = pista
+        self.faixa = faixa
+        self.posicao = posicao
+
+
+class Carro:
+    # constantes
     nome: str
     cor: str
-    posicao: float
     velocidade: float
-    destino: point
     velocidade_relativa_maxima_aceitavel: float
+    local_origem: Local
+    local_destino: Local
+    aceleracao: float  # [TODO] usar isso
 
-    # currently unused
-    aceleracao: float
+    # serão alteradas durante a simulação
+    pista_i: int
+    faixa_i: int
+    posicao: float
+    pista: Pista
+    faixa: Faixa
 
     def __init__(
         self,
-        pista_i: int,
-        faixa_i: int,
         nome: str,
         cor: str,
-        posicao: float,
         velocidade: float,
-        destino: point,
         max_rvel: float,
         aceleracao: float,
+        local_origem: Local,
+        local_destino: Local,
     ):
         self.nome = nome
         self.cor = cor
-        self.pista_i = pista_i
-        self.faixa_i = faixa_i
-        self.posicao = posicao
         self.velocidade = velocidade
-        self.destino = destino
         self.max_rvel = max_rvel
         self.aceleracao = aceleracao
+        self.local_origem = local_origem
+        self.local_destino = local_destino
+
+        self.pista_i = local_origem.pista
+        self.faixa_i = local_origem.faixa
+        self.posicao = local_origem.posicao
+
+
+# [TODO] Fazer adapter grafo-simulacao?
 
 
 class Simulation:
@@ -125,6 +141,8 @@ class Simulation:
 
     tick_rate: int
 
+    grafo_pista: Grafo
+
     def __init__(self, cenario_file, tick_rate=60):
         pistas, carros = self.read(cenario_file)
         self.pistas = pistas
@@ -133,6 +151,7 @@ class Simulation:
         self.running = True
 
         self.tick_rate = tick_rate
+        self.calc = {}
 
     def get_pistas_and_carros(self):
         return self.pistas
@@ -146,20 +165,30 @@ class Simulation:
         for carro in data["carros"]:
             nome = carro["nome"]
 
-            carro_obj = Carro(
-                nome=nome,
-                cor=carro["cor"],
-                pista_i=carro["pista"],
-                faixa_i=carro["faixa"],
-                posicao=carro["posicao"],
-                velocidade=carro["velocidade"],
-                destino=carro["destino"],
-                max_rvel=carro["max_rvel"],
-                aceleracao=carro["aceleracao"],
+            origem = Local(
+                carro["origem"]["pista"],
+                carro["origem"]["faixa"],
+                carro["origem"]["posicao"],
+            )
+
+            destino = Local(
+                carro["origem"]["pista"],
+                carro["origem"]["faixa"],
+                carro["origem"]["posicao"],
             )
 
             if carros.get(nome) is not None:
                 eprint(f"Carro {nome} já existe!")
+
+            carro_obj = Carro(
+                nome=nome,
+                cor=carro["cor"],
+                velocidade=carro["velocidade"],
+                max_rvel=carro["max_rvel"],
+                aceleracao=carro["aceleracao"],
+                local_origem=origem,
+                local_destino=destino,
+            )
 
             carros[nome] = carro_obj
 
@@ -182,6 +211,9 @@ class Simulation:
 
         return pistas, carros
 
+    def contruir_grafo_pistas(self, pistas):
+        pass
+
     def read_and_parse_json_file(self, path):
         with open(path, "r") as f:
             data = json.load(f)
@@ -192,6 +224,52 @@ class Simulation:
 
     def update(self):
         for carro in self.carros.values():
-            carro.posicao += carro.velocidade / self.tick_rate
+            velocidade = self.get_carro_velocidade(carro)
+
+            carro.posicao += velocidade / self.tick_rate
+
             if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
                 carro.posicao = 0
+
+    def get_carro_velocidade(self, carro: Carro) -> float:
+        velocidade_baseline = self.get_carro_velocidade_baseline(carro)
+
+        bloqueado, next_carro = self.is_carro_bloqueando_movimento(carro)
+        if not bloqueado:
+            return velocidade_baseline
+
+        return self.get_carro_velocidade(next_carro)
+
+    def is_carro_bloqueando_movimento(self, c_carro) -> tuple[bool, Carro]:
+        # verifique se existe algum carro dentro do espaço de movimento do carro atual
+        # o carro atual.
+        # O bloqueio é definido por um carro que compartilha a mesma faixa e está
+        # em algum lugar entre [0,5] metros da posição do carro atual na faixa.
+        p = c_carro.posicao
+        for carro in self.carros.values():
+            if carro == c_carro or carro.faixa != c_carro.faixa:
+                continue
+            np = carro.posicao
+            if np >= p and np <= p + TAMANHO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE:
+                return True, carro
+        return False, None
+
+    def get_carro_velocidade_baseline(self, carro: Carro):
+        # [TODO] Adicionar aceleração do carro
+        return carro.velocidade
+
+    def get_next_pista(self, carro: Carro) -> Pista:
+        if carro.pista_i == carro.local_destino.pista:
+            # [TODO] o carro precisa voltar?
+            # [TODO] o carro precisa seguir reto?
+            return Pista
+
+        passos = self.grafo_pista.get_passos_dijkstra(
+            carro.pista_i, carro.local_destino.pista
+        )
+
+        if len(passos) == 1:
+            return Pista
+
+        # passo 0 é a pista atual, logo 1 é a próxima
+        return self.pistas[passos[1]]

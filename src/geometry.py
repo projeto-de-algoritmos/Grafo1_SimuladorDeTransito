@@ -111,6 +111,10 @@ def soma_vetor(v1: point, v2: point):
     return [v1[X] + v2[X], v1[Y] + v2[Y]]
 
 
+def is_ponto_em_linha(p: point, l: linha):
+    pass
+
+
 if __name__ == "__main__":
     v = rotacionar_vetor_horario([1, 0], deg_pra_rad(30), [0, 0])
 

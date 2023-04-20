@@ -114,16 +114,41 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
 [TODO]
-- Desenhar carro como dependente da pista em que está.
 - Criar sistema simulador
+  - Não faça NENHUMA otimização de performance
+  - Detector de ciclos?
 - Criar sistema de logging
 - Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
 - Criar interaface gráfica com seguintes operações:
   - Pausar/Resumir a simulação
   - Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
   - Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
+- Adicionar metodo de conectar estradas
 
 [IGNORE]
+
+
+
+### Princípios do trânsito
+
+- A velocidade de um carro que está atrás de outro carro sempre será a velocidade do carro da frente
+  - Sendo assim, é possível que a definição da velocidade de um carro depende da velocidade de um grupo de outros carros
+  - A velocidade desse grupo pode ser que esteja em um cenário onde só pode ser definida pelo carro original. Ou seja, um ciclo.
+  - No caso de ciclos, a velocidade dos carros no ciclos é igual a velocidade do carro que dirige mais devagar dentro do ciclos.
+- A decisão de direção que um carro vai virar, caso ele chegue no final da pista ou pode virar pra outra pista depende do dijkstra
+  da próxima pista.
+- Pistas são estáticas, ou seja, elas nunca serão alteradas durante a execução do "transito".
+
+### Falhas do modelo
+
+[v1]
+- Sem retornos
+- Sem aceleração
+
+[v2]
+
+[v(nunca)]
+
 
 
 

@@ -33,13 +33,17 @@ Todos os carros tomam uma decisão ótima local a cada passo da simulação, e c
 ### As verdadeiras leis do trânsito
 
 - Lei 1: Todo carro irá dirigir na maior velocidade que puder dentro do seu limite de conforto.
+  - É possível que o limite de conforto supere a velocidade máxima do próprio carro.
 - Lei 2: A velocidade de um carro que está atrás de outro carro na mesma faixa sempre será a velocidade do carro da frente.
+  - Caso um carro esteja imediatamente atrás de outro, a velocidade desejada do carro atrás é sempre maior ou igual ao carro da frente. 
   - Sendo assim, é possível que a definição da velocidade de um carro depende da velocidade de um grupo formado pela sequência de outros carros à sua frente. 
-  - A velocidade desse grupo pode estar em um cenário onde a sequência volte até o carro original. Ou seja, um ciclo.
+  - Este grupo pode estar em um cenário onde a sequência dê uma volta completa até o carro original. Ou seja, um ciclo.
   - No caso de ciclos, a velocidade dos carros no ciclo é igual a velocidade do carro que dirige mais devagar dentro do ciclo.
 - Lei 3: Um carro sai de sua faixa com o propósito exclusivo de chegar ao seu destino mais rápido. 
-- Lei 4: Pistas são estáticas, ou seja, elas nunca serão alteradas durante a "execução" do transito.
+- Lei 4: Pistas podem ser classificadas de duas formas na perspectiva de um carro em específico: ela existe ou não. 
+  - Um sinal que se fecha durante o trajeto de um carro é equivalente à inexistencia temporária de uma pista.
 - Lei 5: Caso ocorra uma parada na pista, carros irão se distribuir por todas faixas de forma uniforme.
+- Lei 6: Caso não exista forma de um carro chegar ao seu destino, ele irá freiar.
 
 ### Fatores técnicos
 

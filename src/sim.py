@@ -1,6 +1,7 @@
 import json
 from enum import Enum
 import traceback
+import copy
 
 from .geometry import *
 from .gui import *
@@ -283,3 +284,48 @@ class Simulation:
 
         # passo 0 é a pista atual, logo 1 é a próxima
         return self.pistas[passos[1]]
+
+    def clonar_simulacao(self) -> "Simulation":
+        return copy.deepcopy(self)
+
+    # Esse função simula um futuro onde todos os carros
+    # ficam na mesma faixa onde estão. Ela tenta encontrar
+    # o caminho mais rápido para o carro atual chegar até
+    # seu destino final.
+    # [v1] Não existem interações entre múltiplas faixas.
+    def prever_melhor_jogada(self, carro):
+        jogadas: tuple[callable[[Carro], bool], callable[[Carro]]] = [
+            (self.pode_carro_virar_pra_direita, self.virar_carro_pra_direita),
+            (self.pode_carro_virar_pra_esquerda, self.virar_carro_pra_esquerda),
+        ]
+
+        for pista in self.get_pistas_acessiveis_por_carro(carro):
+            jogadas.append(
+                (lambda: True, lambda: self.entrar_carro_em_outra_pista(pista))
+            )
+
+        # essa abstração serve pra prever o futuro sem alterar o estado atual
+        # e todos os motoristas na pista fazem exatamente isso enquanto dirigem
+        simulacao = self.clonar_simulacao()
+        for jogadas in jogadas():
+            pass
+
+    def virar_carro_pra_direita(self, carro):
+        pass
+
+    def virar_carro_pra_esquerda(self, carro):
+        pass
+
+    def entrar_carro_em_outra_pista(self, carro):
+        # [TODO] Implementar
+        return []
+
+    def pode_carro_virar_pra_direita(self, carro) -> bool:
+        pass
+
+    def pode_carro_virar_pra_esquerda(self, carro) -> bool:
+        pass
+
+    def get_pistas_acessiveis_por_carro(self, carro) -> list[Pista]:
+        # [TODO] Implementar
+        return []

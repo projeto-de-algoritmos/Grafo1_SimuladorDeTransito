@@ -61,36 +61,6 @@ def normalizar_vetor(v: point, base: point = [0, 0]):
     return [nv[X] + base[X], nv[Y] + base[Y]]
 
 
-kt = 0
-
-
-def normaliza_multiplica_vetor(v: point, fator: float, base: point = [0, 0]):
-    nv = [v[X] - base[X], v[Y] - base[Y]]
-    d = distancia_euclidiana([0, 0], v)
-    global kt
-    if kt is None:
-        kt = 0
-    if kt == 0:
-        print(nv[Y], fator, nv[Y] * fator)
-        # print(nv[Y] * fator, nv[Y] / d, fator / d)
-        kt = 1
-    else:
-        kt = 0
-
-    v = fator / d
-    px = nv[X] / math.fabs(nv[X])
-    py = nv[Y] / math.fabs(nv[Y])
-    px = round(px, 0)
-    py = round(py, 0)
-    print(nv[Y], v**2)
-    nv[X] *= nv[X] * v**2
-    nv[Y] *= nv[Y] * v**2
-    nv[X] = math.sqrt(nv[X]) * px
-    nv[Y] = math.sqrt(nv[Y]) * py
-
-    return [nv[X] + base[X], nv[Y] + base[Y]]
-
-
 def get_vetor(p1: point, p2: point):
     return [p2[X] - p1[X], p2[Y] - p1[Y]]
 

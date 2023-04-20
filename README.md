@@ -11,6 +11,8 @@
 
 ## Sobre 
 
+
+
 ### Simulação
 
 O objetivo do projeto é **calcular a estratégia ótima que carros dirigindo em pistas irão adotar em múltiplos cenários adversariais** (todos contra todos). Atingidos esse objetivos, isso nos permite analisar e teorizar heurísticas para decisões efetivas num contexto de trânsito, sendo o projeto um estudo de teoria dos jogos.
@@ -27,6 +29,17 @@ Para cada passo da simulação, cada carro irá **assumir que cada outro carro n
 Todos os carros tomam uma decisão ótima local a cada passo da simulação, e cada uma dos carros não prioriza conceitos considerados arcaicos como "segurança" ou "respeito". Sendo assim, um contexto anárquico acontece, e todos os carros adotam a SUA melhor estratégia a cada momento.
 
 É necessário calcular estratégias ótimas locais pois não é possível que um carro saiba o que acontecerá no futuro. Além disso, existe uma quantidade grande de computações que são complexas demais para otimizar de forma assintótica, tornando esse projeto perfeito para o contexto.
+
+### As verdadeiras leis do trânsito
+
+- Lei 1: Todo carro irá dirigir na maior velocidade que puder dentro do seu limite de conforto.
+- Lei 2: A velocidade de um carro que está atrás de outro carro na mesma faixa sempre será a velocidade do carro da frente.
+  - Sendo assim, é possível que a definição da velocidade de um carro depende da velocidade de um grupo formado pela sequência de outros carros à sua frente. 
+  - A velocidade desse grupo pode estar em um cenário onde a sequência volte até o carro original. Ou seja, um ciclo.
+  - No caso de ciclos, a velocidade dos carros no ciclo é igual a velocidade do carro que dirige mais devagar dentro do ciclo.
+- Lei 3: Um carro sai de sua faixa com o propósito exclusivo de chegar ao seu destino mais rápido. 
+- Lei 4: Pistas são estáticas, ou seja, elas nunca serão alteradas durante a "execução" do transito.
+- Lei 5: Caso ocorra uma parada na pista, carros irão se distribuir por todas faixas de forma uniforme.
 
 ### Fatores técnicos
 
@@ -47,6 +60,9 @@ Essa parametrização dos atributos da simulação nesse projeto foi feito à pa
 Uma potencial expansão do projeto seria incluir na decisão ótima local um certo nível de iterações de cálculo da decisão ótima local de outros carros. Ou seja, cada carro calculará uma decisão ótima local mais simples para cada outro carro durante cada passo da simulação separadamente (como um motorista faria). Claramente, a complexidade assintótica disso é alta demais e preferi não o fazer.
 
 O programa deve ser capaz de dar instruções em texto do que deveria ser feito.
+
+
+#### Grandezas
 
 Todos os carros médios tem 4 metros de comprimento.
 Todos os carros mantem um distância mínima de 1 metro.
@@ -113,38 +129,46 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
-[TODO]
+[TODO v1]
+- [SIM] Permitir que um carro chegue a seu destino na mesma pista onde está.
+- [SIM] Simular futuro com diferentes movimentos cadeados
 - [GRAFO] Adicionar metodo de conectar estradas (incluindo uma pista que se conecta com outra de forma indireta)
 - [GRAFO] Adicionar ações no objeto carro
 - [GRAFO] Brutador de ações do carro com preview de futuro
+- [SIM] Detector de caminhos possíveis (disjoint set union)
+
+[TODO later]
+- [REN] Consertar sistema de render_scale mal feito e inconsistente.
+- [SIM] Detector de ciclos de carros engarrafados
+- [DEV] Criar sistema de logging
+- [SIM] Analisar esforço e otimizar performance
 - [GUI] Criar interaface gráfica com seguintes operações:
   - [GUI] Pausar/Resumir a simulação
   - [GUI] Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
   - [GUI] Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
-- [DEV] Criar sistema de logging
-- [SIM] Detector de ciclos de carros engarrafados
-- [REN] Consertar sistema de render_scale mal feito e inconsistente.
 
-[IGNORE]
-- Não faça NENHUMA otimização de performance até que a necessidade exista
+[IGNORE v1]
+- [v1] Não faça NENHUMA otimização de performance até que a necessidade exista
+  - Sim, vai explorar todo o ambiente de possibilidades.
+  - Caso encontre uma solução, pare a exploração (ou seja, todas os passos devem consumir o mesmo "tempo" para poder parar na primeira solução).
+  - Caso demore demais, decida baseado no limite máximo de exploração
+  - Uma solução impossível = Uma solução que demorou demais.
 
 
 
-### Princípios do trânsito
-
-- A velocidade de um carro que está atrás de outro carro sempre será a velocidade do carro da frente
-  - Sendo assim, é possível que a definição da velocidade de um carro depende da velocidade de um grupo de outros carros
-  - A velocidade desse grupo pode ser que esteja em um cenário onde só pode ser definida pelo carro original. Ou seja, um ciclo.
-  - No caso de ciclos, a velocidade dos carros no ciclos é igual a velocidade do carro que dirige mais devagar dentro do ciclos.
-- A decisão de direção que um carro vai virar, caso ele chegue no final da pista ou pode virar pra outra pista depende do dijkstra
-  da próxima pista.
-- Pistas são estáticas, ou seja, elas nunca serão alteradas durante a execução do "transito".
 
 ### Falhas do modelo
 
 [v1]
 - Sem retornos
 - Sem aceleração
+- Instantaneamente muda de faixa pra voltar
+- Acostamento é só elemento visual  
+- Não existe pardal
+- Não existe sinal
+- Não se freia antes de curvas acentuadas
+- Não acontecem acidentes
+- O tempo de reação de cada carro é igual ao tick_rate da simulação.
 
 [v2]
 

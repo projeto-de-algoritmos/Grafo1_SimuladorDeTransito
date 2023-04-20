@@ -1,13 +1,10 @@
 # config
 DEBUG = True
 
-# render config
-SCALE = 1
-
-# tempo
+# tempo EM MICROSSEGUNDOS
 SEC_IN_MICROSECONDS = 10e6
 
-# cor
+# cor EM TUPLE(R,G,B)
 COR_ACOSTAMENTO = (60, 60, 60)
 COR_FAIXA = (15, 15, 15)
 COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
@@ -15,15 +12,21 @@ COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
 # tamanho visual (da renderização)
-LARGURA_DIVISORIA = 3
-LARGURA_FAIXA = 10
-LARGURA_CARRO = 8
-COMPRIMENTO_CARRO = 13  # (visual)
-FATOR_AJUSTE_CARRO_VISUAL = 1
+SCALE = 1
 
-# tamanho físico (da simulação)
-TAMANHO_CARRO = 4  # metros
+
+def scaled(x):
+    global SCALE
+    return x * SCALE
+
+
+# tamanho físico (da simulação) EM METROS
+LARGURA_DIVISORIA = 1
+LARGURA_FAIXA = 3
+LARGURA_CARRO = 2
+COMPRIMENTO_CARRO = 5  # metros
 DISTANCIA_MINIMA_CARRO_A_FRENTE = 1  # metros
+FATOR_AJUSTE_CARRO_VISUAL = 0.3
 
 # geometria
 X = 0

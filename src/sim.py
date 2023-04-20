@@ -246,11 +246,21 @@ class Simulation:
         # O bloqueio é definido por um carro que compartilha a mesma faixa e está
         # em algum lugar entre [0,5] metros da posição do carro atual na faixa.
         p = c_carro.posicao
+        intervalo = [p, p + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE]
         for carro in self.carros.values():
             if carro == c_carro or carro.faixa != c_carro.faixa:
                 continue
             np = carro.posicao
-            if np >= p and np <= p + TAMANHO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE:
+            if p > np:
+                continue
+            c_intervalo = [np, np + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE]
+            bloqueado_p1 = (
+                c_intervalo[0] <= intervalo[0] and intervalo[0] <= c_intervalo[1]
+            )
+            bloqueado_p2 = (
+                c_intervalo[0] <= intervalo[1] and intervalo[1] <= c_intervalo[1]
+            )
+            if bloqueado_p1 or bloqueado_p2:
                 return True, carro
         return False, None
 

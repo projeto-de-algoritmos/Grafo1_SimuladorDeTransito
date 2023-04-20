@@ -1,8 +1,8 @@
 {
   "pistas": [
     {
-      "p1": [50, 50],
-      "p2": [500, 50],
+      "p1": [10, 50],
+      "p2": [250, 50],
       "velocidade_maxima": 80,
       "faixas": [
         {
@@ -24,7 +24,7 @@
     {
       "nome": "player1",
       "cor": "#77ff00",
-      "velocidade": 11.11,
+      "velocidade": 8.11,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
       "origem": {
@@ -48,6 +48,23 @@
         "pista": 0,
         "faixa": 1,
         "posicao": 100
+      },
+      "destino": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 400
+      }
+    },
+    {
+      "nome": "player3",
+      "cor": "#ff8888",
+      "velocidade": 1.11,
+      "max_rvel": 1.2,
+      "aceleracao": "4.0",
+      "origem": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 150
       },
       "destino": {
         "pista": 0,

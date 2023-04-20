@@ -124,6 +124,7 @@ make save_cenario file=cenario/{nome_do_cenario}.json
   - Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
   - Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
 - Adicionar metodo de conectar estradas
+- Consertar sistema de render_scale mal feito e inconsistente.
 
 [IGNORE]
 

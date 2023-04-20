@@ -11,10 +11,8 @@ COR_DIVISORIA_FAIXA_SENTIDO_IGUAL = (200, 200, 200)
 COR_DIVISORIA_FAIXA_SENTIDO_DIFERENTE = (200, 180, 60)
 COR_DIVISORIA_FAIXA_ACOSTAMENTO = (160, 160, 160)
 
+
 # tamanho visual (da renderização)
-SCALE = 1
-
-
 def scaled(x):
     global SCALE
     return x * SCALE
@@ -40,3 +38,6 @@ point = list[float, float]
 segment = list[point, point]
 linha = list[point, point]
 poligno = list[point]
+
+# restrições da simulacao
+MAX_SIM_ITER_COUNT = 1000

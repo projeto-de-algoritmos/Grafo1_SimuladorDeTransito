@@ -33,6 +33,9 @@ cor = tuple[int, int, int]
 Direcao = Enum("Direcao", "normal contrario")
 FaixaTipo = Enum("FaixaTipo", "acostamento geral")
 
+CondicaoCarro = callable[["Carro"], bool]
+AcaoCarro = callable[["Simulation", "Carro"]]
+
 
 class Faixa:
     pista: "Pista"
@@ -130,6 +133,9 @@ class Carro:
         self.faixa_i = local_origem.faixa
         self.posicao = local_origem.posicao
 
+    def clonar(self) -> "Carro":
+        return copy.deepcopy(self)
+
 
 # [TODO] Fazer adapter grafo-simulacao?
 
@@ -153,6 +159,9 @@ class Simulation:
 
         self.tick_rate = tick_rate
         self.calc = {}
+
+    def clonar(self) -> "Simulation":
+        return copy.deepcopy(self)
 
     def get_pistas_and_carros(self):
         return self.pistas
@@ -285,18 +294,33 @@ class Simulation:
         # passo 0 é a pista atual, logo 1 é a próxima
         return self.pistas[passos[1]]
 
-    def clonar_simulacao(self) -> "Simulation":
-        return copy.deepcopy(self)
+    def get_distancia_destino(self, carro: Carro):
+        # [TODO] implementar dijkstra nas pistas
+        return int(math.fabs(carro.posicao - carro.local_destino.posicao))
+
+    def is_carro_no_destino(self, carro: Carro):
+        return self.get_distancia_destino(carro) == 0
 
     # Esse função simula um futuro onde todos os carros
     # ficam na mesma faixa onde estão. Ela tenta encontrar
     # o caminho mais rápido para o carro atual chegar até
     # seu destino final.
+    # ela retona a acao imediata pra se realizar, bem como os passos que demorou
     # [v1] Não existem interações entre múltiplas faixas.
-    def prever_melhor_jogada(self, carro):
-        jogadas: tuple[callable[[Carro], bool], callable[[Carro]]] = [
-            (self.pode_carro_virar_pra_direita, self.virar_carro_pra_direita),
-            (self.pode_carro_virar_pra_esquerda, self.virar_carro_pra_esquerda),
+    def prever_melhor_jogada(self, carro: Carro, passos=1) -> tuple[AcaoCarro, int]:
+        # se superamos a quantidade de iteração, retornamos
+        if passos > MAX_SIM_ITER_COUNT:
+            return None, 1e18
+
+        jogadas: tuple[CondicaoCarro, AcaoCarro] = [
+            (
+                self.pode_carro_virar_pra_direita,
+                lambda sim, carro: sim.virar_carro_pra_direita(carro),
+            ),
+            (
+                self.pode_carro_virar_pra_esquerda,
+                lambda sim, carro: sim.virar_carro_pra_esquerda(carro),
+            ),
         ]
 
         for pista in self.get_pistas_acessiveis_por_carro(carro):
@@ -304,11 +328,43 @@ class Simulation:
                 (lambda: True, lambda: self.entrar_carro_em_outra_pista(pista))
             )
 
+        m_jogada = None
+        m_passos = 1e18
+
+        # =============== esse é o BFS mais importante do app ===============
+        #
+        # vamos testar as possibilidades de jogadas até encontrar a ideal.
         # essa abstração serve pra prever o futuro sem alterar o estado atual
-        # e todos os motoristas na pista fazem exatamente isso enquanto dirigem
-        simulacao = self.clonar_simulacao()
-        for jogadas in jogadas():
-            pass
+        # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
+        for jogada in jogadas:
+            cond, acao = jogada
+            if cond(carro):
+                # clona pra evitar conflito de estado (performance altissima)
+                n_carro: Carro = carro.clonar()
+                n_simulacao: Simulation = self.clonar()
+
+                # executa acao de teste
+                n_simulacao[acao](n_carro)
+
+                # se chegou ao destino, encontramos uma solução
+                if n_simulacao.is_carro_no_destino(n_carro):
+                    return acao, passos + 1
+
+                # vamos testar as jogadas possíveis a partir daqui
+                n_jogada, n_passos = n_simulacao.prever_melhor_jogada(
+                    n_carro, passos=passos + 1
+                )
+
+                # se essa jogada foi melhor que a anterior, atualiza
+                if n_passos < m_passos:
+                    n_jogada = n_jogada
+                    m_passos = n_passos
+
+        return m_jogada, m_passos
+
+    def seguir_carro_reto(self, carro: Carro):
+        # apenas um noop pra interface ficar consistente
+        pass
 
     def virar_carro_pra_direita(self, carro: Carro):
         _, i = self.get_faixa_a_direita(carro)

@@ -114,19 +114,19 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
 [TODO]
-- Criar sistema simulador
-  - Não faça NENHUMA otimização de performance
-  - Detector de ciclos?
-- Criar sistema de logging
-- Sistema de simulação consegue fazer o parse das pistas que se conectam em algum ponto.
-- Criar interaface gráfica com seguintes operações:
-  - Pausar/Resumir a simulação
-  - Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
-  - Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
-- Adicionar metodo de conectar estradas
-- Consertar sistema de render_scale mal feito e inconsistente.
+- [GRAFO] Adicionar metodo de conectar estradas (incluindo uma pista que se conecta com outra de forma indireta)
+- [GRAFO] Adicionar ações no objeto carro
+- [GRAFO] Brutador de ações do carro com preview de futuro
+- [GUI] Criar interaface gráfica com seguintes operações:
+  - [GUI] Pausar/Resumir a simulação
+  - [GUI] Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)
+  - [GUI] Botão para adicionar nova pista (de onde até onde, e incluir representação se pista conecta ou não com outra pista)
+- [DEV] Criar sistema de logging
+- [SIM] Detector de ciclos de carros engarrafados
+- [REN] Consertar sistema de render_scale mal feito e inconsistente.
 
 [IGNORE]
+- Não faça NENHUMA otimização de performance até que a necessidade exista
 
 
 

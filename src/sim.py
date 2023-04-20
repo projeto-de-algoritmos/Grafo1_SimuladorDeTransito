@@ -310,22 +310,91 @@ class Simulation:
         for jogadas in jogadas():
             pass
 
-    def virar_carro_pra_direita(self, carro):
-        pass
+    def virar_carro_pra_direita(self, carro: Carro):
+        _, i = self.get_faixa_a_direita(carro)
+        carro.faixa_i = i
+        carro.faixa = self.pistas[carro.pista_i].faixas[i]
 
-    def virar_carro_pra_esquerda(self, carro):
-        pass
+    def virar_carro_pra_esquerda(self, carro: Carro):
+        _, i = self.get_faixa_a_esquerda(carro)
+        carro.faixa_i = i
+        carro.faixa = self.pistas[carro.pista_i].faixas[i]
 
-    def entrar_carro_em_outra_pista(self, carro):
+    def pode_carro_virar_pra_direita(self, carro: Carro) -> bool:
+        # existe alguma faixa anterior a atual, se o sentido da faixa é normal?
+        # existe alguma faixa posterior a atual, se o sentido da faixa é contrario?
+        # essa faixa está indo no mesmo sentido?
+        # essa faixa é geral, e não um acostamento?
+        cf = carro.faixa_i
+        pista = self.pistas[carro.pista_i]
+        faixa = pista.faixas[carro.faixa_i]
+
+        faixa_a_direita = self.get_faixa_a_direita(carro)
+
+        if (
+            faixa_a_direita is None
+            or faixa_a_direita.sentido != faixa.sentido
+            or faixa_a_direita.tipo != FaixaTipo["geral"]
+        ):
+            return False
+
+        return True
+
+    def pode_carro_virar_pra_esquerda(self, carro: Carro) -> bool:
+        # existe alguma faixa anterior a atual, se o sentido da faixa é normal?
+        # existe alguma faixa posterior a atual, se o sentido da faixa é contrario?
+        # essa faixa está indo no mesmo sentido?
+        # essa faixa é geral, e não um acostamento?
+        pista = self.pistas[carro.pista_i]
+        faixa = pista.faixas[carro.faixa_i]
+
+        faixa_a_direita = self.get_faixa_a_direita(carro)
+
+        if (
+            faixa_a_direita is None
+            or faixa_a_direita.sentido != faixa.sentido
+            or faixa_a_direita.tipo != FaixaTipo["geral"]
+        ):
+            return False
+
+        return True
+
+    def get_faixa_a_direita(self, carro: Carro):
+        cf = carro.faixa_i
+        pista = self.pistas[carro.pista_i]
+        faixa = pista.faixas[carro.faixa_i]
+        faixa_a_direita = None
+        index = -1
+
+        if faixa.sentido == Direcao["geral"] and cf > 0:
+            faixa_a_direita = pista.faixas[cf - 1]
+            index = cf - 1
+        elif faixa.sentido == Direcao["contrario"] and cf + 1 < len(pista.faixas):
+            faixa_a_direita = pista.faixas[cf + 1]
+            index = cf + 1
+
+        return faixa_a_direita, index
+
+    def get_faixa_a_esquerda(self, carro: Carro) -> tuple[Faixa, int]:
+        cf = carro.faixa_i
+        pista = self.pistas[carro.pista_i]
+        faixa = pista.faixas[carro.faixa_i]
+        faixa_a_esquerda = None
+        index = -1
+
+        if faixa.sentido == Direcao["contrario"] and cf > 0:
+            faixa_a_esquerda = pista.faixas[cf - 1]
+            index = cf - 1
+        elif faixa.sentido == Direcao["geral"] and cf + 1 < len(pista.faixas):
+            faixa_a_esquerda = pista.faixas[cf + 1]
+            index = cf + 1
+
+        return faixa_a_esquerda, index
+
+    def get_pistas_acessiveis_por_carro(self, carro: Carro) -> list[Pista]:
         # [TODO] Implementar
         return []
 
-    def pode_carro_virar_pra_direita(self, carro) -> bool:
-        pass
-
-    def pode_carro_virar_pra_esquerda(self, carro) -> bool:
-        pass
-
-    def get_pistas_acessiveis_por_carro(self, carro) -> list[Pista]:
+    def entrar_carro_em_outra_pista(self, carro: Carro):
         # [TODO] Implementar
         return []

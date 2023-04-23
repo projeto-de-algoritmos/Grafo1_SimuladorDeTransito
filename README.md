@@ -51,7 +51,7 @@ Leia a palavra 'lei' como as leis de newton, não como as leis do código penal.
 
 Pela alta quantidade de computação e baixa prioridade de desenvolvimento em performance, os cenários desse projeto precisarão ser curtos, com fim de evitar uma demora significativa no cálculo do resultado.
 
-Além disso, existe um parâmetro chamado de ***tick***, que indica quantos milissegundos de simulação cada passo irá tomar. Quanto mais segundos, menos intesa é a computação porque menos passos são calculados.
+Além disso, existe um parâmetro chamado de ***tick***, que indica quantos milissegundos de física da simulação cada passo irá tomar. Quanto mais segundos, menos intesa é a computação porque menos passos são calculados.
 
 O cenário é feita a partir de um arquivo json. No geral, criar um cenário novo requer algum esforço, e portanto recomenda-se usar algum dos cenários na pasta `cenarios/`. Cada arquivo de cenário possui um título descritivo do que ele representa. Digite `make load_cenario file=cenario/{nome_do_cenario}.json` para adicionar o cenário desejado (ou copie manualmente).  
 

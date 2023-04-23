@@ -40,4 +40,6 @@ linha = list[point, point]
 poligno = list[point]
 
 # restrições da simulacao
+DEFAULT_TICK_RATE = 60  # ms
+DEFAULT_TICK = 1000 / 60  # ms
 MAX_SIM_ITER_COUNT = 20

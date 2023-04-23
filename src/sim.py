@@ -163,18 +163,22 @@ class Simulation:
 
     running: bool = False
 
-    tick_rate: int
+    tick_rate: float  # 1 / milissegundo
+    tick: float  #      milissegundo
+    delta_t: float  #   segundo
 
     grafo_pista: Grafo
 
-    def __init__(self, cenario_file, tick_rate=60):
+    def __init__(self, cenario_file, tick=DEFAULT_TICK):
         pistas, carros = self.read(cenario_file)
         self.pistas = pistas
         self.carros = carros
 
         self.running = True
 
-        self.tick_rate = tick_rate
+        self.tick = tick
+        self.tick_rate = 1000 / tick
+        self.delta_t = tick / 1e3
         self.calc = {}
 
     def clonar(self) -> "Simulation":
@@ -253,7 +257,7 @@ class Simulation:
         for carro in self.carros.values():
             velocidade = self.get_carro_velocidade(carro)
 
-            carro.posicao += velocidade / self.tick_rate
+            carro.posicao += velocidade * self.delta_t
 
             if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
                 carro.posicao = 0
@@ -382,7 +386,7 @@ class Simulation:
         # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
 
         for jogada in jogadas:
-            # jogada = self.amortizar_calculo(jogada, carro, self)
+            jogada = self.amortizar_calculo(jogada, carro)
 
             if jogada.atende_condicao(self, carro):
                 sts = self.save_update_state()
@@ -416,26 +420,42 @@ class Simulation:
 
         return m_jogada, m_passos
 
-    def amortizar_calculo(self, jogada, carro, simulacao) -> Jogada:
+    def amortizar_calculo(self, jogada: Jogada, carro: Carro) -> Jogada:
         # como todos os carros a partir do momento que estou calculando não irão mudar de faixa
-        # posso combinar numa única decisão todos os passos até que o carro siga até a posição
-        # do proximo carro na pista. com isso irei somar um numero de passos igual ao tick rate
-        # da simulação como se fossem decisões de seguir reto. ou seja, muitos calculos
-        # desnecessários serão evitados
+        # posso combinar numa única decisão todos os passos até que o carro
+        # - siga até a posição do proximo carro na pista
+        # - siga até o final da pista
+        # - ou se essa pista é contém seu destino final, siga até o destino final
+        # com isso irei somar um numero de passos igual ao tick rate da simulação como se fossem
+        # decisões de seguir reto. ou seja, muitos calculos desnecessários serão evitados
 
         if jogada.nome != "seguir em frente":
             return jogada
 
-        nxt_carro = simulacao.get_proximo_carro(carro)
-        if nxt_carro is None:
-            jogada.n_passos = math.floor(
-                self.pistas[carro.pista_i].get_comprimento() - carro.posicao
+        n_passos = jogada.n_passos
+        vel = self.get_carro_velocidade_baseline(carro)
+        dist = 1e18
+        found = False
+
+        nxt_carro = self.get_proximo_carro(carro)
+        if nxt_carro is not None:
+            # segue até o proximo carro?
+            dist = min(nxt_carro.posicao - carro.posicao, dist)
+
+        if carro.local_destino.pista == carro.pista_i:
+            # segue até o destino final?
+            dist = min(carro.local_destino.posicao - carro.posicao, dist)
+        else:
+            # segue até o final da pista?
+            dist = min(
+                self.pistas[carro.pista_i].get_comprimento() - carro.posicao, dist
             )
+
+        if not found or dist <= self.delta_t * vel:
             return jogada
-        diff = nxt_carro.posicao - carro.posicao
-        dt = simulacao.tick_rate
-        if diff > dt:
-            jogada.n_passos = math.floor(diff / dt)
+
+        n_passos = math.floor(dist / vel)
+        jogada.n_passos = n_passos
         return jogada
 
     def get_proximo_carro(self, carro: Carro) -> Carro:

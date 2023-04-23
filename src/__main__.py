@@ -5,7 +5,7 @@ from .sim import Simulation, eprint
 def main():
     cfg = read_config()
 
-    sim = Simulation(cenario_file=cfg["cenario_file"], tick_rate=cfg["tick_rate"])
+    sim = Simulation(cenario_file=cfg["cenario_file"], tick=cfg["tick"])
 
     gui = GUI(
         max_fps=cfg["max_fps"],

@@ -436,20 +436,22 @@ class Simulation:
         vel = self.get_carro_velocidade_baseline(carro)
         dist = 1e18
         found = False
+        p = carro.posicao
 
         nxt_carro = self.get_proximo_carro(carro)
         if nxt_carro is not None:
             # segue até o proximo carro?
-            dist = min(nxt_carro.posicao - carro.posicao, dist)
+            found = True
+            dist = min(nxt_carro.posicao - p, dist)
 
         if carro.local_destino.pista == carro.pista_i:
             # segue até o destino final?
-            dist = min(carro.local_destino.posicao - carro.posicao, dist)
+            found = True
+            dist = min(carro.local_destino.posicao - p, dist)
         else:
             # segue até o final da pista?
-            dist = min(
-                self.pistas[carro.pista_i].get_comprimento() - carro.posicao, dist
-            )
+            found = True
+            dist = min(self.pistas[carro.pista_i].get_comprimento() - p, dist)
 
         if not found or dist <= self.delta_t * vel:
             return jogada

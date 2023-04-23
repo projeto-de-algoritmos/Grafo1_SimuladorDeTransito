@@ -40,4 +40,4 @@ linha = list[point, point]
 poligno = list[point]
 
 # restrições da simulacao
-MAX_SIM_ITER_COUNT = 500
+MAX_SIM_ITER_COUNT = 20

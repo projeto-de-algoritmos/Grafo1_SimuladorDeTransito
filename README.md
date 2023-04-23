@@ -137,10 +137,8 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 
 [TODO v1]
 - [SIM] Permitir que um carro chegue a seu destino na mesma pista onde está.
-- [SIM] Simular futuro com diferentes movimentos cadeados
+- [SIM] Lidar com possibilidade de usar acostamentos e ultrapassagens por faixa sentido oposto
 - [GRAFO] Adicionar metodo de conectar estradas (incluindo uma pista que se conecta com outra de forma indireta)
-- [GRAFO] Adicionar ações no objeto carro
-- [GRAFO] Brutador de ações do carro com preview de futuro
 - [SIM] Detector de caminhos possíveis (disjoint set union)
 
 [TODO later]

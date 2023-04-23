@@ -255,12 +255,18 @@ class Simulation:
 
     def update(self, prever_jogada=True):
         for carro in self.carros.values():
-            velocidade = self.get_carro_velocidade(carro)
+            velocidade, carro_a_frente = self.get_carro_velocidade(carro)
 
             carro.posicao += velocidade * self.delta_t
 
-            if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
-                carro.posicao = 0
+            if carro_a_frente is not None:
+                carro.posicao = (
+                    carro_a_frente.posicao
+                    - DISTANCIA_MINIMA_CARRO_A_FRENTE
+                    - COMPRIMENTO_CARRO
+                )
+            elif carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
+                carro.posicao = carro.pista.get_comprimento() - COMPRIMENTO_CARRO
 
             if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
                 jogada, passos = self.prever_melhor_jogada(carro)
@@ -279,38 +285,50 @@ class Simulation:
             carro.posicao = sts[i]
             i += 1
 
-    def get_carro_velocidade(self, carro: Carro) -> float:
+    def get_carro_velocidade(self, carro: Carro) -> tuple[float, Carro | None]:
         velocidade_baseline = self.get_carro_velocidade_baseline(carro)
 
         bloqueado, next_carro = self.is_carro_bloqueando_movimento(carro)
         if not bloqueado:
-            return velocidade_baseline
+            return velocidade_baseline, None
 
-        return self.get_carro_velocidade(next_carro)
+        vel, _ = self.get_carro_velocidade(next_carro)
+        return vel, next_carro
 
     def is_carro_bloqueando_movimento(self, c_carro) -> tuple[bool, Carro]:
         # verifique se existe algum carro dentro do espaço de movimento do carro atual
         # o carro atual.
         # O bloqueio é definido por um carro que compartilha a mesma faixa e está
         # em algum lugar entre [0,5] metros da posição do carro atual na faixa.
+
+        carro = self.get_proximo_carro(c_carro)
+        if carro is None:
+            return False, None
+
         p = c_carro.posicao
+        np = carro.posicao
+
+        if p > np:
+            return True, carro
+
         intervalo = [p, p + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE]
-        for carro in self.carros.values():
-            if carro == c_carro or carro.faixa != c_carro.faixa:
-                continue
-            np = carro.posicao
-            if p > np:
-                continue
-            c_intervalo = [np, np + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE]
-            bloqueado_p1 = (
-                c_intervalo[0] <= intervalo[0] and intervalo[0] <= c_intervalo[1]
-            )
-            bloqueado_p2 = (
-                c_intervalo[0] <= intervalo[1] and intervalo[1] <= c_intervalo[1]
-            )
-            if bloqueado_p1 or bloqueado_p2:
-                return True, carro
+        c_intervalo = [np, np + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE]
+        bloqueado_p1 = c_intervalo[0] <= intervalo[0] and intervalo[0] <= c_intervalo[1]
+        bloqueado_p2 = c_intervalo[0] <= intervalo[1] and intervalo[1] <= c_intervalo[1]
+
+        if bloqueado_p1 or bloqueado_p2:
+            return True, carro
+
         return False, None
+
+    def get_proximo_carro(self, carro: Carro) -> Carro:
+        ret = None
+        for ccarro in self.carros.values():
+            if ccarro.pista_i == carro.pista_i and ccarro.faixa_i == carro.faixa_i:
+                if ccarro.posicao > carro.posicao:
+                    if ret is None or ret.posicao > ccarro.posicao:
+                        ret = ccarro
+        return ret
 
     def get_carro_velocidade_baseline(self, carro: Carro):
         # [TODO] Adicionar aceleração do carro
@@ -456,18 +474,10 @@ class Simulation:
         if not found or dist <= self.delta_t * vel:
             return jogada
 
+        dprint("amortizado ", n_passos)
         n_passos = math.floor(dist / vel)
         jogada.n_passos = n_passos
         return jogada
-
-    def get_proximo_carro(self, carro: Carro) -> Carro:
-        ret = None
-        for ccarro in self.carros.values():
-            if ccarro.pista_i == carro.pista_i and ccarro.faixa_i == carro.faixa_i:
-                if ccarro.posicao > carro.posicao:
-                    if ret is None or ret.posicao > ccarro.posicao:
-                        ret = ccarro
-        return ret
 
     def seguir_em_frente(self, carro: Carro):
         # apenas um noop pra interface ficar consistente

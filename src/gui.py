@@ -15,6 +15,7 @@ class DrawItem:
 
     def draw_polygon(self, scr, cor, rect):
         global RENDER_SCALE
+        RENDER_SCALE = 4
         for item in rect:
             item[0] *= RENDER_SCALE
             item[1] *= RENDER_SCALE

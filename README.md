@@ -32,6 +32,8 @@ Todos os carros tomam uma decisão ótima local a cada passo da simulação, e c
 
 ### As verdadeiras leis do trânsito
 
+Leia a palavra 'lei' como as leis de newton, não como as leis do código penal.
+
 - Lei 1: Todo carro irá dirigir na maior velocidade que puder dentro do seu limite de conforto.
   - É possível que o limite de conforto supere a velocidade máxima do próprio carro.
 - Lei 2: A velocidade de um carro que está atrás de outro carro na mesma faixa sempre será a velocidade do carro da frente.

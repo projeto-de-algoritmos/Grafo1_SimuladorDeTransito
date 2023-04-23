@@ -2,7 +2,7 @@
   "pistas": [
     {
       "p1": [10, 50],
-      "p2": [250, 50],
+      "p2": [150, 50],
       "velocidade_maxima": 80,
       "faixas": [
         {
@@ -35,7 +35,7 @@
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 400
+        "posicao": 139
       }
     },
     {
@@ -47,12 +47,12 @@
       "origem": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 100
+        "posicao": 50
       },
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 400
+        "posicao": 139
       }
     },
     {
@@ -64,12 +64,12 @@
       "origem": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 150
+        "posicao": 70
       },
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 400
+        "posicao": 139
       }
     }
   ],

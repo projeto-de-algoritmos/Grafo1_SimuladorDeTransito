@@ -9,6 +9,12 @@ from .const import *
 from .algoritmos import *
 
 
+cor = tuple[int, int, int]
+
+Direcao = Enum("Direcao", "normal contrario")
+FaixaTipo = Enum("FaixaTipo", "acostamento geral")
+
+
 def dprint(*values: object):
     if DEBUG:
         print("[DEBUG]", *values)
@@ -26,15 +32,6 @@ def enum_list(values: list[Enum]):
     for value in values:
         r.append(value.name)
     return sorted(r)
-
-
-cor = tuple[int, int, int]
-
-Direcao = Enum("Direcao", "normal contrario")
-FaixaTipo = Enum("FaixaTipo", "acostamento geral")
-
-CondicaoCarro = callable[["Carro"], bool]
-AcaoCarro = callable[["Simulation", "Carro"]]
 
 
 class Faixa:
@@ -140,6 +137,25 @@ class Carro:
 # [TODO] Fazer adapter grafo-simulacao?
 
 
+class Jogada:
+    cond: any
+    jogada: any
+    name: str
+
+    def __init__(self, condicao, jogada, name=""):
+        self.cond = condicao
+        self.jogada = jogada
+        self.name = name
+
+    def atende_condicao(self, simulacao: "Simulation", carro: Carro) -> bool:
+        cond = self.cond
+        return cond(simulacao, carro)
+
+    def executar(self, simulacao: "Simulation", carro: Carro):
+        jogada = self.jogada
+        jogada(simulacao, carro)
+
+
 class Simulation:
     pistas: list[Pista]
     carros: dict[str, Carro]
@@ -232,7 +248,7 @@ class Simulation:
     def jump_to_next_tick(self):
         pass
 
-    def update(self):
+    def update(self, prever_jogada=True):
         for carro in self.carros.values():
             velocidade = self.get_carro_velocidade(carro)
 
@@ -240,6 +256,11 @@ class Simulation:
 
             if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
                 carro.posicao = 0
+
+            if prever_jogada:
+                jogada, passos = self.prever_melhor_jogada(carro)
+                if jogada != None:
+                    jogada.executar(self, carro)
 
     def get_carro_velocidade(self, carro: Carro) -> float:
         velocidade_baseline = self.get_carro_velocidade_baseline(carro)
@@ -301,32 +322,43 @@ class Simulation:
     def is_carro_no_destino(self, carro: Carro):
         return self.get_distancia_destino(carro) == 0
 
+    def get_jogadas(self, carro: Carro):
+        jogadas: list[Jogada] = [
+            Jogada(
+                lambda sim, carro: True,
+                lambda sim, carro: sim.seguir_em_frente(carro),
+                "seguir em frente",
+            ),
+            Jogada(
+                lambda sim, carro: sim.pode_carro_virar_pra_direita(carro),
+                lambda sim, carro: sim.virar_carro_pra_direita(carro),
+                "virar pra direita",
+            ),
+            Jogada(
+                lambda sim, carro: sim.pode_carro_virar_pra_esquerda(carro),
+                lambda sim, carro: sim.virar_carro_pra_esquerda(carro),
+                "virar pra esquerda",
+            ),
+        ]
+        for pista in self.get_pistas_acessiveis_por_carro(carro):
+            jogadas.append(
+                (lambda: True, lambda: self.entrar_carro_em_outra_pista(pista))
+            )
+        return jogadas
+
     # Esse função simula um futuro onde todos os carros
     # ficam na mesma faixa onde estão. Ela tenta encontrar
     # o caminho mais rápido para o carro atual chegar até
     # seu destino final.
     # ela retona a acao imediata pra se realizar, bem como os passos que demorou
     # [v1] Não existem interações entre múltiplas faixas.
-    def prever_melhor_jogada(self, carro: Carro, passos=1) -> tuple[AcaoCarro, int]:
+    def prever_melhor_jogada(self, carro: Carro, passos=1) -> Jogada:
         # se superamos a quantidade de iteração, retornamos
         if passos > MAX_SIM_ITER_COUNT:
+            print("depth exceeded")
             return None, 1e18
 
-        jogadas: tuple[CondicaoCarro, AcaoCarro] = [
-            (
-                self.pode_carro_virar_pra_direita,
-                lambda sim, carro: sim.virar_carro_pra_direita(carro),
-            ),
-            (
-                self.pode_carro_virar_pra_esquerda,
-                lambda sim, carro: sim.virar_carro_pra_esquerda(carro),
-            ),
-        ]
-
-        for pista in self.get_pistas_acessiveis_por_carro(carro):
-            jogadas.append(
-                (lambda: True, lambda: self.entrar_carro_em_outra_pista(pista))
-            )
+        jogadas = self.get_jogadas(carro)
 
         m_jogada = None
         m_passos = 1e18
@@ -337,18 +369,19 @@ class Simulation:
         # essa abstração serve pra prever o futuro sem alterar o estado atual
         # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
         for jogada in jogadas:
-            cond, acao = jogada
-            if cond(carro):
+            if jogada.atende_condicao(self, carro):
                 # clona pra evitar conflito de estado (performance altissima)
                 n_carro: Carro = carro.clonar()
                 n_simulacao: Simulation = self.clonar()
 
                 # executa acao de teste
-                n_simulacao[acao](n_carro)
+                jogada.executar(n_simulacao, n_carro)
+
+                n_simulacao.update(prever_jogada=False)
 
                 # se chegou ao destino, encontramos uma solução
                 if n_simulacao.is_carro_no_destino(n_carro):
-                    return acao, passos + 1
+                    return jogada, passos + 1
 
                 # vamos testar as jogadas possíveis a partir daqui
                 n_jogada, n_passos = n_simulacao.prever_melhor_jogada(
@@ -357,12 +390,16 @@ class Simulation:
 
                 # se essa jogada foi melhor que a anterior, atualiza
                 if n_passos < m_passos:
-                    n_jogada = n_jogada
+                    m_jogada = n_jogada
                     m_passos = n_passos
 
+        if m_jogada is not None:
+            print("returning best jogada =", m_jogada.nome, "passos =", m_passos)
+        else:
+            print("best jogada not found")
         return m_jogada, m_passos
 
-    def seguir_carro_reto(self, carro: Carro):
+    def seguir_em_frente(self, carro: Carro):
         # apenas um noop pra interface ficar consistente
         pass
 
@@ -385,7 +422,7 @@ class Simulation:
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]
 
-        faixa_a_direita = self.get_faixa_a_direita(carro)
+        faixa_a_direita, _ = self.get_faixa_a_direita(carro)
 
         if (
             faixa_a_direita is None
@@ -404,12 +441,12 @@ class Simulation:
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]
 
-        faixa_a_direita = self.get_faixa_a_direita(carro)
+        faixa_a_esquerda, _ = self.get_faixa_a_esquerda(carro)
 
         if (
-            faixa_a_direita is None
-            or faixa_a_direita.sentido != faixa.sentido
-            or faixa_a_direita.tipo != FaixaTipo["geral"]
+            faixa_a_esquerda is None
+            or faixa_a_esquerda.sentido != faixa.sentido
+            or faixa_a_esquerda.tipo != FaixaTipo["geral"]
         ):
             return False
 
@@ -422,7 +459,7 @@ class Simulation:
         faixa_a_direita = None
         index = -1
 
-        if faixa.sentido == Direcao["geral"] and cf > 0:
+        if faixa.sentido == Direcao["normal"] and cf > 0:
             faixa_a_direita = pista.faixas[cf - 1]
             index = cf - 1
         elif faixa.sentido == Direcao["contrario"] and cf + 1 < len(pista.faixas):
@@ -441,7 +478,7 @@ class Simulation:
         if faixa.sentido == Direcao["contrario"] and cf > 0:
             faixa_a_esquerda = pista.faixas[cf - 1]
             index = cf - 1
-        elif faixa.sentido == Direcao["geral"] and cf + 1 < len(pista.faixas):
+        elif faixa.sentido == Direcao["normal"] and cf + 1 < len(pista.faixas):
             faixa_a_esquerda = pista.faixas[cf + 1]
             index = cf + 1
 

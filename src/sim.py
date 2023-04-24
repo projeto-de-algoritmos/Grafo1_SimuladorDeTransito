@@ -257,16 +257,13 @@ class Simulation:
         for carro in self.carros.values():
             velocidade, carro_a_frente = self.get_carro_velocidade(carro)
 
-            carro.posicao += velocidade * self.delta_t
-
-            if carro_a_frente is not None:
-                carro.posicao = (
-                    carro_a_frente.posicao
-                    - DISTANCIA_MINIMA_CARRO_A_FRENTE
-                    - COMPRIMENTO_CARRO
-                )
-            elif carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
+            if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
                 carro.posicao = carro.pista.get_comprimento() - COMPRIMENTO_CARRO
+            else:
+                if carro_a_frente is not None:
+                    carro.posicao = carro_a_frente.posicao - COMPRIMENTO_CARRO
+                else:
+                    carro.posicao += velocidade * self.delta_t
 
             if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
                 jogada, passos = self.prever_melhor_jogada(carro)

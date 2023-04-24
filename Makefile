@@ -18,4 +18,4 @@ load_cenario:
 	cat $(file) > cenario.json
 
 run:
-	python3 -m src
+	@python3 -m src

@@ -1,6 +1,10 @@
-import pygame
 import datetime
 import time
+import os
+
+# remove print de suporte do pygame
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+import pygame
 
 from .sim import *
 from .geometry import *
@@ -246,6 +250,9 @@ class GUI:
         self, max_fps=60, resolution=[600, 500], fullscreen=False, render_scale=2
     ):
         pygame.init()
+        pygame.display.set_caption("Simulador de trânsito")
+        pygame.output = dprint
+
         self.running = True
         self.max_fps = max_fps
         self.step_time = datetime.timedelta(seconds=1 / self.max_fps)

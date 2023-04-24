@@ -136,6 +136,7 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
 [TODO v1]
+- [SIM] 
 - [SIM] Permitir que um carro chegue a seu destino na mesma pista onde está.
 - [SIM] Lidar com possibilidade de usar acostamentos e ultrapassagens por faixa sentido oposto
 - [GRAFO] Adicionar metodo de conectar estradas (incluindo uma pista que se conecta com outra de forma indireta)
@@ -164,6 +165,7 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 ### Falhas do modelo
 
 [v1]
+- Quando carro chega ao seu objetivo, ele desaparece
 - Sem retornos
 - Sem aceleração
 - Instantaneamente muda de faixa pra voltar

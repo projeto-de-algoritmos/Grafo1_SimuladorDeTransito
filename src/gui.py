@@ -5,6 +5,8 @@ import os
 # remove print de suporte do pygame
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame
+import pygame.freetype  # Import the freetype module.
+
 
 from .sim import *
 from .geometry import *
@@ -23,6 +25,7 @@ class DrawItem:
         for item in rect:
             item[0] *= RENDER_SCALE
             item[1] *= RENDER_SCALE
+
         pygame.draw.polygon(scr, cor, rect)
 
 
@@ -51,6 +54,25 @@ class Drawer:
         if self.draw_items_locked:
             raise Exception("Cannot set draw items while drawing")
         self.draw_items = draw_items
+
+
+class TextDrawer(DrawItem):
+    txt: str
+    cor: cor
+    font: pygame.font
+
+    def __init__(self, txt: str, x: int, y: int, cor: cor = (0, 0, 0)):
+        self.txt = txt
+        self.x = x
+        self.y = y
+        self.cor = cor
+        self.font = pygame.freetype.SysFont("Verdana", 12)
+
+    def draw(self, scr: pygame.Surface):
+        global RENDER_SCALE
+        self.font.render_to(
+            scr, (self.x * RENDER_SCALE, self.y * RENDER_SCALE), self.txt, cor
+        )
 
 
 class PistaDrawer(DrawItem):
@@ -227,7 +249,11 @@ class PistaDrawer(DrawItem):
         rect = self.montar_carro_retangulo2(carro)
 
         # dprint("draw car", rect[3])
-        self.draw_polygon(scr, carro.cor, rect)
+
+        if carro.ativado == False:
+            self.draw_polygon(scr, COR_CARRO_COMPLETO, rect)
+        else:
+            self.draw_polygon(scr, carro.cor, rect)
 
 
 class GUI:

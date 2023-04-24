@@ -19,7 +19,7 @@
   "carros": [
     {
       "nome": "player1",
-      "cor": "#77ff00",
+      "cor": "#9988ff",
       "velocidade": 4.11,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
@@ -31,9 +31,11 @@
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 139
+        "posicao": 80
       }
-    },
+    }
+  ],
+  "carros_ignore": [
     {
       "nome": "player2",
       "cor": "#8888ff",
@@ -50,9 +52,7 @@
         "faixa": 1,
         "posicao": 139
       }
-    }
-  ],
-  "carros_ignore": [
+    },
     {
       "nome": "player3",
       "cor": "#ff8888",

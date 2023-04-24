@@ -107,6 +107,8 @@ class Carro:
     pista: Pista
     faixa: Faixa
 
+    ativado: bool = True
+
     def __init__(
         self,
         nome: str,
@@ -129,6 +131,8 @@ class Carro:
         self.faixa_i = local_origem.faixa
         self.posicao = local_origem.posicao
 
+        self.ativado = True
+
     def clonar(self) -> "Carro":
         return copy.deepcopy(self)
 
@@ -136,6 +140,7 @@ class Carro:
 # [TODO] Fazer adapter grafo-simulacao?
 
 
+# Pode se tratar uma jogada como uma transformação da simulação.
 class Jogada:
     cond: any
     jogada: any
@@ -179,6 +184,7 @@ class Simulation:
         self.tick = tick
         self.tick_rate = 1000 / tick
         self.delta_t = tick / 1e3
+        dprint(self.tick, self.tick_rate, self.delta_t)
         self.calc = {}
 
     def clonar(self) -> "Simulation":
@@ -203,9 +209,9 @@ class Simulation:
             )
 
             destino = Local(
-                carro["origem"]["pista"],
-                carro["origem"]["faixa"],
-                carro["origem"]["posicao"],
+                carro["destino"]["pista"],
+                carro["destino"]["faixa"],
+                carro["destino"]["posicao"],
             )
 
             if carros.get(nome) is not None:
@@ -255,6 +261,12 @@ class Simulation:
 
     def update(self, prever_jogada=True):
         for carro in self.carros.values():
+            if not carro.ativado:
+                continue
+            if self.is_carro_no_destino(carro):
+                carro.ativado = False
+                continue
+
             velocidade, carro_a_frente = self.get_carro_velocidade(carro)
 
             if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
@@ -268,7 +280,16 @@ class Simulation:
             if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
                 jogada, passos = self.prever_melhor_jogada(carro)
                 if jogada != None:
+                    dprint(
+                        "----- <<< -------- executa",
+                        jogada.nome,
+                        "com",
+                        passos,
+                        "passos",
+                    )
                     jogada.executar(self, carro)
+                else:
+                    dprint("----- <<< -------- falhou encontrar jogada!!")
 
     def save_update_state(self):
         v = []
@@ -321,6 +342,8 @@ class Simulation:
     def get_proximo_carro(self, carro: Carro) -> Carro:
         ret = None
         for ccarro in self.carros.values():
+            if not carro.ativado:
+                continue
             if ccarro.pista_i == carro.pista_i and ccarro.faixa_i == carro.faixa_i:
                 if ccarro.posicao > carro.posicao:
                     if ret is None or ret.posicao > ccarro.posicao:
@@ -384,9 +407,10 @@ class Simulation:
     # Esse função simula um futuro onde todos os carros ficam na mesma faixa onde estão.
     # Ela tenta encontrar o caminho mais rápido para o carro atual chegar até seu destino
     # final. Ela retona a acao imediata pra se realizar, bem como os passos que demorou
-    def prever_melhor_jogada(self, carro: Carro, passos=1) -> Jogada:
+    def prever_melhor_jogada(self, carro: Carro, passos=1, iter=1) -> Jogada:
+        dprint(f"======prever_melhor_jogada {carro.nome} {passos} {iter}")
         # se superamos a quantidade de iteração, retornamos
-        if passos > MAX_SIM_ITER_COUNT:
+        if iter > MAX_SIM_ITER_COUNT:
             return None, 1e18
 
         jogadas = self.get_jogadas(carro)
@@ -402,7 +426,10 @@ class Simulation:
 
         for jogada in jogadas:
             jogada = self.amortizar_calculo(jogada, carro)
-
+            # if jogada.n_passos > 1:
+            #     dprint("amortizado", jogada.nome, jogada.n_passos - 1)
+            # else:
+            #     dprint("Não amortizado", jogada.nome)
             if jogada.atende_condicao(self, carro):
                 sts = self.save_update_state()
                 # clona pra evitar conflito de estado (performance altissima)
@@ -423,7 +450,7 @@ class Simulation:
 
                 # vamos testar as jogadas possíveis a partir daqui
                 n_jogada, n_passos = n_simulacao.prever_melhor_jogada(
-                    n_carro, passos=n_passos
+                    n_carro, passos=n_passos, iter=iter + 1
                 )
 
                 # se essa jogada foi melhor que a anterior, atualiza
@@ -433,9 +460,11 @@ class Simulation:
 
                 self.apply_update_state(sts)
 
+        if m_jogada is not None:
+            dprint(f"ret {carro.nome} {iter} {m_passos} {m_jogada.nome}")
         return m_jogada, m_passos
 
-    def amortizar_calculo(self, jogada: Jogada, carro: Carro) -> Jogada:
+    def amortizar_calculo(self, jogada: Jogada, carro: Carro, depth=1) -> Jogada:
         # como todos os carros a partir do momento que estou calculando não irão mudar de faixa
         # posso combinar numa única decisão todos os passos até que o carro
         # - siga até a posição do proximo carro na pista
@@ -446,18 +475,24 @@ class Simulation:
 
         if jogada.nome != "seguir em frente":
             return jogada
-
         n_passos = jogada.n_passos
         vel = self.get_carro_velocidade_baseline(carro)
         dist = 1e18
         found = False
         p = carro.posicao
 
-        nxt_carro = self.get_proximo_carro(carro)
+        bloqueado, nxt_carro = self.is_carro_bloqueando_movimento(carro)
         if nxt_carro is not None:
-            # segue até o proximo carro?
-            found = True
-            dist = min(nxt_carro.posicao - p, dist)
+            if bloqueado:
+                # segue atrás do carro
+                if depth > 0:
+                    n_jogada = copy.deepcopy(jogada)
+                    n_jogada = self.amortizar_calculo(n_jogada, nxt_carro, depth - 1)
+                    return n_jogada
+            else:
+                # segue até o proximo carro?
+                dist = min(nxt_carro.posicao - p, dist)
+                found = True
 
         if carro.local_destino.pista == carro.pista_i:
             # segue até o destino final?
@@ -471,7 +506,6 @@ class Simulation:
         if not found or dist <= self.delta_t * vel:
             return jogada
 
-        dprint("amortizado ", n_passos)
         n_passos = math.floor(dist / vel)
         jogada.n_passos = n_passos
         return jogada

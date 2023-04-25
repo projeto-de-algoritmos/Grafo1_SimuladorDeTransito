@@ -174,8 +174,11 @@ class Simulation:
 
     grafo_pista: Grafo
 
+    bfs_index: int
+
     def __init__(self, cenario_file, tick=DEFAULT_TICK):
         pistas, carros = self.read(cenario_file)
+        self.bfs_index = 0
         self.pistas = pistas
         self.carros = carros
 
@@ -375,16 +378,10 @@ class Simulation:
         return int(math.fabs(carro.posicao - carro.local_destino.posicao))
 
     def is_carro_no_destino(self, carro: Carro):
-        return self.get_distancia_destino(carro) == 0
+        return self.get_distancia_destino(carro) < FATOR_ARRENDONDAMENTO
 
     def get_jogadas(self, carro: Carro):
         jogadas: list[Jogada] = [
-            Jogada(
-                lambda sim, carro: True,
-                lambda sim, carro: sim.seguir_em_frente(carro),
-                nome="seguir em frente",
-                n_passos=1,
-            ),
             Jogada(
                 lambda sim, carro: sim.pode_carro_virar_pra_direita(carro),
                 lambda sim, carro: sim.virar_carro_pra_direita(carro),
@@ -397,6 +394,12 @@ class Simulation:
                 nome="virar pra esquerda",
                 n_passos=1,
             ),
+            Jogada(
+                lambda sim, carro: True,
+                lambda sim, carro: sim.seguir_em_frente(carro),
+                nome="seguir em frente",
+                n_passos=1,
+            ),
         ]
         for pista in self.get_pistas_acessiveis_por_carro(carro):
             jogadas.append(
@@ -407,12 +410,17 @@ class Simulation:
     # Esse função simula um futuro onde todos os carros ficam na mesma faixa onde estão.
     # Ela tenta encontrar o caminho mais rápido para o carro atual chegar até seu destino
     # final. Ela retona a acao imediata pra se realizar, bem como os passos que demorou
-    def prever_melhor_jogada(self, carro: Carro, passos=1, iter=1) -> Jogada:
-        dprint(f"======prever_melhor_jogada {carro.nome} {passos} {iter}")
+    def prever_melhor_jogada(self, carro: Carro, passos=0, iter=1) -> Jogada:
+        self.bfs_index += 1
+        id = self.bfs_index
         # se superamos a quantidade de iteração, retornamos
         if iter > MAX_SIM_ITER_COUNT:
+            dprint("depth limit")
             return None, 1e18
 
+        dprint(
+            f"======prever_melhor_jogada (id: {id}) nome={carro.nome} pos={carro.posicao} passos={passos} iter={iter}"
+        )
         jogadas = self.get_jogadas(carro)
 
         m_jogada = None
@@ -424,28 +432,52 @@ class Simulation:
         # essa abstração serve pra prever o futuro sem alterar o estado atual
         # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
 
+        if self.is_carro_no_destino(carro):
+            return 0, passos
+
         for jogada in jogadas:
             jogada = self.amortizar_calculo(jogada, carro)
             # if jogada.n_passos > 1:
             #     dprint("amortizado", jogada.nome, jogada.n_passos - 1)
             # else:
             #     dprint("Não amortizado", jogada.nome)
-            if jogada.atende_condicao(self, carro):
-                sts = self.save_update_state()
+            if not jogada.atende_condicao(self, carro):
+                dprint(f"nao atende condicao {jogada.nome} (id: {id})")
+            else:
+                dprint(f"atende condicao (id: {id})", jogada.nome)
+                # sts = self.save_update_state()
                 # clona pra evitar conflito de estado (performance altissima)
                 n_carro: Carro = carro.clonar()
-                n_simulacao: Simulation = self  # self.clonar()
+                n_simulacao: Simulation = self.clonar()
 
+                dprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 # executa acao de teste
                 jogada.executar(n_simulacao, n_carro)
                 n_passos = passos + jogada.n_passos
 
+                dprint(
+                    f"simulando futuro (id: {id}) jogada='{jogada.nome}' n_passos={n_passos}"
+                )
                 for i in range(0, jogada.n_passos):
+                    if id == 2 and jogada.nome.startswith("seguir"):
+                        pass
                     n_simulacao.update(prever_jogada=False)
+                    dprint(
+                        f"(id: {id}) carros no passo da simulação: {[c.posicao for c in n_simulacao.carros.values()]}"
+                    )
+
+                dprint(
+                    f"(id: {id}) IS CARRO NO DESTINO",
+                    n_carro.posicao,
+                    n_carro.faixa_i,
+                    n_carro.local_destino.posicao,
+                    n_simulacao.get_distancia_destino(n_carro),
+                )
 
                 # se chegou ao destino, encontramos uma solução
                 if n_simulacao.is_carro_no_destino(n_carro):
-                    self.apply_update_state(sts)
+                    # self.apply_update_state(sts)
+                    dprint(f"(id: {id}) ret solucao")
                     return jogada, passos + 1
 
                 # vamos testar as jogadas possíveis a partir daqui
@@ -458,10 +490,12 @@ class Simulation:
                     m_jogada = n_jogada
                     m_passos = n_passos
 
-                self.apply_update_state(sts)
+                # self.apply_update_state(sts)
 
         if m_jogada is not None:
-            dprint(f"ret {carro.nome} {iter} {m_passos} {m_jogada.nome}")
+            dprint(f"(id: {id}) ret {carro.nome} {iter} {m_passos} {m_jogada.nome}")
+        else:
+            dprint(f"(id: {id}) ret none")
         return m_jogada, m_passos
 
     def amortizar_calculo(self, jogada: Jogada, carro: Carro, depth=1) -> Jogada:
@@ -506,7 +540,10 @@ class Simulation:
         if not found or dist <= self.delta_t * vel:
             return jogada
 
-        n_passos = math.floor(dist / vel)
+        n_passos = math.floor(dist / (vel * self.delta_t))
+        dprint(n_passos * self.delta_t * vel)
+        dprint(carro.posicao)
+        dprint(n_passos * self.delta_t * vel + carro.posicao)
         jogada.n_passos = n_passos
         return jogada
 
@@ -563,7 +600,7 @@ class Simulation:
 
         return True
 
-    def get_faixa_a_direita(self, carro: Carro):
+    def get_faixa_a_esquerda(self, carro: Carro):
         cf = carro.faixa_i
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]
@@ -579,7 +616,7 @@ class Simulation:
 
         return faixa_a_direita, index
 
-    def get_faixa_a_esquerda(self, carro: Carro) -> tuple[Faixa, int]:
+    def get_faixa_a_direita(self, carro: Carro) -> tuple[Faixa, int]:
         cf = carro.faixa_i
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]

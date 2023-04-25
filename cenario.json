@@ -18,8 +18,8 @@
   ],
   "carros": [
     {
-      "nome": "player1",
-      "cor": "#77ff00",
+      "nome": "player_atras",
+      "cor": "#9988ff",
       "velocidade": 4.11,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
@@ -31,13 +31,13 @@
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 139
+        "posicao": 129
       }
     },
     {
-      "nome": "player2",
-      "cor": "#8888ff",
-      "velocidade": 2.11,
+      "nome": "player_frente",
+      "cor": "#ff8899",
+      "velocidade": 1.5,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
       "origem": {
@@ -48,27 +48,9 @@
       "destino": {
         "pista": 0,
         "faixa": 1,
-        "posicao": 139
+        "posicao": 135
       }
     }
   ],
-  "carros_ignore": [
-    {
-      "nome": "player3",
-      "cor": "#ff8888",
-      "velocidade": 1.11,
-      "max_rvel": 1.2,
-      "aceleracao": "4.0",
-      "origem": {
-        "pista": 0,
-        "faixa": 1,
-        "posicao": 60
-      },
-      "destino": {
-        "pista": 0,
-        "faixa": 1,
-        "posicao": 139
-      }
-    }
-  ]
+  "carros_ignore": []
 }

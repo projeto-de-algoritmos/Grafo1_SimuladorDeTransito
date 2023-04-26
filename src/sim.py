@@ -178,7 +178,6 @@ class Simulation:
 
     def __init__(self, cenario_file, tick=DEFAULT_TICK):
         pistas, carros = self.read(cenario_file)
-        self.bfs_index = 0
         self.pistas = pistas
         self.carros = carros
 
@@ -189,6 +188,9 @@ class Simulation:
         self.delta_t = tick / 1e3
         dprint(self.tick, self.tick_rate, self.delta_t)
         self.calc = {}
+
+        global BFS_I
+        BFS_I = 0
 
     def clonar(self) -> "Simulation":
         return copy.deepcopy(self)
@@ -289,6 +291,7 @@ class Simulation:
                         "com",
                         passos,
                         "passos",
+                        carro.nome,
                     )
                     jogada.executar(self, carro)
                 else:
@@ -411,8 +414,9 @@ class Simulation:
     # Ela tenta encontrar o caminho mais rápido para o carro atual chegar até seu destino
     # final. Ela retona a acao imediata pra se realizar, bem como os passos que demorou
     def prever_melhor_jogada(self, carro: Carro, passos=0, iter=1) -> Jogada:
-        self.bfs_index += 1
-        id = self.bfs_index
+        global BFS_I
+        BFS_I += 1
+        id = BFS_I
         # se superamos a quantidade de iteração, retornamos
         if iter > MAX_SIM_ITER_COUNT:
             dprint("depth limit")
@@ -447,12 +451,15 @@ class Simulation:
                 dprint(f"atende condicao (id: {id})", jogada.nome)
                 # sts = self.save_update_state()
                 # clona pra evitar conflito de estado (performance altissima)
-                n_carro: Carro = carro.clonar()
+                dprint(f"clonando (id: {id}) old_sim={self.__hash__()}")
                 n_simulacao: Simulation = self.clonar()
+                dprint(f"clonando (id: {id}) new_sim={n_simulacao.__hash__()}")
+                n_carro: Carro = n_simulacao.carros[carro.nome].clonar()
 
                 dprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 # executa acao de teste
                 jogada.executar(n_simulacao, n_carro)
+                dprint(f"faixa (id: {id}) carro_faixa='{n_carro.faixa_i}'")
                 n_passos = passos + jogada.n_passos
 
                 dprint(
@@ -462,16 +469,18 @@ class Simulation:
                     if id == 2 and jogada.nome.startswith("seguir"):
                         pass
                     n_simulacao.update(prever_jogada=False)
-                    dprint(
-                        f"(id: {id}) carros no passo da simulação: {[c.posicao for c in n_simulacao.carros.values()]}"
-                    )
+                    # dprint(
+                    #     f"(id: {id}) carros no passo da simulação: {[c.posicao for c in n_simulacao.carros.values()]}",
+                    #     f"(id: {id}) faixas: {[c.faixa_i for c in n_simulacao.carros.values()]}",
+                    # )
 
                 dprint(
                     f"(id: {id}) IS CARRO NO DESTINO",
                     n_carro.posicao,
                     n_carro.faixa_i,
                     n_carro.local_destino.posicao,
-                    n_simulacao.get_distancia_destino(n_carro),
+                    n_simulacao.get_distancia_destino(n_simulacao.carros[carro.nome]),
+                    n_simulacao.is_carro_no_destino(n_simulacao.carros[carro.nome]),
                 )
 
                 # se chegou ao destino, encontramos uma solução
@@ -487,7 +496,7 @@ class Simulation:
 
                 # se essa jogada foi melhor que a anterior, atualiza
                 if n_passos < m_passos:
-                    m_jogada = n_jogada
+                    m_jogada = jogada
                     m_passos = n_passos
 
                 # self.apply_update_state(sts)
@@ -555,11 +564,13 @@ class Simulation:
         _, i = self.get_faixa_a_direita(carro)
         carro.faixa_i = i
         carro.faixa = self.pistas[carro.pista_i].faixas[i]
+        self.carros[carro.nome] = carro
 
     def virar_carro_pra_esquerda(self, carro: Carro):
         _, i = self.get_faixa_a_esquerda(carro)
         carro.faixa_i = i
         carro.faixa = self.pistas[carro.pista_i].faixas[i]
+        self.carros[carro.nome] = carro
 
     def pode_carro_virar_pra_direita(self, carro: Carro) -> bool:
         # existe alguma faixa anterior a atual, se o sentido da faixa é normal?

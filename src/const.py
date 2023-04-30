@@ -1,5 +1,6 @@
 # config
 DEBUG = True
+LOG_ENABLED = True
 
 # tempo EM MICROSSEGUNDOS
 SEC_IN_MICROSECONDS = 10e6

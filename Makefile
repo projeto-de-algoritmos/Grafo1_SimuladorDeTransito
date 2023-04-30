@@ -18,4 +18,5 @@ load_cenario:
 	cat $(file) > cenario.json
 
 run:
+	@echo "" > log.txt
 	@python3 -m src

@@ -19,6 +19,12 @@ def dprint(*values: object):
         print("[DEBUG]", *values)
 
 
+def lprint(*values: object):
+    if LOG_ENABLED:
+        with open("log.txt", "a") as file:
+            print("[LOG]", *values, file=file)
+
+
 def eprint(*values: object, cexit=True):
     traceback.print_stack()
     print("[ERROR]", *values)
@@ -98,7 +104,8 @@ class Carro:
     velocidade_relativa_maxima_aceitavel: float
     local_origem: Local
     local_destino: Local
-    aceleracao: float  # [TODO] usar isso
+    aceleracao: float  # [TODO] usar isso\
+    next_jogadas: list["Jogada"]
 
     # serão alteradas durante a simulação
     pista_i: int
@@ -132,6 +139,8 @@ class Carro:
         self.posicao = local_origem.posicao
 
         self.ativado = True
+
+        self.next_jogadas = []
 
     def clonar(self) -> "Carro":
         return copy.deepcopy(self)
@@ -186,8 +195,7 @@ class Simulation:
         self.tick = tick
         self.tick_rate = 1000 / tick
         self.delta_t = tick / 1e3
-        dprint(self.tick, self.tick_rate, self.delta_t)
-        self.calc = {}
+        lprint(f"tick={self.tick}, tick_rate={self.tick_rate}, delta_t={self.delta_t}")
 
         global BFS_I
         BFS_I = 0
@@ -282,10 +290,13 @@ class Simulation:
                 else:
                     carro.posicao += velocidade * self.delta_t
 
-            if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
-                jogada, passos = self.prever_melhor_jogada(carro)
-                if jogada != None:
-                    dprint(
+            # if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
+            if prever_jogada and (self.is_carro_bloqueando_movimento(carro)[0]):
+                jogadas, passos = self.prever_melhor_jogada(carro)
+                if len(jogadas) > 0:
+                    jogada = jogadas[0]
+                    carro.next_jogadas = jogadas[1:]
+                    lprint(
                         "----- <<< -------- executa",
                         jogada.nome,
                         "com",
@@ -295,19 +306,7 @@ class Simulation:
                     )
                     jogada.executar(self, carro)
                 else:
-                    dprint("----- <<< -------- falhou encontrar jogada!!")
-
-    def save_update_state(self):
-        v = []
-        for carro in self.carros.values():
-            v.append(carro.posicao)
-        return v
-
-    def apply_update_state(self, sts: list[float]):
-        i = 0
-        for carro in self.carros.values():
-            carro.posicao = sts[i]
-            i += 1
+                    lprint("----- <<< -------- falhou encontrar jogada!!")
 
     def get_carro_velocidade(self, carro: Carro) -> tuple[float, Carro | None]:
         velocidade_baseline = self.get_carro_velocidade_baseline(carro)
@@ -381,6 +380,10 @@ class Simulation:
         return int(math.fabs(carro.posicao - carro.local_destino.posicao))
 
     def is_carro_no_destino(self, carro: Carro):
+        if carro.pista_i != carro.local_destino.pista:
+            return False
+        if carro.faixa_i != carro.local_destino.faixa:
+            return False
         return self.get_distancia_destino(carro) < FATOR_ARRENDONDAMENTO
 
     def get_jogadas(self, carro: Carro):
@@ -413,21 +416,23 @@ class Simulation:
     # Esse função simula um futuro onde todos os carros ficam na mesma faixa onde estão.
     # Ela tenta encontrar o caminho mais rápido para o carro atual chegar até seu destino
     # final. Ela retona a acao imediata pra se realizar, bem como os passos que demorou
-    def prever_melhor_jogada(self, carro: Carro, passos=0, iter=1) -> Jogada:
+    def prever_melhor_jogada(
+        self, carro: Carro, passos=0, iter=1
+    ) -> tuple[list[Jogada], int]:
         global BFS_I
         BFS_I += 1
         id = BFS_I
+
         # se superamos a quantidade de iteração, retornamos
         if iter > MAX_SIM_ITER_COUNT:
-            dprint("depth limit")
-            return None, 1e18
+            lprint(f"(id: {id}) depth limit")
+            return [], 1e18
 
-        dprint(
+        lprint(
             f"======prever_melhor_jogada (id: {id}) nome={carro.nome} pos={carro.posicao} passos={passos} iter={iter}"
         )
         jogadas = self.get_jogadas(carro)
 
-        m_jogada = None
         m_passos = 1e18
 
         # =============== esse é o BFS mais importante do app ===============
@@ -437,44 +442,40 @@ class Simulation:
         # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
 
         if self.is_carro_no_destino(carro):
-            return 0, passos
+            return [], passos
+
+        melhores_jogadas = []
 
         for jogada in jogadas:
             jogada = self.amortizar_calculo(jogada, carro)
-            # if jogada.n_passos > 1:
-            #     dprint("amortizado", jogada.nome, jogada.n_passos - 1)
-            # else:
-            #     dprint("Não amortizado", jogada.nome)
-            if not jogada.atende_condicao(self, carro):
-                dprint(f"nao atende condicao {jogada.nome} (id: {id})")
-            else:
-                dprint(f"atende condicao (id: {id})", jogada.nome)
+
+            if jogada.atende_condicao(self, carro):
+                lprint(f"atende condicao (id: {id})", jogada.nome)
                 # sts = self.save_update_state()
                 # clona pra evitar conflito de estado (performance altissima)
-                dprint(f"clonando (id: {id}) old_sim={self.__hash__()}")
+                lprint(f"clonando (id: {id}) old_sim={self.__hash__()}")
                 n_simulacao: Simulation = self.clonar()
-                dprint(f"clonando (id: {id}) new_sim={n_simulacao.__hash__()}")
+                lprint(f"clonando (id: {id}) new_sim={n_simulacao.__hash__()}")
                 n_carro: Carro = n_simulacao.carros[carro.nome].clonar()
 
-                dprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
+                lprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 # executa acao de teste
                 jogada.executar(n_simulacao, n_carro)
-                dprint(f"faixa (id: {id}) carro_faixa='{n_carro.faixa_i}'")
                 n_passos = passos + jogada.n_passos
 
-                dprint(
+                lprint(
                     f"simulando futuro (id: {id}) jogada='{jogada.nome}' n_passos={n_passos}"
                 )
                 for i in range(0, jogada.n_passos):
                     if id == 2 and jogada.nome.startswith("seguir"):
                         pass
                     n_simulacao.update(prever_jogada=False)
-                    # dprint(
+                    # lprint(
                     #     f"(id: {id}) carros no passo da simulação: {[c.posicao for c in n_simulacao.carros.values()]}",
                     #     f"(id: {id}) faixas: {[c.faixa_i for c in n_simulacao.carros.values()]}",
                     # )
 
-                dprint(
+                lprint(
                     f"(id: {id}) IS CARRO NO DESTINO",
                     n_carro.posicao,
                     n_carro.faixa_i,
@@ -486,26 +487,28 @@ class Simulation:
                 # se chegou ao destino, encontramos uma solução
                 if n_simulacao.is_carro_no_destino(n_carro):
                     # self.apply_update_state(sts)
-                    dprint(f"(id: {id}) ret solucao")
-                    return jogada, passos + 1
+                    lprint(f"(id: {id}) ret solucao")
+                    return [jogada], passos + 1
 
                 # vamos testar as jogadas possíveis a partir daqui
-                n_jogada, n_passos = n_simulacao.prever_melhor_jogada(
+                n_jogadas, n_passos = n_simulacao.prever_melhor_jogada(
                     n_carro, passos=n_passos, iter=iter + 1
                 )
 
                 # se essa jogada foi melhor que a anterior, atualiza
                 if n_passos < m_passos:
-                    m_jogada = jogada
+                    melhores_jogadas += [jogada] + n_jogadas
                     m_passos = n_passos
 
                 # self.apply_update_state(sts)
 
-        if m_jogada is not None:
-            dprint(f"(id: {id}) ret {carro.nome} {iter} {m_passos} {m_jogada.nome}")
+        if len(melhores_jogadas) > 0:
+            lprint(
+                f"(id: {id}) ret {carro.nome} {iter} {m_passos} {melhores_jogadas[0].nome}"
+            )
         else:
-            dprint(f"(id: {id}) ret none")
-        return m_jogada, m_passos
+            lprint(f"(id: {id}) ret none")
+        return melhores_jogadas, m_passos
 
     def amortizar_calculo(self, jogada: Jogada, carro: Carro, depth=1) -> Jogada:
         # como todos os carros a partir do momento que estou calculando não irão mudar de faixa
@@ -550,9 +553,9 @@ class Simulation:
             return jogada
 
         n_passos = math.floor(dist / (vel * self.delta_t))
-        dprint(n_passos * self.delta_t * vel)
-        dprint(carro.posicao)
-        dprint(n_passos * self.delta_t * vel + carro.posicao)
+        lprint(
+            f"amorizar_calculo dist={n_passos * self.delta_t * vel} pos={carro.posicao} pos_after={carro.posicao + n_passos * self.delta_t * vel + carro.posicao}"
+        )
         jogada.n_passos = n_passos
         return jogada
 

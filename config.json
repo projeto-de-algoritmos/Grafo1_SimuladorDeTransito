@@ -3,6 +3,6 @@
   "render_scale": 3,
   "fullscreen": false,
   "max_fps": 60,
-  "tick": 60,
+  "tick": 30,
   "cenario_file": "cenario.json"
 }

@@ -425,33 +425,31 @@ class Simulation:
 
         # se superamos a quantidade de iteração, retornamos
         if iter > MAX_SIM_ITER_COUNT:
-            lprint(f"(id: {id}) depth limit")
+            lprint(f"(id: {id}) atingiu limite de recursão")
             return [], 1e18
 
         lprint(
-            f"======prever_melhor_jogada (id: {id}) nome={carro.nome} pos={carro.posicao} passos={passos} iter={iter}"
+            f"====== prever_melhor_jogada (id: {id}) nome={carro.nome} pos={carro.posicao} passos={passos} iter={iter}"
         )
-        jogadas = self.get_jogadas(carro)
-
-        m_passos = 1e18
-
-        # =============== esse é o BFS mais importante do app ===============
-        #
-        # vamos testar as possibilidades de jogadas até encontrar a ideal.
-        # essa abstração serve pra prever o futuro sem alterar o estado atual
-        # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
 
         if self.is_carro_no_destino(carro):
             return [], passos
 
         melhores_jogadas = []
+        jogadas = self.get_jogadas(carro)
+        m_passos = 1e18
+
+        # =============== esse é o DFS mais importante do app ===============
+        #
+        # vamos testar as possibilidades de jogadas até encontrar a ideal.
+        # essa abstração serve pra prever o futuro sem alterar o estado atual
+        # todos os motoristas na vida real fazem exatamente isso enquanto dirigem
 
         for jogada in jogadas:
             jogada = self.amortizar_calculo(jogada, carro)
 
             if jogada.atende_condicao(self, carro):
                 lprint(f"atende condicao (id: {id})", jogada.nome)
-                # sts = self.save_update_state()
                 # clona pra evitar conflito de estado (performance altissima)
                 lprint(f"clonando (id: {id}) old_sim={self.__hash__()}")
                 n_simulacao: Simulation = self.clonar()
@@ -467,13 +465,7 @@ class Simulation:
                     f"simulando futuro (id: {id}) jogada='{jogada.nome}' n_passos={n_passos}"
                 )
                 for i in range(0, jogada.n_passos):
-                    if id == 2 and jogada.nome.startswith("seguir"):
-                        pass
                     n_simulacao.update(prever_jogada=False)
-                    # lprint(
-                    #     f"(id: {id}) carros no passo da simulação: {[c.posicao for c in n_simulacao.carros.values()]}",
-                    #     f"(id: {id}) faixas: {[c.faixa_i for c in n_simulacao.carros.values()]}",
-                    # )
 
                 lprint(
                     f"(id: {id}) IS CARRO NO DESTINO",

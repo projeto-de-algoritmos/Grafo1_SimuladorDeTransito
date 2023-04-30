@@ -13,6 +13,10 @@
 
 ![output](https://user-images.githubusercontent.com/45462822/234572198-92541791-dfe1-40c4-8ca3-9baee5ac4f16.gif)
 
+### Nota para o avaliador
+
+No arquivo `src/sim.py`, função `prever_melhor_jogada()`, você pode encontrar o DFS, que seria o objetivo do projeto.
+
 ### Simulação
 
 O objetivo do projeto é **calcular a estratégia ótima que carros dirigindo em pistas irão adotar em múltiplos cenários adversariais** (todos contra todos). Atingidos esse objetivos, isso nos permite analisar e teorizar heurísticas para decisões efetivas num contexto de trânsito, sendo o projeto um estudo de teoria dos jogos.
@@ -24,7 +28,7 @@ As decisões que um carro pode tomar são apenas 3, cada uma caso a possibilidad
 - Virar para direita.
 - Seguir para outra pista.
 
-Para cada passo da simulação, cada carro irá **assumir que cada outro carro não irá mudar seu atual estado atual** (ou seja, vai continuar seguindo em frente sem virar, mesmo se houver um carro mais devagar na frente). Com isso, é possível prever exatamente como o "futuro" de cada passo da simulação na perpectiva de um carro em específico será. Com isso, cada carro faz um **BFS** no seu espaço de possibilidades até descobrir qual caminho custa menos passos (por isso o BFS é usado) para decidir sua ação no presente momento. O nome atribuído à essa decisão é de: ***decisão ótima local*** (uma única decisão ótima local requer muita computação para ser calculada).
+Para cada passo da simulação, cada carro irá **assumir que cada outro carro não irá mudar seu atual estado atual** (ou seja, vai continuar seguindo em frente sem virar, mesmo se houver um carro mais devagar na frente). Com isso, é possível prever exatamente como o "futuro" de cada passo da simulação na perpectiva de um carro em específico será. Com isso, cada carro faz um **DFS** no seu espaço de possibilidades até descobrir qual caminho custa menos passos para decidir sua ação no presente momento. O nome atribuído à essa decisão é de: ***decisão ótima local*** (uma única decisão ótima local requer muita computação para ser calculada).
 
 Todos os carros tomam uma decisão ótima local a cada passo da simulação, e cada uma dos carros não prioriza conceitos considerados arcaicos como "segurança" ou "respeito". Sendo assim, um contexto anárquico acontece, e todos os carros adotam a SUA melhor estratégia a cada momento.
 

@@ -294,6 +294,7 @@ class Simulation:
         return pistas, carros
 
     def contruir_grafo_pistas(self, pistas):
+        print(pistas)
         pass
 
     def read_and_parse_json_file(self, path):

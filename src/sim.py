@@ -356,7 +356,7 @@ class Simulation:
                     lprint("< -------- buscando jogadas...")
                     jogadas, _ = self.prever_melhor_jogada(carro)
                     if len(jogadas) > 0:
-                        lprint("< -------- jogada encontrada: {jogadas[0].nome}")
+                        lprint(f"< -------- jogada encontrada: {jogadas[0].nome}")
                     else:
                         lprint("< -------- falhou em encontrar jogada")
 
@@ -456,7 +456,14 @@ class Simulation:
 
     def get_distancia_destino(self, carro: Carro):
         # [TODO] implementar dijkstra nas pistas
-        return int(math.fabs(carro.posicao - carro.local_destino.posicao))
+        # o ajuste tem o simples propósito de dar uma penalidade para
+        # o carro mudar de faixa ou de pista, pequena porém não nula
+        ajuste = 0
+        if carro.pista_i != carro.local_destino.pista:
+            ajuste += 2
+        if carro.faixa_i != carro.local_destino.faixa:
+            ajuste += 1
+        return int(math.fabs(carro.posicao - carro.local_destino.posicao)) + ajuste
 
     def is_carro_no_destino(self, carro: Carro):
         if carro.pista_i != carro.local_destino.pista:
@@ -483,7 +490,7 @@ class Simulation:
                 lambda sim, carro: True,
                 lambda sim, carro: sim.seguir_em_frente(carro),
                 nome="seguir em frente",
-                n_passos=1,
+                n_passos=0,
             ),
         ]
         for pista in self.get_pistas_acessiveis_por_carro(carro):
@@ -537,6 +544,7 @@ class Simulation:
                 lprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 jogada.executar(n_simulacao, n_carro)
                 n_passos = passos + jogada.n_passos
+                passos += jogada.n_passos
 
                 lprint(
                     f"simulando futuro (id: {id}) jogada='{jogada.nome}' n_passos={n_passos}"
@@ -545,16 +553,11 @@ class Simulation:
                     n_simulacao.update(prever_jogada=False)
 
                 lprint(
-                    f"(id: {id}) IS CARRO NO DESTINO",
-                    n_carro.posicao,
-                    n_carro.faixa_i,
-                    n_carro.local_destino.posicao,
-                    n_simulacao.get_distancia_destino(n_simulacao.carros[carro.nome]),
-                    n_simulacao.is_carro_no_destino(n_simulacao.carros[carro.nome]),
+                    f"(id: {id}) carro_no_destino={n_simulacao.is_carro_no_destino(n_simulacao.carros[carro.nome])} posicao={n_carro.posicao}, faixa={n_carro.faixa_i}, destino={n_carro.local_destino.posicao}, distancia={n_simulacao.get_distancia_destino(n_simulacao.carros[carro.nome])}"
                 )
 
                 # se chegou ao destino, encontramos uma solução
-                if n_simulacao.is_carro_no_destino(n_carro):
+                if n_simulacao.is_carro_no_destino(n_simulacao.carros[carro.nome]):
                     # self.apply_update_state(sts)
                     lprint(f"(id: {id}) ret solucao")
                     return [jogada], passos + 1
@@ -568,6 +571,11 @@ class Simulation:
                 if n_passos < m_passos:
                     melhores_jogadas += [jogada] + n_jogadas
                     m_passos = n_passos
+                    lprint(
+                        f"nova melhor jogada (id: {id}) jogada='{jogada.nome}' n_passos={n_passos} iter={iter} carro={carro.nome} "
+                    )
+
+                passos -= jogada.n_passos
 
                 # self.apply_update_state(sts)
 

@@ -25,9 +25,7 @@
       "aceleracao": "4.0",
       "origem": {
         "pista": 0,
-        "faixa": 1
-        
-        ,
+        "faixa": 1,
         "posicao": 15
       },
       "destino": {

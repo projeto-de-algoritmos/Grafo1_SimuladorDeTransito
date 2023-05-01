@@ -172,7 +172,6 @@ class PistaDrawer(DrawItem):
             carro.faixa_i * LARGURA_FAIXA
             + min(carro.faixa_i, 0) * LARGURA_DIVISORIA
             + (LARGURA_FAIXA - LARGURA_CARRO) / 2.0
-            + FATOR_AJUSTE_CARRO_VISUAL
         )
 
         r1, r2, r3, r4 = self.montar_faixa_divisoria_retangulo(

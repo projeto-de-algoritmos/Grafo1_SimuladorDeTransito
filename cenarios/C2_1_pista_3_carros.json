@@ -1,0 +1,73 @@
+{
+  "pistas": [
+    {
+      "p1": [10, 50],
+      "p2": [150, 50],
+      "velocidade_maxima": 80,
+      "faixas": [
+        {
+          "tipo": "geral",
+          "sentido": "normal"
+        },
+        {
+          "tipo": "geral",
+          "sentido": "normal"
+        }
+      ]
+    }
+  ],
+  "carros": [
+    {
+      "nome": "player_atras",
+      "cor": "#99ddff",
+      "velocidade": 4.11,
+      "max_rvel": 1.2,
+      "aceleracao": "4.0",
+      "origem": {
+        "pista": 0,
+        "faixa": 0,
+        "posicao": 15
+      },
+      "destino": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 117
+      }
+    },
+    {
+      "nome": "player_frente",
+      "cor": "#ff8899",
+      "velocidade": 1.5,
+      "max_rvel": 1.2,
+      "aceleracao": "4.0",
+      "origem": {
+        "pista": 0,
+        "faixa": 0,
+        "posicao": 50
+      },
+      "destino": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 110
+      }
+    },
+    {
+      "nome": "player_mais_atras",
+      "cor": "#ff8899",
+      "velocidade": 5.1,
+      "max_rvel": 1.2,
+      "aceleracao": "4.0",
+      "origem": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 5
+      },
+      "destino": {
+        "pista": 0,
+        "faixa": 0,
+        "posicao": 110
+      }
+    }
+  ],
+  "carros_ignore": []
+}

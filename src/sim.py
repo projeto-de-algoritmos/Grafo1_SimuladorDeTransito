@@ -382,8 +382,6 @@ class Simulation:
     def get_proximo_carro(self, carro: Carro) -> Carro:
         ret = None
         for ccarro in self.carros.values():
-            if not carro.ativado:
-                continue
             if ccarro.pista_i == carro.pista_i and ccarro.faixa_i == carro.faixa_i:
                 if ccarro.posicao > carro.posicao:
                     if ret is None or ret.posicao > ccarro.posicao:

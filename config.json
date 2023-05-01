@@ -3,7 +3,7 @@
   "render_scale": 3,
   "fullscreen": false,
   "max_fps": 60,
-  "tick": 30,
+  "tick": 10,
   "cenario_file": "cenario.json",
   "prever_jogada_cooldown": 10
 }

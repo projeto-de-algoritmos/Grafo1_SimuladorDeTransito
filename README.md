@@ -7,11 +7,11 @@
 | Matrícula  | Aluno                |
 | ---------- | -------------------- |
 | 18/0027239 | Renato Britto Araujo |
-| xx/xxxxxx  | xxxx xxxx xxxxx      |
 
 ## Sobre 
 
 ![pa_g2](https://user-images.githubusercontent.com/45462822/235490452-987bafa9-0be6-4870-a414-874a4500001c.gif)
+*Execução do exemplo do cenário T3*
 
 ### Nota para o avaliador
 

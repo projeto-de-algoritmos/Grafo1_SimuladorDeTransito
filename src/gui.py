@@ -111,8 +111,6 @@ class PistaDrawer(DrawItem):
         fx = 0
         dv = 0
 
-        # dprint(" ")
-
         for faixa in self.pista.faixas:
             if last_faixa is not None:
                 dlt = fx * LARGURA_FAIXA + dv * LARGURA_DIVISORIA
@@ -259,8 +257,6 @@ class PistaDrawer(DrawItem):
 
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo2(carro)
-
-        # dprint("draw car", rect[3])
 
         if carro.ativado == False:
             self.draw_polygon(scr, COR_CARRO_COMPLETO, rect)

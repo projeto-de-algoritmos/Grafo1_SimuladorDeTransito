@@ -1,6 +1,7 @@
 import json
 from enum import Enum
 import traceback
+import datetime
 import copy
 
 from .geometry import *
@@ -12,6 +13,10 @@ cor = tuple[int, int, int]
 
 Direcao = Enum("Direcao", "normal contrario")
 FaixaTipo = Enum("FaixaTipo", "acostamento geral")
+
+
+def elapsed_ms(time: datetime.datetime):
+    return (datetime.datetime.now() - time).total_seconds() * 1000
 
 
 def dprint(*values: object):
@@ -187,8 +192,16 @@ class Simulation:
 
     next_jogadas_ignoradas: dict[str, int]  # [nome_do_carro]next_cooldown
     prever_jogada_cooldown: int
+    skip_prever_jogada_for_ms: int
+    time_init: datetime.datetime
 
-    def __init__(self, cenario_file, tick=DEFAULT_TICK, prever_jogada_cooldown=0):
+    def __init__(
+        self,
+        cenario_file,
+        tick=DEFAULT_TICK,
+        prever_jogada_cooldown=0,
+        skip_prever_jogada_for_ms=0,
+    ):
         self.next_jogadas_ignoradas = {}
 
         pistas, carros = self.read(cenario_file)
@@ -198,6 +211,8 @@ class Simulation:
 
         self.running = True
         self.prever_jogada_cooldown = prever_jogada_cooldown
+        self.skip_prever_jogada_for_ms = skip_prever_jogada_for_ms
+        self.time_init = datetime.datetime.now()
 
         self.tick = tick
         self.tick_rate = 1000 / tick
@@ -298,7 +313,10 @@ class Simulation:
                 else:
                     carro.posicao += velocidade * self.delta_t
 
-            if prever_jogada:
+            if (
+                prever_jogada
+                and elapsed_ms(self.time_init) > self.skip_prever_jogada_for_ms
+            ):
                 carro_bloqueando_movimento, _ = self.is_carro_bloqueando_movimento(
                     carro
                 )

@@ -9,6 +9,7 @@ def main():
         cenario_file=cfg["cenario_file"],
         tick=cfg["tick"],
         prever_jogada_cooldown=cfg["prever_jogada_cooldown"],
+        skip_prever_jogada_for_ms=cfg["skip_prever_jogada_for_ms"],
     )
 
     gui = GUI(

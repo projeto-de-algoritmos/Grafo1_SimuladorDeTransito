@@ -379,6 +379,20 @@ class Simulation:
 
         return False, None
 
+    def is_segmento_faixa_ocupado(
+        self, seg: tuple[float, float], pista_i: int, faixa_i: int
+    ):
+        p1, p2 = seg
+        for carro in self.carros.values():
+            if carro.pista_i == pista_i and carro.faixa_i == faixa_i:
+                c1, c2 = (
+                    carro.posicao,
+                    carro.posicao + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE,
+                )
+                if (p1 <= c1 <= p2) or (p1 <= c2 <= p2):
+                    return True
+        return False
+
     def get_proximo_carro(self, carro: Carro) -> Carro:
         ret = None
         for ccarro in self.carros.values():
@@ -607,7 +621,7 @@ class Simulation:
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]
 
-        faixa_a_direita, _ = self.get_faixa_a_direita(carro)
+        faixa_a_direita, faixa_direita_i = self.get_faixa_a_direita(carro)
 
         if (
             faixa_a_direita is None
@@ -616,6 +630,15 @@ class Simulation:
         ):
             return False
 
+        if self.is_segmento_faixa_ocupado(
+            (
+                carro.posicao,
+                carro.posicao + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE,
+            ),
+            carro.pista_i,
+            faixa_direita_i,
+        ):
+            return False
         return True
 
     def pode_carro_virar_pra_esquerda(self, carro: Carro) -> bool:
@@ -626,12 +649,22 @@ class Simulation:
         pista = self.pistas[carro.pista_i]
         faixa = pista.faixas[carro.faixa_i]
 
-        faixa_a_esquerda, _ = self.get_faixa_a_esquerda(carro)
+        faixa_a_esquerda, faixa_esquerda_i = self.get_faixa_a_esquerda(carro)
 
         if (
             faixa_a_esquerda is None
             or faixa_a_esquerda.sentido != faixa.sentido
             or faixa_a_esquerda.tipo != FaixaTipo["geral"]
+        ):
+            return False
+
+        if self.is_segmento_faixa_ocupado(
+            (
+                carro.posicao,
+                carro.posicao + COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE,
+            ),
+            carro.pista_i,
+            faixa_esquerda_i,
         ):
             return False
 

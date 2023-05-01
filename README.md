@@ -139,6 +139,19 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 
 É feita com injeção de dependências na main. Os parametros estão em `config.json`.
 
+### Descrição da configuração
+
+- **resolution**: [resolucao X da tela, resolucao X da tela]
+- **render_scale**: multiplica a resolucao dentro do programa. se X = 100, render_scale = 3, 'X' virtual é de 300
+- **fullscreen**: está em tela cheia
+- **max_fps**: fps máximo (quanto mais, mais o computador vai se esforçar pra reproduzir a simulação)
+- **tick**: milissegundos entre cada passo da simulação (taxa de atualização da física)
+- **cenario_file**: nome do arquivo de cenário
+- **prever_jogada_cooldown**: número de vezes evitará recalcular rota de um carro com tentativa recente
+- **skip_prever_jogada_for_ms**: pula previsão de jogadas nos primeiros milissegundos de exceução, para observar-mos o que ocorre logo nas primeiras decisões visualmente.
+
+### Lista de tarefas
+
 [TODO v1]
 - [SIM] Consertar carros ocupando a mesma faixa
 - [SIM] Amortizar mais os cáculos
@@ -150,8 +163,6 @@ make save_cenario file=cenario/{nome_do_cenario}.json
 [TODO later]
 - [REN] Consertar sistema de render_scale mal feito e inconsistente.
 - [SIM] Detector de ciclos de carros engarrafados
-- [DEV] Criar sistema de logging
-- [SIM] Analisar esforço e otimizar performance
 - [GUI] Criar interaface gráfica com seguintes operações:
   - [GUI] Pausar/Resumir a simulação
   - [GUI] Botão para adicionar novo carro (clica em alguma faixa e o carro aparece)

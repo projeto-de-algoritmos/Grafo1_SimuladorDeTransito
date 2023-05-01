@@ -185,12 +185,19 @@ class Simulation:
 
     bfs_index: int
 
-    def __init__(self, cenario_file, tick=DEFAULT_TICK):
+    next_jogadas_ignoradas: dict[str, int]  # [nome_do_carro]next_cooldown
+    prever_jogada_cooldown: int
+
+    def __init__(self, cenario_file, tick=DEFAULT_TICK, prever_jogada_cooldown=0):
+        self.next_jogadas_ignoradas = {}
+
         pistas, carros = self.read(cenario_file)
+
         self.pistas = pistas
         self.carros = carros
 
         self.running = True
+        self.prever_jogada_cooldown = prever_jogada_cooldown
 
         self.tick = tick
         self.tick_rate = 1000 / tick
@@ -241,6 +248,7 @@ class Simulation:
             )
 
             carros[nome] = carro_obj
+            self.next_jogadas_ignoradas[nome] = 0
 
         for i in range(len(data["pistas"])):
             pista = data["pistas"][i]
@@ -290,23 +298,50 @@ class Simulation:
                 else:
                     carro.posicao += velocidade * self.delta_t
 
-            # if prever_jogada and self.is_carro_bloqueando_movimento(carro)[0]:
-            if prever_jogada and (self.is_carro_bloqueando_movimento(carro)[0]):
-                jogadas, passos = self.prever_melhor_jogada(carro)
+            if prever_jogada:
+                carro_bloqueando_movimento, _ = self.is_carro_bloqueando_movimento(
+                    carro
+                )
+
+                jogadas = carro.next_jogadas
+                if len(jogadas) > 0 and jogadas[0].n_passos == 0:
+                    jogadas = jogadas[1:]
+                    carro.next_jogadas = jogadas
+
+                cooldown = self.next_jogadas_ignoradas[carro.nome]
+                tentar_prever_jogada = False
+
+                # sempre recalcula jogada se tiver bloqueado
+                if carro_bloqueando_movimento and cooldown == 0:
+                    tentar_prever_jogada = True
+                    carro.next_jogadas = []
+
+                # caso não tenha plano, faça um plano
+                if len(jogadas) == 0:
+                    tentar_prever_jogada = True
+
+                if cooldown == 0 and tentar_prever_jogada:
+                    lprint("< -------- buscando jogadas...")
+                    jogadas, _ = self.prever_melhor_jogada(carro)
+                    if len(jogadas) > 0:
+                        lprint("< -------- jogada encontrada: {jogadas[0].nome}")
+                    else:
+                        lprint("< -------- falhou em encontrar jogada")
+
+                    # ajusta cooldown
+                    self.next_jogadas_ignoradas[
+                        carro.nome
+                    ] = self.prever_jogada_cooldown
+                elif cooldown > 0:
+                    self.next_jogadas_ignoradas[carro.nome] -= min(cooldown, 1)
+
                 if len(jogadas) > 0:
-                    jogada = jogadas[0]
-                    carro.next_jogadas = jogadas[1:]
-                    lprint(
-                        "----- <<< -------- executa",
-                        jogada.nome,
-                        "com",
-                        passos,
-                        "passos",
-                        carro.nome,
-                    )
-                    jogada.executar(self, carro)
-                else:
-                    lprint("----- <<< -------- falhou encontrar jogada!!")
+                    jogadas[0].executar(self, carro)
+                    if jogadas[0].n_passos > 1:
+                        jogadas[0].n_passos -= 1
+                    else:
+                        jogadas = jogadas[1:]
+                    carro.next_jogadas = jogadas
 
     def get_carro_velocidade(self, carro: Carro) -> tuple[float, Carro | None]:
         velocidade_baseline = self.get_carro_velocidade_baseline(carro)
@@ -449,15 +484,13 @@ class Simulation:
             jogada = self.amortizar_calculo(jogada, carro)
 
             if jogada.atende_condicao(self, carro):
-                lprint(f"atende condicao (id: {id})", jogada.nome)
                 # clona pra evitar conflito de estado (performance altissima)
-                lprint(f"clonando (id: {id}) old_sim={self.__hash__()}")
+                lprint(f"atende condicao (id: {id})", jogada.nome)
                 n_simulacao: Simulation = self.clonar()
-                lprint(f"clonando (id: {id}) new_sim={n_simulacao.__hash__()}")
                 n_carro: Carro = n_simulacao.carros[carro.nome].clonar()
 
-                lprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 # executa acao de teste
+                lprint(f"executa mudanca (id: {id}) jogada='{jogada.nome}'")
                 jogada.executar(n_simulacao, n_carro)
                 n_passos = passos + jogada.n_passos
 

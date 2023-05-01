@@ -4,5 +4,6 @@
   "fullscreen": false,
   "max_fps": 60,
   "tick": 30,
-  "cenario_file": "cenario.json"
+  "cenario_file": "cenario.json",
+  "prever_jogada_cooldown": 10
 }

@@ -1,194 +1,1765 @@
 
 [LOG] tick=30, tick_rate=33.333333333333336, delta_t=0.03
-[LOG] ======prever_melhor_jogada (id: 1) nome=player_atras pos=66.4034000000002 passos=0 iter=1
-[LOG] atende condicao (id: 1) virar pra esquerda
-[LOG] clonando (id: 1) old_sim=8787799316928
-[LOG] clonando (id: 1) new_sim=8787796365676
-[LOG] executa mudanca (id: 1) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 1) jogada='virar pra esquerda' n_passos=1
-[LOG] (id: 1) IS CARRO NO DESTINO 66.5267000000002 0 135 68 False
-[LOG] ======prever_melhor_jogada (id: 2) nome=player_atras pos=66.5267000000002 passos=1 iter=2
-[LOG] atende condicao (id: 2) virar pra direita
-[LOG] clonando (id: 2) old_sim=8787796365676
-[LOG] clonando (id: 2) new_sim=8787796365514
-[LOG] executa mudanca (id: 2) jogada='virar pra direita'
-[LOG] simulando futuro (id: 2) jogada='virar pra direita' n_passos=2
-[LOG] (id: 2) IS CARRO NO DESTINO 67.41000000000085 1 135 67 False
-[LOG] ======prever_melhor_jogada (id: 3) nome=player_atras pos=67.41000000000085 passos=2 iter=3
-[LOG] atende condicao (id: 3) virar pra esquerda
-[LOG] clonando (id: 3) old_sim=8787796365514
-[LOG] clonando (id: 3) new_sim=8787796365901
-[LOG] executa mudanca (id: 3) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 3) jogada='virar pra esquerda' n_passos=3
-[LOG] (id: 3) IS CARRO NO DESTINO 67.53330000000085 0 135 67 False
-[LOG] ======prever_melhor_jogada (id: 4) nome=player_atras pos=67.53330000000085 passos=3 iter=4
-[LOG] atende condicao (id: 4) virar pra direita
-[LOG] clonando (id: 4) old_sim=8787796365901
-[LOG] clonando (id: 4) new_sim=8787796366156
-[LOG] executa mudanca (id: 4) jogada='virar pra direita'
-[LOG] simulando futuro (id: 4) jogada='virar pra direita' n_passos=4
-[LOG] (id: 4) IS CARRO NO DESTINO 67.50000000000085 1 135 67 False
-[LOG] (id: 5) depth limit
-[LOG] amorizar_calculo dist=67.44510000000001 pos=67.53330000000085 pos_after=202.51170000000172
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 1) nome=player_atras pos=15.1233 passos=0 iter=1
+[LOG] atende condicao (id: 1) virar pra direita
+[LOG] executa mudanca (id: 1) jogada='virar pra direita'
+[LOG] simulando futuro (id: 1) jogada='virar pra direita' n_passos=1
+[LOG] (id: 1) IS CARRO NO DESTINO 15.2466 1 117 101 False
+[LOG] ====== prever_melhor_jogada (id: 2) nome=player_atras pos=15.2466 passos=1 iter=2
+[LOG] atende condicao (id: 2) virar pra esquerda
+[LOG] executa mudanca (id: 2) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 2) jogada='virar pra esquerda' n_passos=2
+[LOG] (id: 2) IS CARRO NO DESTINO 15.369900000000001 0 117 101 False
+[LOG] ====== prever_melhor_jogada (id: 3) nome=player_atras pos=15.369900000000001 passos=2 iter=3
+[LOG] atende condicao (id: 3) virar pra direita
+[LOG] executa mudanca (id: 3) jogada='virar pra direita'
+[LOG] simulando futuro (id: 3) jogada='virar pra direita' n_passos=3
+[LOG] (id: 3) IS CARRO NO DESTINO 15.493200000000002 1 117 101 False
+[LOG] ====== prever_melhor_jogada (id: 4) nome=player_atras pos=15.493200000000002 passos=3 iter=4
+[LOG] atende condicao (id: 4) virar pra esquerda
+[LOG] executa mudanca (id: 4) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 4) jogada='virar pra esquerda' n_passos=4
+[LOG] (id: 4) IS CARRO NO DESTINO 15.616500000000002 0 117 101 False
+[LOG] (id: 5) atingiu limite de recursão
+[LOG] amorizar_calculo dist=101.4759 pos=15.493200000000002 pos_after=132.4623
 [LOG] atende condicao (id: 4) seguir em frente
-[LOG] clonando (id: 4) old_sim=8787796365901
-[LOG] clonando (id: 4) new_sim=8787796366189
 [LOG] executa mudanca (id: 4) jogada='seguir em frente'
-[LOG] simulando futuro (id: 4) jogada='seguir em frente' n_passos=550
-[LOG] (id: 4) IS CARRO NO DESTINO 67.53330000000085 0 135 0 False
-[LOG] (id: 6) depth limit
+[LOG] simulando futuro (id: 4) jogada='seguir em frente' n_passos=826
+[LOG] (id: 4) IS CARRO NO DESTINO 15.493200000000002 1 117 0 True
+[LOG] (id: 6) atingiu limite de recursão
 [LOG] (id: 4) ret none
-[LOG] amorizar_calculo dist=56.519999999999996 pos=72.45500000000085 pos_after=201.4300000000017
+[LOG] amorizar_calculo dist=101.5992 pos=15.369900000000001 pos_after=132.339
 [LOG] atende condicao (id: 3) seguir em frente
-[LOG] clonando (id: 3) old_sim=8787796365514
-[LOG] clonando (id: 3) new_sim=8787796365934
 [LOG] executa mudanca (id: 3) jogada='seguir em frente'
-[LOG] simulando futuro (id: 3) jogada='seguir em frente' n_passos=1258
-[LOG] (id: 3) IS CARRO NO DESTINO 67.41000000000085 1 135 11 False
-[LOG] ======prever_melhor_jogada (id: 7) nome=player_atras pos=67.41000000000085 passos=1258 iter=4
-[LOG] atende condicao (id: 7) virar pra esquerda
-[LOG] clonando (id: 7) old_sim=8787796365934
-[LOG] clonando (id: 7) new_sim=8787796379147
-[LOG] executa mudanca (id: 7) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 7) jogada='virar pra esquerda' n_passos=1259
-[LOG] (id: 7) IS CARRO NO DESTINO 123.15330000000296 0 135 11 False
-[LOG] (id: 8) depth limit
-[LOG] amorizar_calculo dist=67.5684 pos=67.41000000000085 pos_after=202.3884000000017
+[LOG] simulando futuro (id: 3) jogada='seguir em frente' n_passos=826
+[LOG] (id: 3) IS CARRO NO DESTINO 15.369900000000001 0 117 34 False
+[LOG] ====== prever_melhor_jogada (id: 7) nome=player_atras pos=15.369900000000001 passos=826 iter=4
+[LOG] atende condicao (id: 7) virar pra direita
+[LOG] executa mudanca (id: 7) jogada='virar pra direita'
+[LOG] simulando futuro (id: 7) jogada='virar pra direita' n_passos=827
+[LOG] (id: 7) IS CARRO NO DESTINO 82.24830000000141 1 117 34 False
+[LOG] (id: 8) atingiu limite de recursão
+[LOG] amorizar_calculo dist=101.5992 pos=15.369900000000001 pos_after=132.339
 [LOG] atende condicao (id: 7) seguir em frente
-[LOG] clonando (id: 7) old_sim=8787796365934
-[LOG] clonando (id: 7) new_sim=8787796366186
 [LOG] executa mudanca (id: 7) jogada='seguir em frente'
-[LOG] simulando futuro (id: 7) jogada='seguir em frente' n_passos=1806
-[LOG] (id: 7) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] (id: 9) depth limit
+[LOG] simulando futuro (id: 7) jogada='seguir em frente' n_passos=1650
+[LOG] (id: 7) IS CARRO NO DESTINO 82.1250000000014 0 117 2 False
+[LOG] (id: 9) atingiu limite de recursão
 [LOG] (id: 7) ret none
 [LOG] (id: 3) ret none
-[LOG] amorizar_calculo dist=68.4315 pos=66.5267000000002 pos_after=201.4849000000004
+[LOG] amorizar_calculo dist=101.72250000000001 pos=15.2466 pos_after=132.21570000000003
 [LOG] atende condicao (id: 2) seguir em frente
-[LOG] clonando (id: 2) old_sim=8787796365676
-[LOG] clonando (id: 2) new_sim=8787796365838
 [LOG] executa mudanca (id: 2) jogada='seguir em frente'
-[LOG] simulando futuro (id: 2) jogada='seguir em frente' n_passos=556
-[LOG] (id: 2) IS CARRO NO DESTINO 66.5267000000002 0 135 0 False
-[LOG] ======prever_melhor_jogada (id: 10) nome=player_atras pos=66.5267000000002 passos=556 iter=3
-[LOG] atende condicao (id: 10) virar pra direita
-[LOG] clonando (id: 10) old_sim=8787796365838
-[LOG] clonando (id: 10) new_sim=8787796379462
-[LOG] executa mudanca (id: 10) jogada='virar pra direita'
-[LOG] simulando futuro (id: 10) jogada='virar pra direita' n_passos=557
-[LOG] (id: 10) IS CARRO NO DESTINO 134.95820000000043 1 135 0 True
+[LOG] simulando futuro (id: 2) jogada='seguir em frente' n_passos=826
+[LOG] (id: 2) IS CARRO NO DESTINO 15.2466 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 10) nome=player_atras pos=15.2466 passos=826 iter=3
+[LOG] atende condicao (id: 10) virar pra esquerda
+[LOG] executa mudanca (id: 10) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 10) jogada='virar pra esquerda' n_passos=827
+[LOG] (id: 10) IS CARRO NO DESTINO 116.10600000000034 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 11) nome=player_atras pos=116.10600000000034 passos=827 iter=4
+[LOG] atende condicao (id: 11) virar pra direita
+[LOG] executa mudanca (id: 11) jogada='virar pra direita'
+[LOG] simulando futuro (id: 11) jogada='virar pra direita' n_passos=828
+[LOG] (id: 11) IS CARRO NO DESTINO 116.10600000000034 1 117 0 True
+[LOG] (id: 11) ret solucao
+[LOG] amorizar_calculo dist=101.72250000000001 pos=15.2466 pos_after=132.21570000000003
+[LOG] atende condicao (id: 10) seguir em frente
+[LOG] executa mudanca (id: 10) jogada='seguir em frente'
+[LOG] simulando futuro (id: 10) jogada='seguir em frente' n_passos=1651
+[LOG] (id: 10) IS CARRO NO DESTINO 116.10600000000034 1 117 0 True
 [LOG] (id: 10) ret solucao
-[LOG] (id: 2) ret player_atras 2 557 seguir em frente
-[LOG] amorizar_calculo dist=56.61 pos=72.36500000000085 pos_after=201.34000000000168
+[LOG] (id: 2) ret player_atras 2 827 seguir em frente
+[LOG] amorizar_calculo dist=101.8458 pos=15.1233 pos_after=132.0924
 [LOG] atende condicao (id: 1) seguir em frente
-[LOG] clonando (id: 1) old_sim=8787799316928
-[LOG] clonando (id: 1) new_sim=8787796365643
 [LOG] executa mudanca (id: 1) jogada='seguir em frente'
-[LOG] simulando futuro (id: 1) jogada='seguir em frente' n_passos=1258
-[LOG] (id: 1) IS CARRO NO DESTINO 66.4034000000002 1 135 11 False
-[LOG] ======prever_melhor_jogada (id: 11) nome=player_atras pos=66.4034000000002 passos=1258 iter=2
-[LOG] atende condicao (id: 11) virar pra esquerda
-[LOG] clonando (id: 11) old_sim=8787796365643
-[LOG] clonando (id: 11) new_sim=8787796380850
-[LOG] executa mudanca (id: 11) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 11) jogada='virar pra esquerda' n_passos=1259
-[LOG] (id: 11) IS CARRO NO DESTINO 123.15330000000296 0 135 11 False
-[LOG] ======prever_melhor_jogada (id: 12) nome=player_atras pos=123.15330000000296 passos=1259 iter=3
+[LOG] simulando futuro (id: 1) jogada='seguir em frente' n_passos=826
+[LOG] (id: 1) IS CARRO NO DESTINO 15.1233 0 117 34 False
+[LOG] ====== prever_melhor_jogada (id: 12) nome=player_atras pos=15.1233 passos=826 iter=2
 [LOG] atende condicao (id: 12) virar pra direita
-[LOG] clonando (id: 12) old_sim=8787796380850
-[LOG] clonando (id: 12) new_sim=8787796380997
 [LOG] executa mudanca (id: 12) jogada='virar pra direita'
-[LOG] simulando futuro (id: 12) jogada='virar pra direita' n_passos=1260
-[LOG] (id: 12) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] ======prever_melhor_jogada (id: 13) nome=player_atras pos=123.03000000000296 passos=1260 iter=4
+[LOG] simulando futuro (id: 12) jogada='virar pra direita' n_passos=827
+[LOG] (id: 12) IS CARRO NO DESTINO 82.24830000000141 1 117 34 False
+[LOG] ====== prever_melhor_jogada (id: 13) nome=player_atras pos=82.24830000000141 passos=827 iter=3
 [LOG] atende condicao (id: 13) virar pra esquerda
-[LOG] clonando (id: 13) old_sim=8787796380997
-[LOG] clonando (id: 13) new_sim=8787796381240
 [LOG] executa mudanca (id: 13) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 13) jogada='virar pra esquerda' n_passos=1261
-[LOG] (id: 13) IS CARRO NO DESTINO 123.15330000000296 0 135 11 False
-[LOG] (id: 14) depth limit
-[LOG] amorizar_calculo dist=0.9450000000000001 pos=128.03000000000296 pos_after=257.0050000000059
+[LOG] simulando futuro (id: 13) jogada='virar pra esquerda' n_passos=828
+[LOG] (id: 13) IS CARRO NO DESTINO 82.21500000000141 0 117 34 False
+[LOG] ====== prever_melhor_jogada (id: 14) nome=player_atras pos=82.21500000000141 passos=828 iter=4
+[LOG] atende condicao (id: 14) virar pra direita
+[LOG] executa mudanca (id: 14) jogada='virar pra direita'
+[LOG] simulando futuro (id: 14) jogada='virar pra direita' n_passos=829
+[LOG] (id: 14) IS CARRO NO DESTINO 82.33830000000141 1 117 34 False
+[LOG] (id: 15) atingiu limite de recursão
+[LOG] amorizar_calculo dist=22.724999999999998 pos=87.26000000000141 pos_after=197.24500000000282
+[LOG] atende condicao (id: 14) seguir em frente
+[LOG] executa mudanca (id: 14) jogada='seguir em frente'
+[LOG] simulando futuro (id: 14) jogada='seguir em frente' n_passos=1333
+[LOG] (id: 14) IS CARRO NO DESTINO 82.21500000000141 0 117 12 False
+[LOG] (id: 16) atingiu limite de recursão
+[LOG] (id: 14) ret none
+[LOG] amorizar_calculo dist=34.6473 pos=82.24830000000141 pos_after=199.14390000000282
 [LOG] atende condicao (id: 13) seguir em frente
-[LOG] clonando (id: 13) old_sim=8787796380997
-[LOG] clonando (id: 13) new_sim=8787796379558
 [LOG] executa mudanca (id: 13) jogada='seguir em frente'
-[LOG] simulando futuro (id: 13) jogada='seguir em frente' n_passos=1281
-[LOG] (id: 13) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] (id: 15) depth limit
-[LOG] (id: 13) ret none
-[LOG] amorizar_calculo dist=11.8368 pos=123.15330000000296 pos_after=258.14340000000595
-[LOG] atende condicao (id: 12) seguir em frente
-[LOG] clonando (id: 12) old_sim=8787796380850
-[LOG] clonando (id: 12) new_sim=8787796379600
-[LOG] executa mudanca (id: 12) jogada='seguir em frente'
-[LOG] simulando futuro (id: 12) jogada='seguir em frente' n_passos=1355
-[LOG] (id: 12) IS CARRO NO DESTINO 123.15330000000296 0 135 0 False
-[LOG] ======prever_melhor_jogada (id: 16) nome=player_atras pos=123.15330000000296 passos=1355 iter=4
-[LOG] atende condicao (id: 16) virar pra direita
-[LOG] clonando (id: 16) old_sim=8787796379600
-[LOG] clonando (id: 16) new_sim=8787796381504
-[LOG] executa mudanca (id: 16) jogada='virar pra direita'
-[LOG] simulando futuro (id: 16) jogada='virar pra direita' n_passos=1356
-[LOG] (id: 16) IS CARRO NO DESTINO 134.990100000003 1 135 0 True
-[LOG] (id: 16) ret solucao
-[LOG] (id: 12) ret player_atras 3 1356 seguir em frente
-[LOG] amorizar_calculo dist=68.5548 pos=66.4034000000002 pos_after=201.3616000000004
-[LOG] atende condicao (id: 11) seguir em frente
-[LOG] clonando (id: 11) old_sim=8787796365643
-[LOG] clonando (id: 11) new_sim=8787796379504
-[LOG] executa mudanca (id: 11) jogada='seguir em frente'
-[LOG] simulando futuro (id: 11) jogada='seguir em frente' n_passos=1814
-[LOG] (id: 11) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] ======prever_melhor_jogada (id: 17) nome=player_atras pos=123.03000000000296 passos=1814 iter=3
+[LOG] simulando futuro (id: 13) jogada='seguir em frente' n_passos=1108
+[LOG] (id: 13) IS CARRO NO DESTINO 82.24830000000141 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 17) nome=player_atras pos=82.24830000000141 passos=1108 iter=4
 [LOG] atende condicao (id: 17) virar pra esquerda
-[LOG] clonando (id: 17) old_sim=8787796379504
-[LOG] clonando (id: 17) new_sim=8787796383910
 [LOG] executa mudanca (id: 17) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 17) jogada='virar pra esquerda' n_passos=1815
-[LOG] (id: 17) IS CARRO NO DESTINO 123.15330000000296 0 135 11 False
-[LOG] ======prever_melhor_jogada (id: 18) nome=player_atras pos=123.15330000000296 passos=1815 iter=4
-[LOG] atende condicao (id: 18) virar pra direita
-[LOG] clonando (id: 18) old_sim=8787796383910
-[LOG] clonando (id: 18) new_sim=8787796384057
-[LOG] executa mudanca (id: 18) jogada='virar pra direita'
-[LOG] simulando futuro (id: 18) jogada='virar pra direita' n_passos=1816
-[LOG] (id: 18) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] (id: 19) depth limit
-[LOG] amorizar_calculo dist=11.8368 pos=123.15330000000296 pos_after=258.14340000000595
-[LOG] atende condicao (id: 18) seguir em frente
-[LOG] clonando (id: 18) old_sim=8787796383910
-[LOG] clonando (id: 18) new_sim=8787796384078
-[LOG] executa mudanca (id: 18) jogada='seguir em frente'
-[LOG] simulando futuro (id: 18) jogada='seguir em frente' n_passos=1911
-[LOG] (id: 18) IS CARRO NO DESTINO 123.15330000000296 0 135 0 False
-[LOG] (id: 20) depth limit
-[LOG] (id: 18) ret none
-[LOG] amorizar_calculo dist=0.9450000000000001 pos=128.03000000000296 pos_after=257.0050000000059
+[LOG] simulando futuro (id: 17) jogada='virar pra esquerda' n_passos=1109
+[LOG] (id: 17) IS CARRO NO DESTINO 116.03250000000152 0 117 0 False
+[LOG] (id: 18) atingiu limite de recursão
+[LOG] amorizar_calculo dist=34.6473 pos=82.24830000000141 pos_after=199.14390000000282
 [LOG] atende condicao (id: 17) seguir em frente
-[LOG] clonando (id: 17) old_sim=8787796379504
-[LOG] clonando (id: 17) new_sim=8787796381570
 [LOG] executa mudanca (id: 17) jogada='seguir em frente'
-[LOG] simulando futuro (id: 17) jogada='seguir em frente' n_passos=1835
-[LOG] (id: 17) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] ======prever_melhor_jogada (id: 21) nome=player_atras pos=123.03000000000296 passos=1835 iter=4
-[LOG] atende condicao (id: 21) virar pra esquerda
-[LOG] clonando (id: 21) old_sim=8787796381570
-[LOG] clonando (id: 21) new_sim=8787796378685
-[LOG] executa mudanca (id: 21) jogada='virar pra esquerda'
-[LOG] simulando futuro (id: 21) jogada='virar pra esquerda' n_passos=1836
-[LOG] (id: 21) IS CARRO NO DESTINO 123.15330000000296 0 135 11 False
-[LOG] (id: 22) depth limit
-[LOG] amorizar_calculo dist=0.9450000000000001 pos=128.03000000000296 pos_after=257.0050000000059
-[LOG] atende condicao (id: 21) seguir em frente
-[LOG] clonando (id: 21) old_sim=8787796381570
-[LOG] clonando (id: 21) new_sim=8787796384255
-[LOG] executa mudanca (id: 21) jogada='seguir em frente'
-[LOG] simulando futuro (id: 21) jogada='seguir em frente' n_passos=1856
-[LOG] (id: 21) IS CARRO NO DESTINO 123.03000000000296 1 135 11 False
-[LOG] (id: 23) depth limit
-[LOG] (id: 21) ret none
-[LOG] (id: 17) ret none
-[LOG] (id: 11) ret player_atras 2 1356 virar pra esquerda
-[LOG] (id: 1) ret player_atras 1 557 virar pra esquerda
-[LOG] ----- <<< -------- executa virar pra esquerda com 557 passos player_atras
+[LOG] simulando futuro (id: 17) jogada='seguir em frente' n_passos=1389
+[LOG] (id: 17) IS CARRO NO DESTINO 116.03250000000152 1 117 0 True
+[LOG] (id: 17) ret solucao
+[LOG] (id: 13) ret player_atras 3 1109 seguir em frente
+[LOG] amorizar_calculo dist=101.8458 pos=15.1233 pos_after=132.0924
+[LOG] atende condicao (id: 12) seguir em frente
+[LOG] executa mudanca (id: 12) jogada='seguir em frente'
+[LOG] simulando futuro (id: 12) jogada='seguir em frente' n_passos=1652
+[LOG] (id: 12) IS CARRO NO DESTINO 82.1250000000014 0 117 2 False
+[LOG] ====== prever_melhor_jogada (id: 19) nome=player_atras pos=82.1250000000014 passos=1652 iter=3
+[LOG] atende condicao (id: 19) virar pra direita
+[LOG] executa mudanca (id: 19) jogada='virar pra direita'
+[LOG] simulando futuro (id: 19) jogada='virar pra direita' n_passos=1653
+[LOG] (id: 19) IS CARRO NO DESTINO 119.41830000000282 1 117 2 False
+[LOG] ====== prever_melhor_jogada (id: 20) nome=player_atras pos=119.41830000000282 passos=1653 iter=4
+[LOG] atende condicao (id: 20) virar pra esquerda
+[LOG] executa mudanca (id: 20) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 20) jogada='virar pra esquerda' n_passos=1654
+[LOG] (id: 20) IS CARRO NO DESTINO 119.38500000000282 0 117 2 False
+[LOG] (id: 21) atingiu limite de recursão
+[LOG] atende condicao (id: 20) seguir em frente
+[LOG] executa mudanca (id: 20) jogada='seguir em frente'
+[LOG] simulando futuro (id: 20) jogada='seguir em frente' n_passos=1654
+[LOG] (id: 20) IS CARRO NO DESTINO 119.41830000000282 1 117 2 False
+[LOG] (id: 22) atingiu limite de recursão
+[LOG] (id: 20) ret none
+[LOG] amorizar_calculo dist=34.7706 pos=82.1250000000014 pos_after=199.02060000000282
+[LOG] atende condicao (id: 19) seguir em frente
+[LOG] executa mudanca (id: 19) jogada='seguir em frente'
+[LOG] simulando futuro (id: 19) jogada='seguir em frente' n_passos=1934
+[LOG] (id: 19) IS CARRO NO DESTINO 119.29500000000282 0 117 13 False
+[LOG] ====== prever_melhor_jogada (id: 23) nome=player_atras pos=119.29500000000282 passos=1934 iter=4
+[LOG] atende condicao (id: 23) virar pra direita
+[LOG] executa mudanca (id: 23) jogada='virar pra direita'
+[LOG] simulando futuro (id: 23) jogada='virar pra direita' n_passos=1935
+[LOG] (id: 23) IS CARRO NO DESTINO 130.153 1 117 13 False
+[LOG] (id: 24) atingiu limite de recursão
+[LOG] atende condicao (id: 23) seguir em frente
+[LOG] executa mudanca (id: 23) jogada='seguir em frente'
+[LOG] simulando futuro (id: 23) jogada='seguir em frente' n_passos=1935
+[LOG] (id: 23) IS CARRO NO DESTINO 130.045 0 117 13 False
+[LOG] (id: 25) atingiu limite de recursão
+[LOG] (id: 23) ret none
+[LOG] (id: 19) ret none
+[LOG] (id: 12) ret player_atras 2 1109 virar pra direita
+[LOG] (id: 1) ret player_atras 1 827 virar pra direita
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 26) nome=player_frente pos=50.045 passos=0 iter=1
+[LOG] atende condicao (id: 26) virar pra direita
+[LOG] executa mudanca (id: 26) jogada='virar pra direita'
+[LOG] simulando futuro (id: 26) jogada='virar pra direita' n_passos=1
+[LOG] (id: 26) IS CARRO NO DESTINO 50.09 1 110 59 False
+[LOG] ====== prever_melhor_jogada (id: 27) nome=player_frente pos=50.09 passos=1 iter=2
+[LOG] atende condicao (id: 27) virar pra esquerda
+[LOG] executa mudanca (id: 27) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 27) jogada='virar pra esquerda' n_passos=2
+[LOG] (id: 27) IS CARRO NO DESTINO 50.135000000000005 0 110 59 False
+[LOG] ====== prever_melhor_jogada (id: 28) nome=player_frente pos=50.135000000000005 passos=2 iter=3
+[LOG] atende condicao (id: 28) virar pra direita
+[LOG] executa mudanca (id: 28) jogada='virar pra direita'
+[LOG] simulando futuro (id: 28) jogada='virar pra direita' n_passos=3
+[LOG] (id: 28) IS CARRO NO DESTINO 50.18000000000001 1 110 59 False
+[LOG] ====== prever_melhor_jogada (id: 29) nome=player_frente pos=50.18000000000001 passos=3 iter=4
+[LOG] atende condicao (id: 29) virar pra esquerda
+[LOG] executa mudanca (id: 29) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 29) jogada='virar pra esquerda' n_passos=4
+[LOG] (id: 29) IS CARRO NO DESTINO 50.22500000000001 0 110 59 False
+[LOG] (id: 30) atingiu limite de recursão
+[LOG] amorizar_calculo dist=59.80499999999999 pos=50.18000000000001 pos_after=160.16500000000002
+[LOG] atende condicao (id: 29) seguir em frente
+[LOG] executa mudanca (id: 29) jogada='seguir em frente'
+[LOG] simulando futuro (id: 29) jogada='seguir em frente' n_passos=1332
+[LOG] (id: 29) IS CARRO NO DESTINO 50.18000000000001 1 110 0 True
+[LOG] (id: 31) atingiu limite de recursão
+[LOG] (id: 29) ret none
+[LOG] amorizar_calculo dist=59.849999999999994 pos=50.135000000000005 pos_after=160.12
+[LOG] atende condicao (id: 28) seguir em frente
+[LOG] executa mudanca (id: 28) jogada='seguir em frente'
+[LOG] simulando futuro (id: 28) jogada='seguir em frente' n_passos=1332
+[LOG] (id: 28) IS CARRO NO DESTINO 50.135000000000005 0 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 32) nome=player_frente pos=50.135000000000005 passos=1332 iter=4
+[LOG] atende condicao (id: 32) virar pra direita
+[LOG] executa mudanca (id: 32) jogada='virar pra direita'
+[LOG] simulando futuro (id: 32) jogada='virar pra direita' n_passos=1333
+[LOG] (id: 32) IS CARRO NO DESTINO 109.98500000000227 1 110 0 True
+[LOG] (id: 32) ret solucao
+[LOG] (id: 28) ret player_frente 3 1333 seguir em frente
+[LOG] amorizar_calculo dist=59.894999999999996 pos=50.09 pos_after=160.075
+[LOG] atende condicao (id: 27) seguir em frente
+[LOG] executa mudanca (id: 27) jogada='seguir em frente'
+[LOG] simulando futuro (id: 27) jogada='seguir em frente' n_passos=1332
+[LOG] (id: 27) IS CARRO NO DESTINO 50.09 1 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 33) nome=player_frente pos=50.09 passos=1332 iter=3
+[LOG] atende condicao (id: 33) virar pra esquerda
+[LOG] executa mudanca (id: 33) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 33) jogada='virar pra esquerda' n_passos=1333
+[LOG] (id: 33) IS CARRO NO DESTINO 109.04000000000224 0 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 34) nome=player_frente pos=109.04000000000224 passos=1333 iter=4
+[LOG] atende condicao (id: 34) virar pra direita
+[LOG] executa mudanca (id: 34) jogada='virar pra direita'
+[LOG] simulando futuro (id: 34) jogada='virar pra direita' n_passos=1334
+[LOG] (id: 34) IS CARRO NO DESTINO 109.04000000000224 1 110 0 True
+[LOG] (id: 34) ret solucao
+[LOG] amorizar_calculo dist=59.894999999999996 pos=50.09 pos_after=160.075
+[LOG] atende condicao (id: 33) seguir em frente
+[LOG] executa mudanca (id: 33) jogada='seguir em frente'
+[LOG] simulando futuro (id: 33) jogada='seguir em frente' n_passos=2663
+[LOG] (id: 33) IS CARRO NO DESTINO 109.04000000000224 1 110 0 True
+[LOG] (id: 33) ret solucao
+[LOG] (id: 27) ret player_frente 2 1333 virar pra esquerda
+[LOG] amorizar_calculo dist=59.94 pos=50.045 pos_after=160.03
+[LOG] atende condicao (id: 26) seguir em frente
+[LOG] executa mudanca (id: 26) jogada='seguir em frente'
+[LOG] simulando futuro (id: 26) jogada='seguir em frente' n_passos=1332
+[LOG] (id: 26) IS CARRO NO DESTINO 50.045 0 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 35) nome=player_frente pos=50.045 passos=1332 iter=2
+[LOG] atende condicao (id: 35) virar pra direita
+[LOG] executa mudanca (id: 35) jogada='virar pra direita'
+[LOG] simulando futuro (id: 35) jogada='virar pra direita' n_passos=1333
+[LOG] (id: 35) IS CARRO NO DESTINO 109.98500000000227 1 110 0 True
+[LOG] (id: 35) ret solucao
+[LOG] (id: 26) ret player_frente 1 1333 virar pra direita
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 36) nome=player_mais_atras pos=5.153 passos=0 iter=1
+[LOG] atende condicao (id: 36) virar pra esquerda
+[LOG] executa mudanca (id: 36) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 36) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 36) IS CARRO NO DESTINO 5.305999999999999 0 110 104 False
+[LOG] ====== prever_melhor_jogada (id: 37) nome=player_mais_atras pos=5.305999999999999 passos=1 iter=2
+[LOG] atende condicao (id: 37) virar pra direita
+[LOG] executa mudanca (id: 37) jogada='virar pra direita'
+[LOG] simulando futuro (id: 37) jogada='virar pra direita' n_passos=2
+[LOG] (id: 37) IS CARRO NO DESTINO 5.458999999999999 1 110 104 False
+[LOG] ====== prever_melhor_jogada (id: 38) nome=player_mais_atras pos=5.458999999999999 passos=2 iter=3
+[LOG] atende condicao (id: 38) virar pra esquerda
+[LOG] executa mudanca (id: 38) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 38) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 38) IS CARRO NO DESTINO 5.611999999999998 0 110 104 False
+[LOG] ====== prever_melhor_jogada (id: 39) nome=player_mais_atras pos=5.611999999999998 passos=3 iter=4
+[LOG] atende condicao (id: 39) virar pra direita
+[LOG] executa mudanca (id: 39) jogada='virar pra direita'
+[LOG] simulando futuro (id: 39) jogada='virar pra direita' n_passos=4
+[LOG] (id: 39) IS CARRO NO DESTINO 5.764999999999998 1 110 104 False
+[LOG] (id: 40) atingiu limite de recursão
+[LOG] amorizar_calculo dist=104.346 pos=5.611999999999998 pos_after=115.57
+[LOG] atende condicao (id: 39) seguir em frente
+[LOG] executa mudanca (id: 39) jogada='seguir em frente'
+[LOG] simulando futuro (id: 39) jogada='seguir em frente' n_passos=685
+[LOG] (id: 39) IS CARRO NO DESTINO 5.611999999999998 0 110 0 True
+[LOG] (id: 41) atingiu limite de recursão
+[LOG] (id: 39) ret none
+[LOG] amorizar_calculo dist=104.49899999999998 pos=5.458999999999999 pos_after=115.41699999999999
+[LOG] atende condicao (id: 38) seguir em frente
+[LOG] executa mudanca (id: 38) jogada='seguir em frente'
+[LOG] simulando futuro (id: 38) jogada='seguir em frente' n_passos=685
+[LOG] (id: 38) IS CARRO NO DESTINO 5.458999999999999 1 110 39 False
+[LOG] ====== prever_melhor_jogada (id: 42) nome=player_mais_atras pos=5.458999999999999 passos=685 iter=4
+[LOG] atende condicao (id: 42) virar pra esquerda
+[LOG] executa mudanca (id: 42) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 42) jogada='virar pra esquerda' n_passos=686
+[LOG] (id: 42) IS CARRO NO DESTINO 70.97800000000117 0 110 39 False
+[LOG] (id: 43) atingiu limite de recursão
+[LOG] amorizar_calculo dist=104.49899999999998 pos=5.458999999999999 pos_after=115.41699999999999
+[LOG] atende condicao (id: 42) seguir em frente
+[LOG] executa mudanca (id: 42) jogada='seguir em frente'
+[LOG] simulando futuro (id: 42) jogada='seguir em frente' n_passos=1368
+[LOG] (id: 42) IS CARRO NO DESTINO 70.82500000000117 1 110 10 False
+[LOG] (id: 44) atingiu limite de recursão
+[LOG] (id: 42) ret none
+[LOG] (id: 38) ret none
+[LOG] amorizar_calculo dist=104.65199999999999 pos=5.305999999999999 pos_after=115.26399999999998
+[LOG] atende condicao (id: 37) seguir em frente
+[LOG] executa mudanca (id: 37) jogada='seguir em frente'
+[LOG] simulando futuro (id: 37) jogada='seguir em frente' n_passos=685
+[LOG] (id: 37) IS CARRO NO DESTINO 5.305999999999999 0 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 45) nome=player_mais_atras pos=5.305999999999999 passos=685 iter=3
+[LOG] atende condicao (id: 45) virar pra direita
+[LOG] executa mudanca (id: 45) jogada='virar pra direita'
+[LOG] simulando futuro (id: 45) jogada='virar pra direita' n_passos=686
+[LOG] (id: 45) IS CARRO NO DESTINO 109.04000000000131 1 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 46) nome=player_mais_atras pos=109.04000000000131 passos=686 iter=4
+[LOG] atende condicao (id: 46) virar pra esquerda
+[LOG] executa mudanca (id: 46) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 46) jogada='virar pra esquerda' n_passos=687
+[LOG] (id: 46) IS CARRO NO DESTINO 109.04000000000131 0 110 0 True
+[LOG] (id: 46) ret solucao
+[LOG] amorizar_calculo dist=104.65199999999999 pos=5.305999999999999 pos_after=115.26399999999998
+[LOG] atende condicao (id: 45) seguir em frente
+[LOG] executa mudanca (id: 45) jogada='seguir em frente'
+[LOG] simulando futuro (id: 45) jogada='seguir em frente' n_passos=1369
+[LOG] (id: 45) IS CARRO NO DESTINO 109.04000000000131 0 110 0 True
+[LOG] (id: 45) ret solucao
+[LOG] (id: 37) ret player_mais_atras 2 686 seguir em frente
+[LOG] amorizar_calculo dist=104.80499999999999 pos=5.153 pos_after=115.111
+[LOG] atende condicao (id: 36) seguir em frente
+[LOG] executa mudanca (id: 36) jogada='seguir em frente'
+[LOG] simulando futuro (id: 36) jogada='seguir em frente' n_passos=685
+[LOG] (id: 36) IS CARRO NO DESTINO 5.153 1 110 39 False
+[LOG] ====== prever_melhor_jogada (id: 47) nome=player_mais_atras pos=5.153 passos=685 iter=2
+[LOG] atende condicao (id: 47) virar pra esquerda
+[LOG] executa mudanca (id: 47) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 47) jogada='virar pra esquerda' n_passos=686
+[LOG] (id: 47) IS CARRO NO DESTINO 70.97800000000117 0 110 39 False
+[LOG] ====== prever_melhor_jogada (id: 48) nome=player_mais_atras pos=70.97800000000117 passos=686 iter=3
+[LOG] atende condicao (id: 48) virar pra direita
+[LOG] executa mudanca (id: 48) jogada='virar pra direita'
+[LOG] simulando futuro (id: 48) jogada='virar pra direita' n_passos=687
+[LOG] (id: 48) IS CARRO NO DESTINO 70.91500000000117 1 110 39 False
+[LOG] ====== prever_melhor_jogada (id: 49) nome=player_mais_atras pos=70.91500000000117 passos=687 iter=4
+[LOG] atende condicao (id: 49) virar pra esquerda
+[LOG] executa mudanca (id: 49) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 49) jogada='virar pra esquerda' n_passos=688
+[LOG] (id: 49) IS CARRO NO DESTINO 71.06800000000118 0 110 38 False
+[LOG] (id: 50) atingiu limite de recursão
+[LOG] amorizar_calculo dist=41.0589 pos=75.91500000000117 pos_after=192.88890000000237
+[LOG] atende condicao (id: 49) seguir em frente
+[LOG] executa mudanca (id: 49) jogada='seguir em frente'
+[LOG] simulando futuro (id: 49) jogada='seguir em frente' n_passos=1020
+[LOG] (id: 49) IS CARRO NO DESTINO 70.91500000000117 1 110 24 False
+[LOG] (id: 51) atingiu limite de recursão
+[LOG] (id: 49) ret none
+[LOG] amorizar_calculo dist=39.01499999999999 pos=70.97800000000117 pos_after=180.97100000000233
+[LOG] atende condicao (id: 48) seguir em frente
+[LOG] executa mudanca (id: 48) jogada='seguir em frente'
+[LOG] simulando futuro (id: 48) jogada='seguir em frente' n_passos=941
+[LOG] (id: 48) IS CARRO NO DESTINO 70.97800000000117 0 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 52) nome=player_mais_atras pos=70.97800000000117 passos=941 iter=4
+[LOG] atende condicao (id: 52) virar pra direita
+[LOG] executa mudanca (id: 52) jogada='virar pra direita'
+[LOG] simulando futuro (id: 52) jogada='virar pra direita' n_passos=942
+[LOG] (id: 52) IS CARRO NO DESTINO 109.07500000000262 1 110 0 False
+[LOG] (id: 53) atingiu limite de recursão
+[LOG] amorizar_calculo dist=39.01499999999999 pos=70.97800000000117 pos_after=180.97100000000233
+[LOG] atende condicao (id: 52) seguir em frente
+[LOG] executa mudanca (id: 52) jogada='seguir em frente'
+[LOG] simulando futuro (id: 52) jogada='seguir em frente' n_passos=1196
+[LOG] (id: 52) IS CARRO NO DESTINO 109.07500000000262 0 110 0 True
+[LOG] (id: 52) ret solucao
+[LOG] (id: 48) ret player_mais_atras 3 942 seguir em frente
+[LOG] amorizar_calculo dist=104.80499999999999 pos=5.153 pos_after=115.111
+[LOG] atende condicao (id: 47) seguir em frente
+[LOG] executa mudanca (id: 47) jogada='seguir em frente'
+[LOG] simulando futuro (id: 47) jogada='seguir em frente' n_passos=1370
+[LOG] (id: 47) IS CARRO NO DESTINO 70.82500000000117 1 110 10 False
+[LOG] ====== prever_melhor_jogada (id: 54) nome=player_mais_atras pos=70.82500000000117 passos=1370 iter=3
+[LOG] atende condicao (id: 54) virar pra esquerda
+[LOG] executa mudanca (id: 54) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 54) jogada='virar pra esquerda' n_passos=1371
+[LOG] (id: 54) IS CARRO NO DESTINO 99.19300000000224 0 110 10 False
+[LOG] ====== prever_melhor_jogada (id: 55) nome=player_mais_atras pos=99.19300000000224 passos=1371 iter=4
+[LOG] atende condicao (id: 55) virar pra direita
+[LOG] executa mudanca (id: 55) jogada='virar pra direita'
+[LOG] simulando futuro (id: 55) jogada='virar pra direita' n_passos=1372
+[LOG] (id: 55) IS CARRO NO DESTINO 99.04000000000224 1 110 10 False
+[LOG] (id: 56) atingiu limite de recursão
+[LOG] amorizar_calculo dist=10.709999999999999 pos=99.19300000000224 pos_after=209.0960000000045
+[LOG] atende condicao (id: 55) seguir em frente
+[LOG] executa mudanca (id: 55) jogada='seguir em frente'
+[LOG] simulando futuro (id: 55) jogada='seguir em frente' n_passos=1441
+[LOG] (id: 55) IS CARRO NO DESTINO 99.19300000000224 0 110 0 True
+[LOG] (id: 57) atingiu limite de recursão
+[LOG] (id: 55) ret none
+[LOG] amorizar_calculo dist=39.168 pos=70.82500000000117 pos_after=180.8180000000023
+[LOG] atende condicao (id: 54) seguir em frente
+[LOG] executa mudanca (id: 54) jogada='seguir em frente'
+[LOG] simulando futuro (id: 54) jogada='seguir em frente' n_passos=1626
+[LOG] (id: 54) IS CARRO NO DESTINO 99.04000000000224 1 110 10 False
+[LOG] ====== prever_melhor_jogada (id: 58) nome=player_mais_atras pos=99.04000000000224 passos=1626 iter=4
+[LOG] atende condicao (id: 58) virar pra esquerda
+[LOG] executa mudanca (id: 58) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 58) jogada='virar pra esquerda' n_passos=1627
+[LOG] (id: 58) IS CARRO NO DESTINO 99.19300000000224 0 110 10 False
+[LOG] (id: 59) atingiu limite de recursão
+[LOG] amorizar_calculo dist=12.9465 pos=104.04000000000224 pos_after=221.0265000000045
+[LOG] atende condicao (id: 58) seguir em frente
+[LOG] executa mudanca (id: 58) jogada='seguir em frente'
+[LOG] simulando futuro (id: 58) jogada='seguir em frente' n_passos=1731
+[LOG] (id: 58) IS CARRO NO DESTINO 99.04000000000224 1 110 10 False
+[LOG] (id: 60) atingiu limite de recursão
+[LOG] (id: 58) ret none
+[LOG] (id: 54) ret none
+[LOG] (id: 47) ret player_mais_atras 2 942 virar pra esquerda
+[LOG] (id: 36) ret player_mais_atras 1 686 virar pra esquerda
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 61) nome=player_mais_atras pos=60.38599999999964 passos=0 iter=1
+[LOG] atende condicao (id: 61) virar pra direita
+[LOG] executa mudanca (id: 61) jogada='virar pra direita'
+[LOG] simulando futuro (id: 61) jogada='virar pra direita' n_passos=1
+[LOG] (id: 61) IS CARRO NO DESTINO 60.53899999999964 1 110 49 False
+[LOG] ====== prever_melhor_jogada (id: 62) nome=player_mais_atras pos=60.53899999999964 passos=1 iter=2
+[LOG] atende condicao (id: 62) virar pra esquerda
+[LOG] executa mudanca (id: 62) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 62) jogada='virar pra esquerda' n_passos=2
+[LOG] (id: 62) IS CARRO NO DESTINO 61.38000000000062 0 110 48 False
+[LOG] ====== prever_melhor_jogada (id: 63) nome=player_mais_atras pos=61.38000000000062 passos=2 iter=3
+[LOG] atende condicao (id: 63) virar pra direita
+[LOG] executa mudanca (id: 63) jogada='virar pra direita'
+[LOG] simulando futuro (id: 63) jogada='virar pra direita' n_passos=3
+[LOG] (id: 63) IS CARRO NO DESTINO 61.53300000000062 1 110 48 False
+[LOG] ====== prever_melhor_jogada (id: 64) nome=player_mais_atras pos=61.53300000000062 passos=3 iter=4
+[LOG] atende condicao (id: 64) virar pra esquerda
+[LOG] executa mudanca (id: 64) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 64) jogada='virar pra esquerda' n_passos=4
+[LOG] (id: 64) IS CARRO NO DESTINO 61.470000000000624 0 110 48 False
+[LOG] (id: 65) atingiu limite de recursão
+[LOG] amorizar_calculo dist=48.348 pos=61.53300000000062 pos_after=171.41400000000124
+[LOG] atende condicao (id: 64) seguir em frente
+[LOG] executa mudanca (id: 64) jogada='seguir em frente'
+[LOG] simulando futuro (id: 64) jogada='seguir em frente' n_passos=319
+[LOG] (id: 64) IS CARRO NO DESTINO 61.53300000000062 1 110 0 False
+[LOG] (id: 66) atingiu limite de recursão
+[LOG] (id: 64) ret none
+[LOG] amorizar_calculo dist=43.605000000000004 pos=66.38000000000062 pos_after=176.36500000000126
+[LOG] atende condicao (id: 63) seguir em frente
+[LOG] executa mudanca (id: 63) jogada='seguir em frente'
+[LOG] simulando futuro (id: 63) jogada='seguir em frente' n_passos=971
+[LOG] (id: 63) IS CARRO NO DESTINO 61.38000000000062 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 67) nome=player_mais_atras pos=61.38000000000062 passos=971 iter=4
+[LOG] atende condicao (id: 67) virar pra direita
+[LOG] executa mudanca (id: 67) jogada='virar pra direita'
+[LOG] simulando futuro (id: 67) jogada='virar pra direita' n_passos=972
+[LOG] (id: 67) IS CARRO NO DESTINO 105.13800000000228 1 110 4 False
+[LOG] (id: 68) atingiu limite de recursão
+[LOG] amorizar_calculo dist=48.501 pos=61.38000000000062 pos_after=171.26100000000125
+[LOG] atende condicao (id: 67) seguir em frente
+[LOG] executa mudanca (id: 67) jogada='seguir em frente'
+[LOG] simulando futuro (id: 67) jogada='seguir em frente' n_passos=1288
+[LOG] (id: 67) IS CARRO NO DESTINO 104.98500000000227 0 110 0 True
+[LOG] (id: 69) atingiu limite de recursão
+[LOG] (id: 67) ret none
+[LOG] (id: 63) ret none
+[LOG] amorizar_calculo dist=49.419 pos=60.53899999999964 pos_after=170.49699999999928
+[LOG] atende condicao (id: 62) seguir em frente
+[LOG] executa mudanca (id: 62) jogada='seguir em frente'
+[LOG] simulando futuro (id: 62) jogada='seguir em frente' n_passos=324
+[LOG] (id: 62) IS CARRO NO DESTINO 60.53899999999964 1 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 70) nome=player_mais_atras pos=60.53899999999964 passos=324 iter=3
+[LOG] atende condicao (id: 70) virar pra esquerda
+[LOG] executa mudanca (id: 70) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 70) jogada='virar pra esquerda' n_passos=325
+[LOG] (id: 70) IS CARRO NO DESTINO 109.95800000000135 0 110 0 True
+[LOG] (id: 70) ret solucao
+[LOG] (id: 62) ret player_mais_atras 2 325 seguir em frente
+[LOG] amorizar_calculo dist=43.695 pos=66.29000000000062 pos_after=176.27500000000123
+[LOG] atende condicao (id: 61) seguir em frente
+[LOG] executa mudanca (id: 61) jogada='seguir em frente'
+[LOG] simulando futuro (id: 61) jogada='seguir em frente' n_passos=971
+[LOG] (id: 61) IS CARRO NO DESTINO 60.38599999999964 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 71) nome=player_mais_atras pos=60.38599999999964 passos=971 iter=2
+[LOG] atende condicao (id: 71) virar pra direita
+[LOG] executa mudanca (id: 71) jogada='virar pra direita'
+[LOG] simulando futuro (id: 71) jogada='virar pra direita' n_passos=972
+[LOG] (id: 71) IS CARRO NO DESTINO 105.13800000000228 1 110 4 False
+[LOG] ====== prever_melhor_jogada (id: 72) nome=player_mais_atras pos=105.13800000000228 passos=972 iter=3
+[LOG] atende condicao (id: 72) virar pra esquerda
+[LOG] executa mudanca (id: 72) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 72) jogada='virar pra esquerda' n_passos=973
+[LOG] (id: 72) IS CARRO NO DESTINO 105.07500000000228 0 110 4 False
+[LOG] ====== prever_melhor_jogada (id: 73) nome=player_mais_atras pos=105.07500000000228 passos=973 iter=4
+[LOG] atende condicao (id: 73) virar pra direita
+[LOG] executa mudanca (id: 73) jogada='virar pra direita'
+[LOG] simulando futuro (id: 73) jogada='virar pra direita' n_passos=974
+[LOG] (id: 73) IS CARRO NO DESTINO 105.22800000000228 1 110 4 False
+[LOG] (id: 74) atingiu limite de recursão
+[LOG] atende condicao (id: 73) seguir em frente
+[LOG] executa mudanca (id: 73) jogada='seguir em frente'
+[LOG] simulando futuro (id: 73) jogada='seguir em frente' n_passos=974
+[LOG] (id: 73) IS CARRO NO DESTINO 105.07500000000228 0 110 4 False
+[LOG] (id: 75) atingiu limite de recursão
+[LOG] (id: 73) ret none
+[LOG] amorizar_calculo dist=4.742999999999999 pos=105.13800000000228 pos_after=215.01900000000455
+[LOG] atende condicao (id: 72) seguir em frente
+[LOG] executa mudanca (id: 72) jogada='seguir em frente'
+[LOG] simulando futuro (id: 72) jogada='seguir em frente' n_passos=1003
+[LOG] (id: 72) IS CARRO NO DESTINO 105.13800000000228 1 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 76) nome=player_mais_atras pos=105.13800000000228 passos=1003 iter=4
+[LOG] atende condicao (id: 76) virar pra esquerda
+[LOG] executa mudanca (id: 76) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 76) jogada='virar pra esquerda' n_passos=1004
+[LOG] (id: 76) IS CARRO NO DESTINO 109.88100000000246 0 110 0 True
+[LOG] (id: 76) ret solucao
+[LOG] (id: 72) ret player_mais_atras 3 1004 seguir em frente
+[LOG] amorizar_calculo dist=49.57199999999999 pos=60.38599999999964 pos_after=170.34399999999926
+[LOG] atende condicao (id: 71) seguir em frente
+[LOG] executa mudanca (id: 71) jogada='seguir em frente'
+[LOG] simulando futuro (id: 71) jogada='seguir em frente' n_passos=1295
+[LOG] (id: 71) IS CARRO NO DESTINO 104.98500000000227 0 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 77) nome=player_mais_atras pos=104.98500000000227 passos=1295 iter=3
+[LOG] atende condicao (id: 77) virar pra direita
+[LOG] executa mudanca (id: 77) jogada='virar pra direita'
+[LOG] simulando futuro (id: 77) jogada='virar pra direita' n_passos=1296
+[LOG] (id: 77) IS CARRO NO DESTINO 109.03500000000243 1 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 78) nome=player_mais_atras pos=109.03500000000243 passos=1296 iter=4
+[LOG] atende condicao (id: 78) virar pra esquerda
+[LOG] executa mudanca (id: 78) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 78) jogada='virar pra esquerda' n_passos=1297
+[LOG] (id: 78) IS CARRO NO DESTINO 109.03500000000243 0 110 0 True
+[LOG] (id: 78) ret solucao
+[LOG] amorizar_calculo dist=0.9179999999999999 pos=109.03500000000243 pos_after=218.98800000000486
+[LOG] atende condicao (id: 77) seguir em frente
+[LOG] executa mudanca (id: 77) jogada='seguir em frente'
+[LOG] simulando futuro (id: 77) jogada='seguir em frente' n_passos=1301
+[LOG] (id: 77) IS CARRO NO DESTINO 109.03500000000243 0 110 0 True
+[LOG] (id: 77) ret solucao
+[LOG] (id: 71) ret player_mais_atras 2 1004 virar pra direita
+[LOG] (id: 61) ret player_mais_atras 1 325 virar pra direita
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 79) nome=player_atras pos=55.38599999999964 passos=0 iter=1
+[LOG] atende condicao (id: 79) virar pra esquerda
+[LOG] executa mudanca (id: 79) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 79) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 79) IS CARRO NO DESTINO 55.50929999999964 0 117 61 False
+[LOG] ====== prever_melhor_jogada (id: 80) nome=player_atras pos=55.50929999999964 passos=1 iter=2
+[LOG] atende condicao (id: 80) virar pra direita
+[LOG] executa mudanca (id: 80) jogada='virar pra direita'
+[LOG] simulando futuro (id: 80) jogada='virar pra direita' n_passos=2
+[LOG] (id: 80) IS CARRO NO DESTINO 55.53899999999964 1 117 61 False
+[LOG] ====== prever_melhor_jogada (id: 81) nome=player_atras pos=55.53899999999964 passos=2 iter=3
+[LOG] atende condicao (id: 81) virar pra esquerda
+[LOG] executa mudanca (id: 81) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 81) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 81) IS CARRO NO DESTINO 55.66229999999964 0 117 61 False
+[LOG] ====== prever_melhor_jogada (id: 82) nome=player_atras pos=55.66229999999964 passos=3 iter=4
+[LOG] atende condicao (id: 82) virar pra direita
+[LOG] executa mudanca (id: 82) jogada='virar pra direita'
+[LOG] simulando futuro (id: 82) jogada='virar pra direita' n_passos=4
+[LOG] (id: 82) IS CARRO NO DESTINO 55.84499999999964 1 117 61 False
+[LOG] (id: 83) atingiu limite de recursão
+[LOG] amorizar_calculo dist=61.280100000000004 pos=55.66229999999964 pos_after=172.6046999999993
+[LOG] atende condicao (id: 82) seguir em frente
+[LOG] executa mudanca (id: 82) jogada='seguir em frente'
+[LOG] simulando futuro (id: 82) jogada='seguir em frente' n_passos=500
+[LOG] (id: 82) IS CARRO NO DESTINO 55.66229999999964 0 117 33 False
+[LOG] (id: 84) atingiu limite de recursão
+[LOG] (id: 82) ret none
+[LOG] amorizar_calculo dist=49.266 pos=60.69199999999964 pos_after=170.64999999999927
+[LOG] atende condicao (id: 81) seguir em frente
+[LOG] executa mudanca (id: 81) jogada='seguir em frente'
+[LOG] simulando futuro (id: 81) jogada='seguir em frente' n_passos=324
+[LOG] (id: 81) IS CARRO NO DESTINO 55.53899999999964 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 85) nome=player_atras pos=55.53899999999964 passos=324 iter=4
+[LOG] atende condicao (id: 85) virar pra esquerda
+[LOG] executa mudanca (id: 85) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 85) jogada='virar pra esquerda' n_passos=325
+[LOG] (id: 85) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 86) atingiu limite de recursão
+[LOG] amorizar_calculo dist=61.403400000000005 pos=55.53899999999964 pos_after=172.4813999999993
+[LOG] atende condicao (id: 85) seguir em frente
+[LOG] executa mudanca (id: 85) jogada='seguir em frente'
+[LOG] simulando futuro (id: 85) jogada='seguir em frente' n_passos=822
+[LOG] (id: 85) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 87) atingiu limite de recursão
+[LOG] (id: 85) ret none
+[LOG] (id: 81) ret none
+[LOG] amorizar_calculo dist=61.403400000000005 pos=55.50929999999964 pos_after=172.4219999999993
+[LOG] atende condicao (id: 80) seguir em frente
+[LOG] executa mudanca (id: 80) jogada='seguir em frente'
+[LOG] simulando futuro (id: 80) jogada='seguir em frente' n_passos=499
+[LOG] (id: 80) IS CARRO NO DESTINO 55.50929999999964 0 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 88) nome=player_atras pos=55.50929999999964 passos=499 iter=3
+[LOG] atende condicao (id: 88) virar pra direita
+[LOG] executa mudanca (id: 88) jogada='virar pra direita'
+[LOG] simulando futuro (id: 88) jogada='virar pra direita' n_passos=500
+[LOG] (id: 88) IS CARRO NO DESTINO 83.82330000000147 1 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 89) nome=player_atras pos=83.82330000000147 passos=500 iter=4
+[LOG] atende condicao (id: 89) virar pra esquerda
+[LOG] executa mudanca (id: 89) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 89) jogada='virar pra esquerda' n_passos=501
+[LOG] (id: 89) IS CARRO NO DESTINO 83.79000000000147 0 117 33 False
+[LOG] (id: 90) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.1677 pos=83.82330000000147 pos_after=200.81430000000293
+[LOG] atende condicao (id: 89) seguir em frente
+[LOG] executa mudanca (id: 89) jogada='seguir em frente'
+[LOG] simulando futuro (id: 89) jogada='seguir em frente' n_passos=769
+[LOG] (id: 89) IS CARRO NO DESTINO 83.82330000000147 1 117 0 True
+[LOG] (id: 91) atingiu limite de recursão
+[LOG] (id: 89) ret none
+[LOG] amorizar_calculo dist=61.403400000000005 pos=55.50929999999964 pos_after=172.4219999999993
+[LOG] atende condicao (id: 88) seguir em frente
+[LOG] executa mudanca (id: 88) jogada='seguir em frente'
+[LOG] simulando futuro (id: 88) jogada='seguir em frente' n_passos=997
+[LOG] (id: 88) IS CARRO NO DESTINO 83.70000000000147 0 117 10 False
+[LOG] ====== prever_melhor_jogada (id: 92) nome=player_atras pos=83.70000000000147 passos=997 iter=4
+[LOG] atende condicao (id: 92) virar pra direita
+[LOG] executa mudanca (id: 92) jogada='virar pra direita'
+[LOG] simulando futuro (id: 92) jogada='virar pra direita' n_passos=998
+[LOG] (id: 92) IS CARRO NO DESTINO 106.23330000000232 1 117 10 False
+[LOG] (id: 93) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.291000000000004 pos=83.70000000000147 pos_after=200.69100000000293
+[LOG] atende condicao (id: 92) seguir em frente
+[LOG] executa mudanca (id: 92) jogada='seguir em frente'
+[LOG] simulando futuro (id: 92) jogada='seguir em frente' n_passos=1267
+[LOG] (id: 92) IS CARRO NO DESTINO 106.11000000000232 0 117 1 False
+[LOG] (id: 94) atingiu limite de recursão
+[LOG] (id: 92) ret none
+[LOG] (id: 88) ret none
+[LOG] (id: 80) ret none
+[LOG] amorizar_calculo dist=49.57199999999999 pos=60.38599999999964 pos_after=170.34399999999926
+[LOG] atende condicao (id: 79) seguir em frente
+[LOG] executa mudanca (id: 79) jogada='seguir em frente'
+[LOG] simulando futuro (id: 79) jogada='seguir em frente' n_passos=324
+[LOG] (id: 79) IS CARRO NO DESTINO 55.38599999999964 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 95) nome=player_atras pos=55.38599999999964 passos=324 iter=2
+[LOG] atende condicao (id: 95) virar pra esquerda
+[LOG] executa mudanca (id: 95) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 95) jogada='virar pra esquerda' n_passos=325
+[LOG] (id: 95) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 96) nome=player_atras pos=104.92830000000134 passos=325 iter=3
+[LOG] atende condicao (id: 96) virar pra direita
+[LOG] executa mudanca (id: 96) jogada='virar pra direita'
+[LOG] simulando futuro (id: 96) jogada='virar pra direita' n_passos=326
+[LOG] (id: 96) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 97) nome=player_atras pos=105.11100000000135 passos=326 iter=4
+[LOG] atende condicao (id: 97) virar pra esquerda
+[LOG] executa mudanca (id: 97) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 97) jogada='virar pra esquerda' n_passos=327
+[LOG] (id: 97) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 98) atingiu limite de recursão
+[LOG] atende condicao (id: 97) seguir em frente
+[LOG] executa mudanca (id: 97) jogada='seguir em frente'
+[LOG] simulando futuro (id: 97) jogada='seguir em frente' n_passos=327
+[LOG] (id: 97) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 99) atingiu limite de recursão
+[LOG] (id: 97) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 96) seguir em frente
+[LOG] executa mudanca (id: 96) jogada='seguir em frente'
+[LOG] simulando futuro (id: 96) jogada='seguir em frente' n_passos=422
+[LOG] (id: 96) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 100) nome=player_atras pos=104.92830000000134 passos=422 iter=4
+[LOG] atende condicao (id: 100) virar pra direita
+[LOG] executa mudanca (id: 100) jogada='virar pra direita'
+[LOG] simulando futuro (id: 100) jogada='virar pra direita' n_passos=423
+[LOG] (id: 100) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 100) ret solucao
+[LOG] (id: 96) ret player_atras 3 423 seguir em frente
+[LOG] amorizar_calculo dist=61.5267 pos=55.38599999999964 pos_after=172.29869999999926
+[LOG] atende condicao (id: 95) seguir em frente
+[LOG] executa mudanca (id: 95) jogada='seguir em frente'
+[LOG] simulando futuro (id: 95) jogada='seguir em frente' n_passos=823
+[LOG] (id: 95) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 101) nome=player_atras pos=104.80500000000134 passos=823 iter=3
+[LOG] atende condicao (id: 101) virar pra esquerda
+[LOG] executa mudanca (id: 101) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 101) jogada='virar pra esquerda' n_passos=824
+[LOG] (id: 101) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 102) nome=player_atras pos=116.12700000000177 passos=824 iter=4
+[LOG] atende condicao (id: 102) virar pra direita
+[LOG] executa mudanca (id: 102) jogada='virar pra direita'
+[LOG] simulando futuro (id: 102) jogada='virar pra direita' n_passos=825
+[LOG] (id: 102) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 102) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 101) seguir em frente
+[LOG] executa mudanca (id: 101) jogada='seguir em frente'
+[LOG] simulando futuro (id: 101) jogada='seguir em frente' n_passos=921
+[LOG] (id: 101) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 101) ret solucao
+[LOG] (id: 95) ret player_atras 2 423 virar pra esquerda
+[LOG] (id: 79) ret player_atras 1 423 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 103) nome=player_atras pos=57.068999999999626 passos=0 iter=1
+[LOG] atende condicao (id: 103) virar pra esquerda
+[LOG] executa mudanca (id: 103) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 103) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 103) IS CARRO NO DESTINO 57.192299999999626 0 117 59 False
+[LOG] ====== prever_melhor_jogada (id: 104) nome=player_atras pos=57.192299999999626 passos=1 iter=2
+[LOG] atende condicao (id: 104) virar pra direita
+[LOG] executa mudanca (id: 104) jogada='virar pra direita'
+[LOG] simulando futuro (id: 104) jogada='virar pra direita' n_passos=2
+[LOG] (id: 104) IS CARRO NO DESTINO 57.221999999999625 1 117 59 False
+[LOG] ====== prever_melhor_jogada (id: 105) nome=player_atras pos=57.221999999999625 passos=2 iter=3
+[LOG] atende condicao (id: 105) virar pra esquerda
+[LOG] executa mudanca (id: 105) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 105) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 105) IS CARRO NO DESTINO 57.345299999999625 0 117 59 False
+[LOG] ====== prever_melhor_jogada (id: 106) nome=player_atras pos=57.345299999999625 passos=3 iter=4
+[LOG] atende condicao (id: 106) virar pra direita
+[LOG] executa mudanca (id: 106) jogada='virar pra direita'
+[LOG] simulando futuro (id: 106) jogada='virar pra direita' n_passos=4
+[LOG] (id: 106) IS CARRO NO DESTINO 57.52799999999962 1 117 59 False
+[LOG] (id: 107) atingiu limite de recursão
+[LOG] amorizar_calculo dist=59.553900000000006 pos=57.345299999999625 pos_after=174.24449999999928
+[LOG] atende condicao (id: 106) seguir em frente
+[LOG] executa mudanca (id: 106) jogada='seguir em frente'
+[LOG] simulando futuro (id: 106) jogada='seguir em frente' n_passos=486
+[LOG] (id: 106) IS CARRO NO DESTINO 57.345299999999625 0 117 33 False
+[LOG] (id: 108) atingiu limite de recursão
+[LOG] (id: 106) ret none
+[LOG] amorizar_calculo dist=47.583 pos=62.37499999999962 pos_after=172.33299999999926
+[LOG] atende condicao (id: 105) seguir em frente
+[LOG] executa mudanca (id: 105) jogada='seguir em frente'
+[LOG] simulando futuro (id: 105) jogada='seguir em frente' n_passos=313
+[LOG] (id: 105) IS CARRO NO DESTINO 57.221999999999625 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 109) nome=player_atras pos=57.221999999999625 passos=313 iter=4
+[LOG] atende condicao (id: 109) virar pra esquerda
+[LOG] executa mudanca (id: 109) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 109) jogada='virar pra esquerda' n_passos=314
+[LOG] (id: 109) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 110) atingiu limite de recursão
+[LOG] amorizar_calculo dist=59.677200000000006 pos=57.221999999999625 pos_after=174.12119999999925
+[LOG] atende condicao (id: 109) seguir em frente
+[LOG] executa mudanca (id: 109) jogada='seguir em frente'
+[LOG] simulando futuro (id: 109) jogada='seguir em frente' n_passos=797
+[LOG] (id: 109) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 111) atingiu limite de recursão
+[LOG] (id: 109) ret none
+[LOG] (id: 105) ret none
+[LOG] amorizar_calculo dist=59.8005 pos=57.192299999999626 pos_after=174.18509999999924
+[LOG] atende condicao (id: 104) seguir em frente
+[LOG] executa mudanca (id: 104) jogada='seguir em frente'
+[LOG] simulando futuro (id: 104) jogada='seguir em frente' n_passos=486
+[LOG] (id: 104) IS CARRO NO DESTINO 57.192299999999626 0 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 112) nome=player_atras pos=57.192299999999626 passos=486 iter=3
+[LOG] atende condicao (id: 112) virar pra direita
+[LOG] executa mudanca (id: 112) jogada='virar pra direita'
+[LOG] simulando futuro (id: 112) jogada='virar pra direita' n_passos=487
+[LOG] (id: 112) IS CARRO NO DESTINO 83.73330000000146 1 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 113) nome=player_atras pos=83.73330000000146 passos=487 iter=4
+[LOG] atende condicao (id: 113) virar pra esquerda
+[LOG] executa mudanca (id: 113) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 113) jogada='virar pra esquerda' n_passos=488
+[LOG] (id: 113) IS CARRO NO DESTINO 83.70000000000147 0 117 33 False
+[LOG] (id: 114) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.1677 pos=83.73330000000146 pos_after=200.63430000000292
+[LOG] atende condicao (id: 113) seguir em frente
+[LOG] executa mudanca (id: 113) jogada='seguir em frente'
+[LOG] simulando futuro (id: 113) jogada='seguir em frente' n_passos=756
+[LOG] (id: 113) IS CARRO NO DESTINO 83.73330000000146 1 117 0 True
+[LOG] (id: 115) atingiu limite de recursão
+[LOG] (id: 113) ret none
+[LOG] amorizar_calculo dist=59.8005 pos=57.192299999999626 pos_after=174.18509999999924
+[LOG] atende condicao (id: 112) seguir em frente
+[LOG] executa mudanca (id: 112) jogada='seguir em frente'
+[LOG] simulando futuro (id: 112) jogada='seguir em frente' n_passos=971
+[LOG] (id: 112) IS CARRO NO DESTINO 83.61000000000146 0 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 116) nome=player_atras pos=83.61000000000146 passos=971 iter=4
+[LOG] atende condicao (id: 116) virar pra direita
+[LOG] executa mudanca (id: 116) jogada='virar pra direita'
+[LOG] simulando futuro (id: 116) jogada='virar pra direita' n_passos=972
+[LOG] (id: 116) IS CARRO NO DESTINO 105.55830000000229 1 117 11 False
+[LOG] (id: 117) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.291000000000004 pos=83.61000000000146 pos_after=200.51100000000292
+[LOG] atende condicao (id: 116) seguir em frente
+[LOG] executa mudanca (id: 116) jogada='seguir em frente'
+[LOG] simulando futuro (id: 116) jogada='seguir em frente' n_passos=1241
+[LOG] (id: 116) IS CARRO NO DESTINO 105.43500000000229 0 117 0 False
+[LOG] (id: 118) atingiu limite de recursão
+[LOG] (id: 116) ret none
+[LOG] (id: 112) ret none
+[LOG] (id: 104) ret none
+[LOG] amorizar_calculo dist=47.88899999999999 pos=62.068999999999626 pos_after=172.02699999999925
+[LOG] atende condicao (id: 103) seguir em frente
+[LOG] executa mudanca (id: 103) jogada='seguir em frente'
+[LOG] simulando futuro (id: 103) jogada='seguir em frente' n_passos=313
+[LOG] (id: 103) IS CARRO NO DESTINO 57.068999999999626 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 119) nome=player_atras pos=57.068999999999626 passos=313 iter=2
+[LOG] atende condicao (id: 119) virar pra esquerda
+[LOG] executa mudanca (id: 119) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 119) jogada='virar pra esquerda' n_passos=314
+[LOG] (id: 119) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 120) nome=player_atras pos=104.92830000000134 passos=314 iter=3
+[LOG] atende condicao (id: 120) virar pra direita
+[LOG] executa mudanca (id: 120) jogada='virar pra direita'
+[LOG] simulando futuro (id: 120) jogada='virar pra direita' n_passos=315
+[LOG] (id: 120) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 121) nome=player_atras pos=105.11100000000135 passos=315 iter=4
+[LOG] atende condicao (id: 121) virar pra esquerda
+[LOG] executa mudanca (id: 121) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 121) jogada='virar pra esquerda' n_passos=316
+[LOG] (id: 121) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 122) atingiu limite de recursão
+[LOG] atende condicao (id: 121) seguir em frente
+[LOG] executa mudanca (id: 121) jogada='seguir em frente'
+[LOG] simulando futuro (id: 121) jogada='seguir em frente' n_passos=316
+[LOG] (id: 121) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 123) atingiu limite de recursão
+[LOG] (id: 121) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 120) seguir em frente
+[LOG] executa mudanca (id: 120) jogada='seguir em frente'
+[LOG] simulando futuro (id: 120) jogada='seguir em frente' n_passos=411
+[LOG] (id: 120) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 124) nome=player_atras pos=104.92830000000134 passos=411 iter=4
+[LOG] atende condicao (id: 124) virar pra direita
+[LOG] executa mudanca (id: 124) jogada='virar pra direita'
+[LOG] simulando futuro (id: 124) jogada='virar pra direita' n_passos=412
+[LOG] (id: 124) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 124) ret solucao
+[LOG] (id: 120) ret player_atras 3 412 seguir em frente
+[LOG] amorizar_calculo dist=59.92380000000001 pos=57.068999999999626 pos_after=174.06179999999927
+[LOG] atende condicao (id: 119) seguir em frente
+[LOG] executa mudanca (id: 119) jogada='seguir em frente'
+[LOG] simulando futuro (id: 119) jogada='seguir em frente' n_passos=799
+[LOG] (id: 119) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 125) nome=player_atras pos=104.80500000000134 passos=799 iter=3
+[LOG] atende condicao (id: 125) virar pra esquerda
+[LOG] executa mudanca (id: 125) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 125) jogada='virar pra esquerda' n_passos=800
+[LOG] (id: 125) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 126) nome=player_atras pos=116.12700000000177 passos=800 iter=4
+[LOG] atende condicao (id: 126) virar pra direita
+[LOG] executa mudanca (id: 126) jogada='virar pra direita'
+[LOG] simulando futuro (id: 126) jogada='virar pra direita' n_passos=801
+[LOG] (id: 126) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 126) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 125) seguir em frente
+[LOG] executa mudanca (id: 125) jogada='seguir em frente'
+[LOG] simulando futuro (id: 125) jogada='seguir em frente' n_passos=897
+[LOG] (id: 125) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 125) ret solucao
+[LOG] (id: 119) ret player_atras 2 412 virar pra esquerda
+[LOG] (id: 103) ret player_atras 1 412 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 127) nome=player_atras pos=58.75199999999961 passos=0 iter=1
+[LOG] atende condicao (id: 127) virar pra esquerda
+[LOG] executa mudanca (id: 127) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 127) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 127) IS CARRO NO DESTINO 58.87529999999961 0 117 58 False
+[LOG] ====== prever_melhor_jogada (id: 128) nome=player_atras pos=58.87529999999961 passos=1 iter=2
+[LOG] atende condicao (id: 128) virar pra direita
+[LOG] executa mudanca (id: 128) jogada='virar pra direita'
+[LOG] simulando futuro (id: 128) jogada='virar pra direita' n_passos=2
+[LOG] (id: 128) IS CARRO NO DESTINO 58.90499999999961 1 117 58 False
+[LOG] ====== prever_melhor_jogada (id: 129) nome=player_atras pos=58.90499999999961 passos=2 iter=3
+[LOG] atende condicao (id: 129) virar pra esquerda
+[LOG] executa mudanca (id: 129) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 129) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 129) IS CARRO NO DESTINO 59.02829999999961 0 117 57 False
+[LOG] ====== prever_melhor_jogada (id: 130) nome=player_atras pos=59.02829999999961 passos=3 iter=4
+[LOG] atende condicao (id: 130) virar pra direita
+[LOG] executa mudanca (id: 130) jogada='virar pra direita'
+[LOG] simulando futuro (id: 130) jogada='virar pra direita' n_passos=4
+[LOG] (id: 130) IS CARRO NO DESTINO 59.210999999999615 1 117 57 False
+[LOG] (id: 131) atingiu limite de recursão
+[LOG] amorizar_calculo dist=57.951 pos=59.02829999999961 pos_after=176.00759999999923
+[LOG] atende condicao (id: 130) seguir em frente
+[LOG] executa mudanca (id: 130) jogada='seguir em frente'
+[LOG] simulando futuro (id: 130) jogada='seguir em frente' n_passos=473
+[LOG] (id: 130) IS CARRO NO DESTINO 59.02829999999961 0 117 33 False
+[LOG] (id: 132) atingiu limite de recursão
+[LOG] (id: 130) ret none
+[LOG] amorizar_calculo dist=45.9 pos=64.05799999999961 pos_after=174.01599999999922
+[LOG] atende condicao (id: 129) seguir em frente
+[LOG] executa mudanca (id: 129) jogada='seguir em frente'
+[LOG] simulando futuro (id: 129) jogada='seguir em frente' n_passos=302
+[LOG] (id: 129) IS CARRO NO DESTINO 58.90499999999961 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 133) nome=player_atras pos=58.90499999999961 passos=302 iter=4
+[LOG] atende condicao (id: 133) virar pra esquerda
+[LOG] executa mudanca (id: 133) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 133) jogada='virar pra esquerda' n_passos=303
+[LOG] (id: 133) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 134) atingiu limite de recursão
+[LOG] amorizar_calculo dist=58.0743 pos=58.90499999999961 pos_after=175.88429999999923
+[LOG] atende condicao (id: 133) seguir em frente
+[LOG] executa mudanca (id: 133) jogada='seguir em frente'
+[LOG] simulando futuro (id: 133) jogada='seguir em frente' n_passos=773
+[LOG] (id: 133) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 135) atingiu limite de recursão
+[LOG] (id: 133) ret none
+[LOG] (id: 129) ret none
+[LOG] amorizar_calculo dist=58.0743 pos=58.87529999999961 pos_after=175.82489999999922
+[LOG] atende condicao (id: 128) seguir em frente
+[LOG] executa mudanca (id: 128) jogada='seguir em frente'
+[LOG] simulando futuro (id: 128) jogada='seguir em frente' n_passos=472
+[LOG] (id: 128) IS CARRO NO DESTINO 58.87529999999961 0 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 136) nome=player_atras pos=58.87529999999961 passos=472 iter=3
+[LOG] atende condicao (id: 136) virar pra direita
+[LOG] executa mudanca (id: 136) jogada='virar pra direita'
+[LOG] simulando futuro (id: 136) jogada='virar pra direita' n_passos=473
+[LOG] (id: 136) IS CARRO NO DESTINO 83.59830000000146 1 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 137) nome=player_atras pos=83.59830000000146 passos=473 iter=4
+[LOG] atende condicao (id: 137) virar pra esquerda
+[LOG] executa mudanca (id: 137) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 137) jogada='virar pra esquerda' n_passos=474
+[LOG] (id: 137) IS CARRO NO DESTINO 83.56500000000146 0 117 33 False
+[LOG] (id: 138) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.291000000000004 pos=83.59830000000146 pos_after=200.48760000000294
+[LOG] atende condicao (id: 137) seguir em frente
+[LOG] executa mudanca (id: 137) jogada='seguir em frente'
+[LOG] simulando futuro (id: 137) jogada='seguir em frente' n_passos=743
+[LOG] (id: 137) IS CARRO NO DESTINO 83.59830000000146 1 117 0 True
+[LOG] (id: 139) atingiu limite de recursão
+[LOG] (id: 137) ret none
+[LOG] amorizar_calculo dist=58.0743 pos=58.87529999999961 pos_after=175.82489999999922
+[LOG] atende condicao (id: 136) seguir em frente
+[LOG] executa mudanca (id: 136) jogada='seguir em frente'
+[LOG] simulando futuro (id: 136) jogada='seguir em frente' n_passos=943
+[LOG] (id: 136) IS CARRO NO DESTINO 83.47500000000146 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 140) nome=player_atras pos=83.47500000000146 passos=943 iter=4
+[LOG] atende condicao (id: 140) virar pra direita
+[LOG] executa mudanca (id: 140) jogada='virar pra direita'
+[LOG] simulando futuro (id: 140) jogada='virar pra direita' n_passos=944
+[LOG] (id: 140) IS CARRO NO DESTINO 104.79330000000226 1 117 12 False
+[LOG] (id: 141) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.4143 pos=83.47500000000146 pos_after=200.3643000000029
+[LOG] atende condicao (id: 140) seguir em frente
+[LOG] executa mudanca (id: 140) jogada='seguir em frente'
+[LOG] simulando futuro (id: 140) jogada='seguir em frente' n_passos=1214
+[LOG] (id: 140) IS CARRO NO DESTINO 104.67000000000226 0 117 0 False
+[LOG] (id: 142) atingiu limite de recursão
+[LOG] (id: 140) ret none
+[LOG] (id: 136) ret none
+[LOG] (id: 128) ret none
+[LOG] amorizar_calculo dist=46.205999999999996 pos=63.75199999999961 pos_after=173.7099999999992
+[LOG] atende condicao (id: 127) seguir em frente
+[LOG] executa mudanca (id: 127) jogada='seguir em frente'
+[LOG] simulando futuro (id: 127) jogada='seguir em frente' n_passos=302
+[LOG] (id: 127) IS CARRO NO DESTINO 58.75199999999961 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 143) nome=player_atras pos=58.75199999999961 passos=302 iter=2
+[LOG] atende condicao (id: 143) virar pra esquerda
+[LOG] executa mudanca (id: 143) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 143) jogada='virar pra esquerda' n_passos=303
+[LOG] (id: 143) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 144) nome=player_atras pos=104.92830000000134 passos=303 iter=3
+[LOG] atende condicao (id: 144) virar pra direita
+[LOG] executa mudanca (id: 144) jogada='virar pra direita'
+[LOG] simulando futuro (id: 144) jogada='virar pra direita' n_passos=304
+[LOG] (id: 144) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 145) nome=player_atras pos=105.11100000000135 passos=304 iter=4
+[LOG] atende condicao (id: 145) virar pra esquerda
+[LOG] executa mudanca (id: 145) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 145) jogada='virar pra esquerda' n_passos=305
+[LOG] (id: 145) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 146) atingiu limite de recursão
+[LOG] atende condicao (id: 145) seguir em frente
+[LOG] executa mudanca (id: 145) jogada='seguir em frente'
+[LOG] simulando futuro (id: 145) jogada='seguir em frente' n_passos=305
+[LOG] (id: 145) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 147) atingiu limite de recursão
+[LOG] (id: 145) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 144) seguir em frente
+[LOG] executa mudanca (id: 144) jogada='seguir em frente'
+[LOG] simulando futuro (id: 144) jogada='seguir em frente' n_passos=400
+[LOG] (id: 144) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 148) nome=player_atras pos=104.92830000000134 passos=400 iter=4
+[LOG] atende condicao (id: 148) virar pra direita
+[LOG] executa mudanca (id: 148) jogada='virar pra direita'
+[LOG] simulando futuro (id: 148) jogada='virar pra direita' n_passos=401
+[LOG] (id: 148) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 148) ret solucao
+[LOG] (id: 144) ret player_atras 3 401 seguir em frente
+[LOG] amorizar_calculo dist=58.19760000000001 pos=58.75199999999961 pos_after=175.70159999999925
+[LOG] atende condicao (id: 143) seguir em frente
+[LOG] executa mudanca (id: 143) jogada='seguir em frente'
+[LOG] simulando futuro (id: 143) jogada='seguir em frente' n_passos=774
+[LOG] (id: 143) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 149) nome=player_atras pos=104.80500000000134 passos=774 iter=3
+[LOG] atende condicao (id: 149) virar pra esquerda
+[LOG] executa mudanca (id: 149) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 149) jogada='virar pra esquerda' n_passos=775
+[LOG] (id: 149) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 150) nome=player_atras pos=116.12700000000177 passos=775 iter=4
+[LOG] atende condicao (id: 150) virar pra direita
+[LOG] executa mudanca (id: 150) jogada='virar pra direita'
+[LOG] simulando futuro (id: 150) jogada='virar pra direita' n_passos=776
+[LOG] (id: 150) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 150) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 149) seguir em frente
+[LOG] executa mudanca (id: 149) jogada='seguir em frente'
+[LOG] simulando futuro (id: 149) jogada='seguir em frente' n_passos=872
+[LOG] (id: 149) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 149) ret solucao
+[LOG] (id: 143) ret player_atras 2 401 virar pra esquerda
+[LOG] (id: 127) ret player_atras 1 401 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 151) nome=player_atras pos=60.43499999999966 passos=0 iter=1
+[LOG] atende condicao (id: 151) virar pra esquerda
+[LOG] executa mudanca (id: 151) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 151) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 151) IS CARRO NO DESTINO 60.55829999999966 0 117 56 False
+[LOG] ====== prever_melhor_jogada (id: 152) nome=player_atras pos=60.55829999999966 passos=1 iter=2
+[LOG] atende condicao (id: 152) virar pra direita
+[LOG] executa mudanca (id: 152) jogada='virar pra direita'
+[LOG] simulando futuro (id: 152) jogada='virar pra direita' n_passos=2
+[LOG] (id: 152) IS CARRO NO DESTINO 60.58799999999967 1 117 56 False
+[LOG] ====== prever_melhor_jogada (id: 153) nome=player_atras pos=60.58799999999967 passos=2 iter=3
+[LOG] atende condicao (id: 153) virar pra esquerda
+[LOG] executa mudanca (id: 153) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 153) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 153) IS CARRO NO DESTINO 60.71129999999967 0 117 56 False
+[LOG] ====== prever_melhor_jogada (id: 154) nome=player_atras pos=60.71129999999967 passos=3 iter=4
+[LOG] atende condicao (id: 154) virar pra direita
+[LOG] executa mudanca (id: 154) jogada='virar pra direita'
+[LOG] simulando futuro (id: 154) jogada='virar pra direita' n_passos=4
+[LOG] (id: 154) IS CARRO NO DESTINO 60.89399999999968 1 117 56 False
+[LOG] (id: 155) atingiu limite de recursão
+[LOG] amorizar_calculo dist=56.2248 pos=60.71129999999967 pos_after=177.64739999999932
+[LOG] atende condicao (id: 154) seguir em frente
+[LOG] executa mudanca (id: 154) jogada='seguir em frente'
+[LOG] simulando futuro (id: 154) jogada='seguir em frente' n_passos=459
+[LOG] (id: 154) IS CARRO NO DESTINO 60.71129999999967 0 117 33 False
+[LOG] (id: 156) atingiu limite de recursão
+[LOG] (id: 154) ret none
+[LOG] amorizar_calculo dist=44.217 pos=65.74099999999967 pos_after=175.69899999999933
+[LOG] atende condicao (id: 153) seguir em frente
+[LOG] executa mudanca (id: 153) jogada='seguir em frente'
+[LOG] simulando futuro (id: 153) jogada='seguir em frente' n_passos=291
+[LOG] (id: 153) IS CARRO NO DESTINO 60.58799999999967 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 157) nome=player_atras pos=60.58799999999967 passos=291 iter=4
+[LOG] atende condicao (id: 157) virar pra esquerda
+[LOG] executa mudanca (id: 157) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 157) jogada='virar pra esquerda' n_passos=292
+[LOG] (id: 157) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 158) atingiu limite de recursão
+[LOG] amorizar_calculo dist=56.3481 pos=60.58799999999967 pos_after=177.52409999999935
+[LOG] atende condicao (id: 157) seguir em frente
+[LOG] executa mudanca (id: 157) jogada='seguir em frente'
+[LOG] simulando futuro (id: 157) jogada='seguir em frente' n_passos=748
+[LOG] (id: 157) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 159) atingiu limite de recursão
+[LOG] (id: 157) ret none
+[LOG] (id: 153) ret none
+[LOG] amorizar_calculo dist=56.3481 pos=60.55829999999966 pos_after=177.4646999999993
+[LOG] atende condicao (id: 152) seguir em frente
+[LOG] executa mudanca (id: 152) jogada='seguir em frente'
+[LOG] simulando futuro (id: 152) jogada='seguir em frente' n_passos=458
+[LOG] (id: 152) IS CARRO NO DESTINO 60.55829999999966 0 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 160) nome=player_atras pos=60.55829999999966 passos=458 iter=3
+[LOG] atende condicao (id: 160) virar pra direita
+[LOG] executa mudanca (id: 160) jogada='virar pra direita'
+[LOG] simulando futuro (id: 160) jogada='virar pra direita' n_passos=459
+[LOG] (id: 160) IS CARRO NO DESTINO 83.46330000000145 1 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 161) nome=player_atras pos=83.46330000000145 passos=459 iter=4
+[LOG] atende condicao (id: 161) virar pra esquerda
+[LOG] executa mudanca (id: 161) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 161) jogada='virar pra esquerda' n_passos=460
+[LOG] (id: 161) IS CARRO NO DESTINO 83.43000000000146 0 117 33 False
+[LOG] (id: 162) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.4143 pos=83.46330000000145 pos_after=200.3409000000029
+[LOG] atende condicao (id: 161) seguir em frente
+[LOG] executa mudanca (id: 161) jogada='seguir em frente'
+[LOG] simulando futuro (id: 161) jogada='seguir em frente' n_passos=730
+[LOG] (id: 161) IS CARRO NO DESTINO 83.46330000000145 1 117 0 True
+[LOG] (id: 163) atingiu limite de recursão
+[LOG] (id: 161) ret none
+[LOG] amorizar_calculo dist=56.3481 pos=60.55829999999966 pos_after=177.4646999999993
+[LOG] atende condicao (id: 160) seguir em frente
+[LOG] executa mudanca (id: 160) jogada='seguir em frente'
+[LOG] simulando futuro (id: 160) jogada='seguir em frente' n_passos=915
+[LOG] (id: 160) IS CARRO NO DESTINO 83.34000000000145 0 117 13 False
+[LOG] ====== prever_melhor_jogada (id: 164) nome=player_atras pos=83.34000000000145 passos=915 iter=4
+[LOG] atende condicao (id: 164) virar pra direita
+[LOG] executa mudanca (id: 164) jogada='virar pra direita'
+[LOG] simulando futuro (id: 164) jogada='virar pra direita' n_passos=916
+[LOG] (id: 164) IS CARRO NO DESTINO 104.02830000000223 1 117 12 False
+[LOG] (id: 165) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.537600000000005 pos=83.34000000000145 pos_after=200.2176000000029
+[LOG] atende condicao (id: 164) seguir em frente
+[LOG] executa mudanca (id: 164) jogada='seguir em frente'
+[LOG] simulando futuro (id: 164) jogada='seguir em frente' n_passos=1187
+[LOG] (id: 164) IS CARRO NO DESTINO 103.90500000000223 0 117 0 False
+[LOG] (id: 166) atingiu limite de recursão
+[LOG] (id: 164) ret none
+[LOG] (id: 160) ret none
+[LOG] (id: 152) ret none
+[LOG] amorizar_calculo dist=44.522999999999996 pos=65.43499999999966 pos_after=175.39299999999932
+[LOG] atende condicao (id: 151) seguir em frente
+[LOG] executa mudanca (id: 151) jogada='seguir em frente'
+[LOG] simulando futuro (id: 151) jogada='seguir em frente' n_passos=291
+[LOG] (id: 151) IS CARRO NO DESTINO 60.43499999999966 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 167) nome=player_atras pos=60.43499999999966 passos=291 iter=2
+[LOG] atende condicao (id: 167) virar pra esquerda
+[LOG] executa mudanca (id: 167) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 167) jogada='virar pra esquerda' n_passos=292
+[LOG] (id: 167) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 168) nome=player_atras pos=104.92830000000134 passos=292 iter=3
+[LOG] atende condicao (id: 168) virar pra direita
+[LOG] executa mudanca (id: 168) jogada='virar pra direita'
+[LOG] simulando futuro (id: 168) jogada='virar pra direita' n_passos=293
+[LOG] (id: 168) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 169) nome=player_atras pos=105.11100000000135 passos=293 iter=4
+[LOG] atende condicao (id: 169) virar pra esquerda
+[LOG] executa mudanca (id: 169) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 169) jogada='virar pra esquerda' n_passos=294
+[LOG] (id: 169) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 170) atingiu limite de recursão
+[LOG] atende condicao (id: 169) seguir em frente
+[LOG] executa mudanca (id: 169) jogada='seguir em frente'
+[LOG] simulando futuro (id: 169) jogada='seguir em frente' n_passos=294
+[LOG] (id: 169) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 171) atingiu limite de recursão
+[LOG] (id: 169) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 168) seguir em frente
+[LOG] executa mudanca (id: 168) jogada='seguir em frente'
+[LOG] simulando futuro (id: 168) jogada='seguir em frente' n_passos=389
+[LOG] (id: 168) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 172) nome=player_atras pos=104.92830000000134 passos=389 iter=4
+[LOG] atende condicao (id: 172) virar pra direita
+[LOG] executa mudanca (id: 172) jogada='virar pra direita'
+[LOG] simulando futuro (id: 172) jogada='virar pra direita' n_passos=390
+[LOG] (id: 172) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 172) ret solucao
+[LOG] (id: 168) ret player_atras 3 390 seguir em frente
+[LOG] amorizar_calculo dist=56.4714 pos=60.43499999999966 pos_after=177.34139999999934
+[LOG] atende condicao (id: 167) seguir em frente
+[LOG] executa mudanca (id: 167) jogada='seguir em frente'
+[LOG] simulando futuro (id: 167) jogada='seguir em frente' n_passos=749
+[LOG] (id: 167) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 173) nome=player_atras pos=104.80500000000134 passos=749 iter=3
+[LOG] atende condicao (id: 173) virar pra esquerda
+[LOG] executa mudanca (id: 173) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 173) jogada='virar pra esquerda' n_passos=750
+[LOG] (id: 173) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 174) nome=player_atras pos=116.12700000000177 passos=750 iter=4
+[LOG] atende condicao (id: 174) virar pra direita
+[LOG] executa mudanca (id: 174) jogada='virar pra direita'
+[LOG] simulando futuro (id: 174) jogada='virar pra direita' n_passos=751
+[LOG] (id: 174) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 174) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 173) seguir em frente
+[LOG] executa mudanca (id: 173) jogada='seguir em frente'
+[LOG] simulando futuro (id: 173) jogada='seguir em frente' n_passos=847
+[LOG] (id: 173) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 173) ret solucao
+[LOG] (id: 167) ret player_atras 2 390 virar pra esquerda
+[LOG] (id: 151) ret player_atras 1 390 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 175) nome=player_atras pos=62.117999999999725 passos=0 iter=1
+[LOG] atende condicao (id: 175) virar pra esquerda
+[LOG] executa mudanca (id: 175) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 175) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 175) IS CARRO NO DESTINO 62.241299999999725 0 117 54 False
+[LOG] ====== prever_melhor_jogada (id: 176) nome=player_atras pos=62.241299999999725 passos=1 iter=2
+[LOG] atende condicao (id: 176) virar pra direita
+[LOG] executa mudanca (id: 176) jogada='virar pra direita'
+[LOG] simulando futuro (id: 176) jogada='virar pra direita' n_passos=2
+[LOG] (id: 176) IS CARRO NO DESTINO 62.27099999999973 1 117 54 False
+[LOG] ====== prever_melhor_jogada (id: 177) nome=player_atras pos=62.27099999999973 passos=2 iter=3
+[LOG] atende condicao (id: 177) virar pra esquerda
+[LOG] executa mudanca (id: 177) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 177) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 177) IS CARRO NO DESTINO 62.39429999999973 0 117 54 False
+[LOG] ====== prever_melhor_jogada (id: 178) nome=player_atras pos=62.39429999999973 passos=3 iter=4
+[LOG] atende condicao (id: 178) virar pra direita
+[LOG] executa mudanca (id: 178) jogada='virar pra direita'
+[LOG] simulando futuro (id: 178) jogada='virar pra direita' n_passos=4
+[LOG] (id: 178) IS CARRO NO DESTINO 62.57699999999974 1 117 54 False
+[LOG] (id: 179) atingiu limite de recursão
+[LOG] amorizar_calculo dist=54.4986 pos=62.39429999999973 pos_after=179.28719999999947
+[LOG] atende condicao (id: 178) seguir em frente
+[LOG] executa mudanca (id: 178) jogada='seguir em frente'
+[LOG] simulando futuro (id: 178) jogada='seguir em frente' n_passos=445
+[LOG] (id: 178) IS CARRO NO DESTINO 62.39429999999973 0 117 33 False
+[LOG] (id: 180) atingiu limite de recursão
+[LOG] (id: 178) ret none
+[LOG] amorizar_calculo dist=42.534 pos=67.42399999999974 pos_after=177.3819999999995
+[LOG] atende condicao (id: 177) seguir em frente
+[LOG] executa mudanca (id: 177) jogada='seguir em frente'
+[LOG] simulando futuro (id: 177) jogada='seguir em frente' n_passos=280
+[LOG] (id: 177) IS CARRO NO DESTINO 62.27099999999973 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 181) nome=player_atras pos=62.27099999999973 passos=280 iter=4
+[LOG] atende condicao (id: 181) virar pra esquerda
+[LOG] executa mudanca (id: 181) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 181) jogada='virar pra esquerda' n_passos=281
+[LOG] (id: 181) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 182) atingiu limite de recursão
+[LOG] amorizar_calculo dist=54.621900000000004 pos=62.27099999999973 pos_after=179.16389999999947
+[LOG] atende condicao (id: 181) seguir em frente
+[LOG] executa mudanca (id: 181) jogada='seguir em frente'
+[LOG] simulando futuro (id: 181) jogada='seguir em frente' n_passos=723
+[LOG] (id: 181) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 183) atingiu limite de recursão
+[LOG] (id: 181) ret none
+[LOG] (id: 177) ret none
+[LOG] amorizar_calculo dist=54.745200000000004 pos=62.241299999999725 pos_after=179.22779999999943
+[LOG] atende condicao (id: 176) seguir em frente
+[LOG] executa mudanca (id: 176) jogada='seguir em frente'
+[LOG] simulando futuro (id: 176) jogada='seguir em frente' n_passos=445
+[LOG] (id: 176) IS CARRO NO DESTINO 62.241299999999725 0 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 184) nome=player_atras pos=62.241299999999725 passos=445 iter=3
+[LOG] atende condicao (id: 184) virar pra direita
+[LOG] executa mudanca (id: 184) jogada='virar pra direita'
+[LOG] simulando futuro (id: 184) jogada='virar pra direita' n_passos=446
+[LOG] (id: 184) IS CARRO NO DESTINO 83.37330000000145 1 117 33 False
+[LOG] ====== prever_melhor_jogada (id: 185) nome=player_atras pos=83.37330000000145 passos=446 iter=4
+[LOG] atende condicao (id: 185) virar pra esquerda
+[LOG] executa mudanca (id: 185) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 185) jogada='virar pra esquerda' n_passos=447
+[LOG] (id: 185) IS CARRO NO DESTINO 83.34000000000145 0 117 33 False
+[LOG] (id: 186) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.537600000000005 pos=83.37330000000145 pos_after=200.2842000000029
+[LOG] atende condicao (id: 185) seguir em frente
+[LOG] executa mudanca (id: 185) jogada='seguir em frente'
+[LOG] simulando futuro (id: 185) jogada='seguir em frente' n_passos=718
+[LOG] (id: 185) IS CARRO NO DESTINO 83.37330000000145 1 117 0 True
+[LOG] (id: 187) atingiu limite de recursão
+[LOG] (id: 185) ret none
+[LOG] amorizar_calculo dist=54.745200000000004 pos=62.241299999999725 pos_after=179.22779999999943
+[LOG] atende condicao (id: 184) seguir em frente
+[LOG] executa mudanca (id: 184) jogada='seguir em frente'
+[LOG] simulando futuro (id: 184) jogada='seguir em frente' n_passos=889
+[LOG] (id: 184) IS CARRO NO DESTINO 83.25000000000145 0 117 13 False
+[LOG] ====== prever_melhor_jogada (id: 188) nome=player_atras pos=83.25000000000145 passos=889 iter=4
+[LOG] atende condicao (id: 188) virar pra direita
+[LOG] executa mudanca (id: 188) jogada='virar pra direita'
+[LOG] simulando futuro (id: 188) jogada='virar pra direita' n_passos=890
+[LOG] (id: 188) IS CARRO NO DESTINO 103.3533000000022 1 117 13 False
+[LOG] (id: 189) atingiu limite de recursão
+[LOG] amorizar_calculo dist=33.6609 pos=83.25000000000145 pos_after=200.1609000000029
+[LOG] atende condicao (id: 188) seguir em frente
+[LOG] executa mudanca (id: 188) jogada='seguir em frente'
+[LOG] simulando futuro (id: 188) jogada='seguir em frente' n_passos=1162
+[LOG] (id: 188) IS CARRO NO DESTINO 103.2300000000022 0 117 1 False
+[LOG] (id: 190) atingiu limite de recursão
+[LOG] (id: 188) ret none
+[LOG] (id: 184) ret none
+[LOG] (id: 176) ret none
+[LOG] amorizar_calculo dist=42.839999999999996 pos=67.11799999999972 pos_after=177.07599999999945
+[LOG] atende condicao (id: 175) seguir em frente
+[LOG] executa mudanca (id: 175) jogada='seguir em frente'
+[LOG] simulando futuro (id: 175) jogada='seguir em frente' n_passos=280
+[LOG] (id: 175) IS CARRO NO DESTINO 62.117999999999725 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 191) nome=player_atras pos=62.117999999999725 passos=280 iter=2
+[LOG] atende condicao (id: 191) virar pra esquerda
+[LOG] executa mudanca (id: 191) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 191) jogada='virar pra esquerda' n_passos=281
+[LOG] (id: 191) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 192) nome=player_atras pos=104.92830000000134 passos=281 iter=3
+[LOG] atende condicao (id: 192) virar pra direita
+[LOG] executa mudanca (id: 192) jogada='virar pra direita'
+[LOG] simulando futuro (id: 192) jogada='virar pra direita' n_passos=282
+[LOG] (id: 192) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 193) nome=player_atras pos=105.11100000000135 passos=282 iter=4
+[LOG] atende condicao (id: 193) virar pra esquerda
+[LOG] executa mudanca (id: 193) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 193) jogada='virar pra esquerda' n_passos=283
+[LOG] (id: 193) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 194) atingiu limite de recursão
+[LOG] atende condicao (id: 193) seguir em frente
+[LOG] executa mudanca (id: 193) jogada='seguir em frente'
+[LOG] simulando futuro (id: 193) jogada='seguir em frente' n_passos=283
+[LOG] (id: 193) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 195) atingiu limite de recursão
+[LOG] (id: 193) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 192) seguir em frente
+[LOG] executa mudanca (id: 192) jogada='seguir em frente'
+[LOG] simulando futuro (id: 192) jogada='seguir em frente' n_passos=378
+[LOG] (id: 192) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 196) nome=player_atras pos=104.92830000000134 passos=378 iter=4
+[LOG] atende condicao (id: 196) virar pra direita
+[LOG] executa mudanca (id: 196) jogada='virar pra direita'
+[LOG] simulando futuro (id: 196) jogada='virar pra direita' n_passos=379
+[LOG] (id: 196) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 196) ret solucao
+[LOG] (id: 192) ret player_atras 3 379 seguir em frente
+[LOG] amorizar_calculo dist=54.868500000000004 pos=62.117999999999725 pos_after=179.10449999999946
+[LOG] atende condicao (id: 191) seguir em frente
+[LOG] executa mudanca (id: 191) jogada='seguir em frente'
+[LOG] simulando futuro (id: 191) jogada='seguir em frente' n_passos=725
+[LOG] (id: 191) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 197) nome=player_atras pos=104.80500000000134 passos=725 iter=3
+[LOG] atende condicao (id: 197) virar pra esquerda
+[LOG] executa mudanca (id: 197) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 197) jogada='virar pra esquerda' n_passos=726
+[LOG] (id: 197) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 198) nome=player_atras pos=116.12700000000177 passos=726 iter=4
+[LOG] atende condicao (id: 198) virar pra direita
+[LOG] executa mudanca (id: 198) jogada='virar pra direita'
+[LOG] simulando futuro (id: 198) jogada='virar pra direita' n_passos=727
+[LOG] (id: 198) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 198) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 197) seguir em frente
+[LOG] executa mudanca (id: 197) jogada='seguir em frente'
+[LOG] simulando futuro (id: 197) jogada='seguir em frente' n_passos=823
+[LOG] (id: 197) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 197) ret solucao
+[LOG] (id: 191) ret player_atras 2 379 virar pra esquerda
+[LOG] (id: 175) ret player_atras 1 379 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 199) nome=player_atras pos=63.80099999999979 passos=0 iter=1
+[LOG] atende condicao (id: 199) virar pra esquerda
+[LOG] executa mudanca (id: 199) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 199) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 199) IS CARRO NO DESTINO 63.76500000000071 0 117 53 False
+[LOG] ====== prever_melhor_jogada (id: 200) nome=player_atras pos=63.76500000000071 passos=1 iter=2
+[LOG] atende condicao (id: 200) virar pra direita
+[LOG] executa mudanca (id: 200) jogada='virar pra direita'
+[LOG] simulando futuro (id: 200) jogada='virar pra direita' n_passos=2
+[LOG] (id: 200) IS CARRO NO DESTINO 63.953999999999795 1 117 53 False
+[LOG] ====== prever_melhor_jogada (id: 201) nome=player_atras pos=63.953999999999795 passos=2 iter=3
+[LOG] atende condicao (id: 201) virar pra esquerda
+[LOG] executa mudanca (id: 201) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 201) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 201) IS CARRO NO DESTINO 63.855000000000715 0 117 53 False
+[LOG] ====== prever_melhor_jogada (id: 202) nome=player_atras pos=63.855000000000715 passos=3 iter=4
+[LOG] atende condicao (id: 202) virar pra direita
+[LOG] executa mudanca (id: 202) jogada='virar pra direita'
+[LOG] simulando futuro (id: 202) jogada='virar pra direita' n_passos=4
+[LOG] (id: 202) IS CARRO NO DESTINO 64.2599999999998 1 117 52 False
+[LOG] (id: 203) atingiu limite de recursão
+[LOG] amorizar_calculo dist=41.085 pos=68.90000000000072 pos_after=178.88500000000144
+[LOG] atende condicao (id: 202) seguir em frente
+[LOG] executa mudanca (id: 202) jogada='seguir em frente'
+[LOG] simulando futuro (id: 202) jogada='seguir em frente' n_passos=916
+[LOG] (id: 202) IS CARRO NO DESTINO 63.855000000000715 0 117 12 False
+[LOG] (id: 204) atingiu limite de recursão
+[LOG] (id: 202) ret none
+[LOG] amorizar_calculo dist=40.851 pos=69.1069999999998 pos_after=179.0649999999996
+[LOG] atende condicao (id: 201) seguir em frente
+[LOG] executa mudanca (id: 201) jogada='seguir em frente'
+[LOG] simulando futuro (id: 201) jogada='seguir em frente' n_passos=269
+[LOG] (id: 201) IS CARRO NO DESTINO 63.953999999999795 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 205) nome=player_atras pos=63.953999999999795 passos=269 iter=4
+[LOG] atende condicao (id: 205) virar pra esquerda
+[LOG] executa mudanca (id: 205) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 205) jogada='virar pra esquerda' n_passos=270
+[LOG] (id: 205) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] (id: 206) atingiu limite de recursão
+[LOG] amorizar_calculo dist=53.019000000000005 pos=63.953999999999795 pos_after=180.9269999999996
+[LOG] atende condicao (id: 205) seguir em frente
+[LOG] executa mudanca (id: 205) jogada='seguir em frente'
+[LOG] simulando futuro (id: 205) jogada='seguir em frente' n_passos=699
+[LOG] (id: 205) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] (id: 207) atingiu limite de recursão
+[LOG] (id: 205) ret none
+[LOG] (id: 201) ret none
+[LOG] amorizar_calculo dist=41.175 pos=68.81000000000071 pos_after=178.79500000000144
+[LOG] atende condicao (id: 200) seguir em frente
+[LOG] executa mudanca (id: 200) jogada='seguir em frente'
+[LOG] simulando futuro (id: 200) jogada='seguir em frente' n_passos=916
+[LOG] (id: 200) IS CARRO NO DESTINO 63.76500000000071 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 208) nome=player_atras pos=63.76500000000071 passos=916 iter=3
+[LOG] atende condicao (id: 208) virar pra direita
+[LOG] executa mudanca (id: 208) jogada='virar pra direita'
+[LOG] simulando futuro (id: 208) jogada='virar pra direita' n_passos=917
+[LOG] (id: 208) IS CARRO NO DESTINO 105.06330000000227 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 209) nome=player_atras pos=105.06330000000227 passos=917 iter=4
+[LOG] atende condicao (id: 209) virar pra esquerda
+[LOG] executa mudanca (id: 209) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 209) jogada='virar pra esquerda' n_passos=918
+[LOG] (id: 209) IS CARRO NO DESTINO 105.03000000000227 0 117 11 False
+[LOG] (id: 210) atingiu limite de recursão
+[LOG] amorizar_calculo dist=11.8368 pos=105.06330000000227 pos_after=221.96340000000453
+[LOG] atende condicao (id: 209) seguir em frente
+[LOG] executa mudanca (id: 209) jogada='seguir em frente'
+[LOG] simulando futuro (id: 209) jogada='seguir em frente' n_passos=1013
+[LOG] (id: 209) IS CARRO NO DESTINO 105.06330000000227 1 117 0 True
+[LOG] (id: 211) atingiu limite de recursão
+[LOG] (id: 209) ret none
+[LOG] amorizar_calculo dist=53.142300000000006 pos=63.76500000000071 pos_after=180.67230000000143
+[LOG] atende condicao (id: 208) seguir em frente
+[LOG] executa mudanca (id: 208) jogada='seguir em frente'
+[LOG] simulando futuro (id: 208) jogada='seguir em frente' n_passos=1347
+[LOG] (id: 208) IS CARRO NO DESTINO 104.94000000000227 0 117 7 False
+[LOG] ====== prever_melhor_jogada (id: 212) nome=player_atras pos=104.94000000000227 passos=1347 iter=4
+[LOG] atende condicao (id: 212) virar pra direita
+[LOG] executa mudanca (id: 212) jogada='virar pra direita'
+[LOG] simulando futuro (id: 212) jogada='virar pra direita' n_passos=1348
+[LOG] (id: 212) IS CARRO NO DESTINO 124.4583000000026 1 117 7 False
+[LOG] (id: 213) atingiu limite de recursão
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.94000000000227 pos_after=221.84010000000455
+[LOG] atende condicao (id: 212) seguir em frente
+[LOG] executa mudanca (id: 212) jogada='seguir em frente'
+[LOG] simulando futuro (id: 212) jogada='seguir em frente' n_passos=1444
+[LOG] (id: 212) IS CARRO NO DESTINO 124.3350000000026 0 117 11 False
+[LOG] (id: 214) atingiu limite de recursão
+[LOG] (id: 212) ret none
+[LOG] (id: 208) ret none
+[LOG] (id: 200) ret none
+[LOG] amorizar_calculo dist=41.157 pos=68.80099999999979 pos_after=178.75899999999956
+[LOG] atende condicao (id: 199) seguir em frente
+[LOG] executa mudanca (id: 199) jogada='seguir em frente'
+[LOG] simulando futuro (id: 199) jogada='seguir em frente' n_passos=269
+[LOG] (id: 199) IS CARRO NO DESTINO 63.80099999999979 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 215) nome=player_atras pos=63.80099999999979 passos=269 iter=2
+[LOG] atende condicao (id: 215) virar pra esquerda
+[LOG] executa mudanca (id: 215) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 215) jogada='virar pra esquerda' n_passos=270
+[LOG] (id: 215) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 216) nome=player_atras pos=104.92830000000134 passos=270 iter=3
+[LOG] atende condicao (id: 216) virar pra direita
+[LOG] executa mudanca (id: 216) jogada='virar pra direita'
+[LOG] simulando futuro (id: 216) jogada='virar pra direita' n_passos=271
+[LOG] (id: 216) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 217) nome=player_atras pos=105.11100000000135 passos=271 iter=4
+[LOG] atende condicao (id: 217) virar pra esquerda
+[LOG] executa mudanca (id: 217) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 217) jogada='virar pra esquerda' n_passos=272
+[LOG] (id: 217) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 218) atingiu limite de recursão
+[LOG] atende condicao (id: 217) seguir em frente
+[LOG] executa mudanca (id: 217) jogada='seguir em frente'
+[LOG] simulando futuro (id: 217) jogada='seguir em frente' n_passos=272
+[LOG] (id: 217) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 219) atingiu limite de recursão
+[LOG] (id: 217) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 216) seguir em frente
+[LOG] executa mudanca (id: 216) jogada='seguir em frente'
+[LOG] simulando futuro (id: 216) jogada='seguir em frente' n_passos=367
+[LOG] (id: 216) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 220) nome=player_atras pos=104.92830000000134 passos=367 iter=4
+[LOG] atende condicao (id: 220) virar pra direita
+[LOG] executa mudanca (id: 220) jogada='virar pra direita'
+[LOG] simulando futuro (id: 220) jogada='virar pra direita' n_passos=368
+[LOG] (id: 220) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 220) ret solucao
+[LOG] (id: 216) ret player_atras 3 368 seguir em frente
+[LOG] amorizar_calculo dist=53.142300000000006 pos=63.80099999999979 pos_after=180.74429999999958
+[LOG] atende condicao (id: 215) seguir em frente
+[LOG] executa mudanca (id: 215) jogada='seguir em frente'
+[LOG] simulando futuro (id: 215) jogada='seguir em frente' n_passos=700
+[LOG] (id: 215) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 221) nome=player_atras pos=104.80500000000134 passos=700 iter=3
+[LOG] atende condicao (id: 221) virar pra esquerda
+[LOG] executa mudanca (id: 221) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 221) jogada='virar pra esquerda' n_passos=701
+[LOG] (id: 221) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 222) nome=player_atras pos=116.12700000000177 passos=701 iter=4
+[LOG] atende condicao (id: 222) virar pra direita
+[LOG] executa mudanca (id: 222) jogada='virar pra direita'
+[LOG] simulando futuro (id: 222) jogada='virar pra direita' n_passos=702
+[LOG] (id: 222) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 222) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 221) seguir em frente
+[LOG] executa mudanca (id: 221) jogada='seguir em frente'
+[LOG] simulando futuro (id: 221) jogada='seguir em frente' n_passos=798
+[LOG] (id: 221) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 221) ret solucao
+[LOG] (id: 215) ret player_atras 2 368 virar pra esquerda
+[LOG] (id: 199) ret player_atras 1 368 seguir em frente
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 223) nome=player_atras pos=65.48399999999985 passos=0 iter=1
+[LOG] atende condicao (id: 223) virar pra esquerda
+[LOG] executa mudanca (id: 223) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 223) jogada='virar pra esquerda' n_passos=1
+[LOG] (id: 223) IS CARRO NO DESTINO 64.26000000000073 0 117 52 False
+[LOG] ====== prever_melhor_jogada (id: 224) nome=player_atras pos=64.26000000000073 passos=1 iter=2
+[LOG] atende condicao (id: 224) virar pra direita
+[LOG] executa mudanca (id: 224) jogada='virar pra direita'
+[LOG] simulando futuro (id: 224) jogada='virar pra direita' n_passos=2
+[LOG] (id: 224) IS CARRO NO DESTINO 64.38330000000073 1 117 52 False
+[LOG] ====== prever_melhor_jogada (id: 225) nome=player_atras pos=64.38330000000073 passos=2 iter=3
+[LOG] atende condicao (id: 225) virar pra esquerda
+[LOG] executa mudanca (id: 225) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 225) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 225) IS CARRO NO DESTINO 64.35000000000073 0 117 52 False
+[LOG] ====== prever_melhor_jogada (id: 226) nome=player_atras pos=64.35000000000073 passos=3 iter=4
+[LOG] atende condicao (id: 226) virar pra direita
+[LOG] executa mudanca (id: 226) jogada='virar pra direita'
+[LOG] simulando futuro (id: 226) jogada='virar pra direita' n_passos=4
+[LOG] (id: 226) IS CARRO NO DESTINO 64.47330000000073 1 117 52 False
+[LOG] (id: 227) atingiu limite de recursão
+[LOG] amorizar_calculo dist=40.589999999999996 pos=69.39500000000073 pos_after=179.38000000000147
+[LOG] atende condicao (id: 226) seguir em frente
+[LOG] executa mudanca (id: 226) jogada='seguir em frente'
+[LOG] simulando futuro (id: 226) jogada='seguir em frente' n_passos=905
+[LOG] (id: 226) IS CARRO NO DESTINO 64.35000000000073 0 117 12 False
+[LOG] (id: 228) atingiu limite de recursão
+[LOG] (id: 226) ret none
+[LOG] amorizar_calculo dist=52.525800000000004 pos=64.38330000000073 pos_after=181.29240000000146
+[LOG] atende condicao (id: 225) seguir em frente
+[LOG] executa mudanca (id: 225) jogada='seguir em frente'
+[LOG] simulando futuro (id: 225) jogada='seguir em frente' n_passos=428
+[LOG] (id: 225) IS CARRO NO DESTINO 64.38330000000073 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 229) nome=player_atras pos=64.38330000000073 passos=428 iter=4
+[LOG] atende condicao (id: 229) virar pra esquerda
+[LOG] executa mudanca (id: 229) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 229) jogada='virar pra esquerda' n_passos=429
+[LOG] (id: 229) IS CARRO NO DESTINO 116.0460000000009 0 117 0 False
+[LOG] (id: 230) atingiu limite de recursão
+[LOG] amorizar_calculo dist=52.525800000000004 pos=64.38330000000073 pos_after=181.29240000000146
+[LOG] atende condicao (id: 229) seguir em frente
+[LOG] executa mudanca (id: 229) jogada='seguir em frente'
+[LOG] simulando futuro (id: 229) jogada='seguir em frente' n_passos=854
+[LOG] (id: 229) IS CARRO NO DESTINO 116.0460000000009 1 117 0 True
+[LOG] (id: 229) ret solucao
+[LOG] (id: 225) ret player_atras 3 429 seguir em frente
+[LOG] amorizar_calculo dist=40.67999999999999 pos=69.30500000000073 pos_after=179.29000000000144
+[LOG] atende condicao (id: 224) seguir em frente
+[LOG] executa mudanca (id: 224) jogada='seguir em frente'
+[LOG] simulando futuro (id: 224) jogada='seguir em frente' n_passos=905
+[LOG] (id: 224) IS CARRO NO DESTINO 64.26000000000073 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 231) nome=player_atras pos=64.26000000000073 passos=905 iter=3
+[LOG] atende condicao (id: 231) virar pra direita
+[LOG] executa mudanca (id: 231) jogada='virar pra direita'
+[LOG] simulando futuro (id: 231) jogada='virar pra direita' n_passos=906
+[LOG] (id: 231) IS CARRO NO DESTINO 105.06330000000227 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 232) nome=player_atras pos=105.06330000000227 passos=906 iter=4
+[LOG] atende condicao (id: 232) virar pra esquerda
+[LOG] executa mudanca (id: 232) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 232) jogada='virar pra esquerda' n_passos=907
+[LOG] (id: 232) IS CARRO NO DESTINO 105.03000000000227 0 117 11 False
+[LOG] (id: 233) atingiu limite de recursão
+[LOG] amorizar_calculo dist=11.8368 pos=105.06330000000227 pos_after=221.96340000000453
+[LOG] atende condicao (id: 232) seguir em frente
+[LOG] executa mudanca (id: 232) jogada='seguir em frente'
+[LOG] simulando futuro (id: 232) jogada='seguir em frente' n_passos=1002
+[LOG] (id: 232) IS CARRO NO DESTINO 105.06330000000227 1 117 0 True
+[LOG] (id: 234) atingiu limite de recursão
+[LOG] (id: 232) ret none
+[LOG] amorizar_calculo dist=52.6491 pos=64.26000000000073 pos_after=181.16910000000146
+[LOG] atende condicao (id: 231) seguir em frente
+[LOG] executa mudanca (id: 231) jogada='seguir em frente'
+[LOG] simulando futuro (id: 231) jogada='seguir em frente' n_passos=1332
+[LOG] (id: 231) IS CARRO NO DESTINO 104.94000000000227 0 117 7 False
+[LOG] ====== prever_melhor_jogada (id: 235) nome=player_atras pos=104.94000000000227 passos=1332 iter=4
+[LOG] atende condicao (id: 235) virar pra direita
+[LOG] executa mudanca (id: 235) jogada='virar pra direita'
+[LOG] simulando futuro (id: 235) jogada='virar pra direita' n_passos=1333
+[LOG] (id: 235) IS CARRO NO DESTINO 124.27830000000264 1 117 7 False
+[LOG] (id: 236) atingiu limite de recursão
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.94000000000227 pos_after=221.84010000000455
+[LOG] atende condicao (id: 235) seguir em frente
+[LOG] executa mudanca (id: 235) jogada='seguir em frente'
+[LOG] simulando futuro (id: 235) jogada='seguir em frente' n_passos=1429
+[LOG] (id: 235) IS CARRO NO DESTINO 124.15500000000264 0 117 11 False
+[LOG] (id: 237) atingiu limite de recursão
+[LOG] (id: 235) ret none
+[LOG] (id: 231) ret none
+[LOG] (id: 224) ret player_atras 2 429 virar pra direita
+[LOG] amorizar_calculo dist=39.474 pos=70.48399999999985 pos_after=180.44199999999972
+[LOG] atende condicao (id: 223) seguir em frente
+[LOG] executa mudanca (id: 223) jogada='seguir em frente'
+[LOG] simulando futuro (id: 223) jogada='seguir em frente' n_passos=258
+[LOG] (id: 223) IS CARRO NO DESTINO 65.48399999999985 1 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 238) nome=player_atras pos=65.48399999999985 passos=258 iter=2
+[LOG] atende condicao (id: 238) virar pra esquerda
+[LOG] executa mudanca (id: 238) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 238) jogada='virar pra esquerda' n_passos=259
+[LOG] (id: 238) IS CARRO NO DESTINO 104.92830000000134 0 117 12 False
+[LOG] ====== prever_melhor_jogada (id: 239) nome=player_atras pos=104.92830000000134 passos=259 iter=3
+[LOG] atende condicao (id: 239) virar pra direita
+[LOG] executa mudanca (id: 239) jogada='virar pra direita'
+[LOG] simulando futuro (id: 239) jogada='virar pra direita' n_passos=260
+[LOG] (id: 239) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] ====== prever_melhor_jogada (id: 240) nome=player_atras pos=105.11100000000135 passos=260 iter=4
+[LOG] atende condicao (id: 240) virar pra esquerda
+[LOG] executa mudanca (id: 240) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 240) jogada='virar pra esquerda' n_passos=261
+[LOG] (id: 240) IS CARRO NO DESTINO 105.23430000000135 0 117 11 False
+[LOG] (id: 241) atingiu limite de recursão
+[LOG] atende condicao (id: 240) seguir em frente
+[LOG] executa mudanca (id: 240) jogada='seguir em frente'
+[LOG] simulando futuro (id: 240) jogada='seguir em frente' n_passos=261
+[LOG] (id: 240) IS CARRO NO DESTINO 105.11100000000135 1 117 11 False
+[LOG] (id: 242) atingiu limite de recursão
+[LOG] (id: 240) ret none
+[LOG] amorizar_calculo dist=11.960099999999999 pos=104.92830000000134 pos_after=221.8167000000027
+[LOG] atende condicao (id: 239) seguir em frente
+[LOG] executa mudanca (id: 239) jogada='seguir em frente'
+[LOG] simulando futuro (id: 239) jogada='seguir em frente' n_passos=356
+[LOG] (id: 239) IS CARRO NO DESTINO 104.92830000000134 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 243) nome=player_atras pos=104.92830000000134 passos=356 iter=4
+[LOG] atende condicao (id: 243) virar pra direita
+[LOG] executa mudanca (id: 243) jogada='virar pra direita'
+[LOG] simulando futuro (id: 243) jogada='virar pra direita' n_passos=357
+[LOG] (id: 243) IS CARRO NO DESTINO 116.88840000000138 1 117 0 True
+[LOG] (id: 243) ret solucao
+[LOG] (id: 239) ret player_atras 3 357 seguir em frente
+[LOG] amorizar_calculo dist=51.4161 pos=65.48399999999985 pos_after=182.3840999999997
+[LOG] atende condicao (id: 238) seguir em frente
+[LOG] executa mudanca (id: 238) jogada='seguir em frente'
+[LOG] simulando futuro (id: 238) jogada='seguir em frente' n_passos=675
+[LOG] (id: 238) IS CARRO NO DESTINO 104.80500000000134 1 117 0 True
+[LOG] ====== prever_melhor_jogada (id: 244) nome=player_atras pos=104.80500000000134 passos=675 iter=3
+[LOG] atende condicao (id: 244) virar pra esquerda
+[LOG] executa mudanca (id: 244) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 244) jogada='virar pra esquerda' n_passos=676
+[LOG] (id: 244) IS CARRO NO DESTINO 116.12700000000177 0 117 0 False
+[LOG] ====== prever_melhor_jogada (id: 245) nome=player_atras pos=116.12700000000177 passos=676 iter=4
+[LOG] atende condicao (id: 245) virar pra direita
+[LOG] executa mudanca (id: 245) jogada='virar pra direita'
+[LOG] simulando futuro (id: 245) jogada='virar pra direita' n_passos=677
+[LOG] (id: 245) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 245) ret solucao
+[LOG] amorizar_calculo dist=12.083400000000001 pos=104.80500000000134 pos_after=221.69340000000267
+[LOG] atende condicao (id: 244) seguir em frente
+[LOG] executa mudanca (id: 244) jogada='seguir em frente'
+[LOG] simulando futuro (id: 244) jogada='seguir em frente' n_passos=773
+[LOG] (id: 244) IS CARRO NO DESTINO 116.12700000000177 1 117 0 True
+[LOG] (id: 244) ret solucao
+[LOG] (id: 238) ret player_atras 2 357 virar pra esquerda
+[LOG] (id: 223) ret player_atras 1 357 virar pra esquerda
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}
+[LOG] < -------- buscando jogadas...
+[LOG] ====== prever_melhor_jogada (id: 246) nome=player_frente pos=104.00000000000205 passos=0 iter=1
+[LOG] atende condicao (id: 246) virar pra direita
+[LOG] executa mudanca (id: 246) jogada='virar pra direita'
+[LOG] simulando futuro (id: 246) jogada='virar pra direita' n_passos=1
+[LOG] (id: 246) IS CARRO NO DESTINO 104.04500000000205 1 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 247) nome=player_frente pos=104.04500000000205 passos=1 iter=2
+[LOG] atende condicao (id: 247) virar pra esquerda
+[LOG] executa mudanca (id: 247) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 247) jogada='virar pra esquerda' n_passos=2
+[LOG] (id: 247) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 248) nome=player_frente pos=104.95800000000135 passos=2 iter=3
+[LOG] atende condicao (id: 248) virar pra direita
+[LOG] executa mudanca (id: 248) jogada='virar pra direita'
+[LOG] simulando futuro (id: 248) jogada='virar pra direita' n_passos=3
+[LOG] (id: 248) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] ====== prever_melhor_jogada (id: 249) nome=player_frente pos=105.00300000000135 passos=3 iter=4
+[LOG] atende condicao (id: 249) virar pra esquerda
+[LOG] executa mudanca (id: 249) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 249) jogada='virar pra esquerda' n_passos=4
+[LOG] (id: 249) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] (id: 250) atingiu limite de recursão
+[LOG] amorizar_calculo dist=4.995 pos=105.00300000000135 pos_after=215.0010000000027
+[LOG] atende condicao (id: 249) seguir em frente
+[LOG] executa mudanca (id: 249) jogada='seguir em frente'
+[LOG] simulando futuro (id: 249) jogada='seguir em frente' n_passos=114
+[LOG] (id: 249) IS CARRO NO DESTINO 105.00300000000135 1 110 0 True
+[LOG] (id: 251) atingiu limite de recursão
+[LOG] (id: 249) ret none
+[LOG] atende condicao (id: 248) seguir em frente
+[LOG] executa mudanca (id: 248) jogada='seguir em frente'
+[LOG] simulando futuro (id: 248) jogada='seguir em frente' n_passos=3
+[LOG] (id: 248) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 252) nome=player_frente pos=104.95800000000135 passos=3 iter=4
+[LOG] atende condicao (id: 252) virar pra direita
+[LOG] executa mudanca (id: 252) jogada='virar pra direita'
+[LOG] simulando futuro (id: 252) jogada='virar pra direita' n_passos=4
+[LOG] (id: 252) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] (id: 253) atingiu limite de recursão
+[LOG] atende condicao (id: 252) seguir em frente
+[LOG] executa mudanca (id: 252) jogada='seguir em frente'
+[LOG] simulando futuro (id: 252) jogada='seguir em frente' n_passos=4
+[LOG] (id: 252) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] (id: 254) atingiu limite de recursão
+[LOG] (id: 252) ret none
+[LOG] (id: 248) ret none
+[LOG] amorizar_calculo dist=5.9399999999999995 pos=104.04500000000205 pos_after=214.0300000000041
+[LOG] atende condicao (id: 247) seguir em frente
+[LOG] executa mudanca (id: 247) jogada='seguir em frente'
+[LOG] simulando futuro (id: 247) jogada='seguir em frente' n_passos=133
+[LOG] (id: 247) IS CARRO NO DESTINO 104.04500000000205 1 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 255) nome=player_frente pos=104.04500000000205 passos=133 iter=3
+[LOG] atende condicao (id: 255) virar pra esquerda
+[LOG] executa mudanca (id: 255) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 255) jogada='virar pra esquerda' n_passos=134
+[LOG] (id: 255) IS CARRO NO DESTINO 109.04000000000224 0 110 0 False
+[LOG] ====== prever_melhor_jogada (id: 256) nome=player_frente pos=109.04000000000224 passos=134 iter=4
+[LOG] atende condicao (id: 256) virar pra direita
+[LOG] executa mudanca (id: 256) jogada='virar pra direita'
+[LOG] simulando futuro (id: 256) jogada='virar pra direita' n_passos=135
+[LOG] (id: 256) IS CARRO NO DESTINO 109.04000000000224 1 110 0 True
+[LOG] (id: 256) ret solucao
+[LOG] amorizar_calculo dist=0.9450000000000001 pos=109.04000000000224 pos_after=219.02500000000447
+[LOG] atende condicao (id: 255) seguir em frente
+[LOG] executa mudanca (id: 255) jogada='seguir em frente'
+[LOG] simulando futuro (id: 255) jogada='seguir em frente' n_passos=154
+[LOG] (id: 255) IS CARRO NO DESTINO 109.04000000000224 1 110 0 True
+[LOG] (id: 255) ret solucao
+[LOG] (id: 247) ret player_frente 2 134 seguir em frente
+[LOG] atende condicao (id: 246) seguir em frente
+[LOG] executa mudanca (id: 246) jogada='seguir em frente'
+[LOG] simulando futuro (id: 246) jogada='seguir em frente' n_passos=1
+[LOG] (id: 246) IS CARRO NO DESTINO 104.00000000000205 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 257) nome=player_frente pos=104.00000000000205 passos=1 iter=2
+[LOG] atende condicao (id: 257) virar pra direita
+[LOG] executa mudanca (id: 257) jogada='virar pra direita'
+[LOG] simulando futuro (id: 257) jogada='virar pra direita' n_passos=2
+[LOG] (id: 257) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] ====== prever_melhor_jogada (id: 258) nome=player_frente pos=105.00300000000135 passos=2 iter=3
+[LOG] atende condicao (id: 258) virar pra esquerda
+[LOG] executa mudanca (id: 258) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 258) jogada='virar pra esquerda' n_passos=3
+[LOG] (id: 258) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 259) nome=player_frente pos=104.95800000000135 passos=3 iter=4
+[LOG] atende condicao (id: 259) virar pra direita
+[LOG] executa mudanca (id: 259) jogada='virar pra direita'
+[LOG] simulando futuro (id: 259) jogada='virar pra direita' n_passos=4
+[LOG] (id: 259) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] (id: 260) atingiu limite de recursão
+[LOG] atende condicao (id: 259) seguir em frente
+[LOG] executa mudanca (id: 259) jogada='seguir em frente'
+[LOG] simulando futuro (id: 259) jogada='seguir em frente' n_passos=4
+[LOG] (id: 259) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] (id: 261) atingiu limite de recursão
+[LOG] (id: 259) ret none
+[LOG] amorizar_calculo dist=4.995 pos=105.00300000000135 pos_after=215.0010000000027
+[LOG] atende condicao (id: 258) seguir em frente
+[LOG] executa mudanca (id: 258) jogada='seguir em frente'
+[LOG] simulando futuro (id: 258) jogada='seguir em frente' n_passos=113
+[LOG] (id: 258) IS CARRO NO DESTINO 105.00300000000135 1 110 0 True
+[LOG] ====== prever_melhor_jogada (id: 262) nome=player_frente pos=105.00300000000135 passos=113 iter=4
+[LOG] atende condicao (id: 262) virar pra esquerda
+[LOG] executa mudanca (id: 262) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 262) jogada='virar pra esquerda' n_passos=114
+[LOG] (id: 262) IS CARRO NO DESTINO 109.0080000000015 0 110 0 False
+[LOG] (id: 263) atingiu limite de recursão
+[LOG] amorizar_calculo dist=0.9899999999999999 pos=109.0080000000015 pos_after=219.00600000000298
+[LOG] atende condicao (id: 262) seguir em frente
+[LOG] executa mudanca (id: 262) jogada='seguir em frente'
+[LOG] simulando futuro (id: 262) jogada='seguir em frente' n_passos=135
+[LOG] (id: 262) IS CARRO NO DESTINO 109.0080000000015 1 110 0 True
+[LOG] (id: 262) ret solucao
+[LOG] (id: 258) ret player_frente 3 114 seguir em frente
+[LOG] amorizar_calculo dist=5.04 pos=104.95800000000135 pos_after=214.9560000000027
+[LOG] atende condicao (id: 257) seguir em frente
+[LOG] executa mudanca (id: 257) jogada='seguir em frente'
+[LOG] simulando futuro (id: 257) jogada='seguir em frente' n_passos=113
+[LOG] (id: 257) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 264) nome=player_frente pos=104.95800000000135 passos=113 iter=3
+[LOG] atende condicao (id: 264) virar pra direita
+[LOG] executa mudanca (id: 264) jogada='virar pra direita'
+[LOG] simulando futuro (id: 264) jogada='virar pra direita' n_passos=114
+[LOG] (id: 264) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] ====== prever_melhor_jogada (id: 265) nome=player_frente pos=105.00300000000135 passos=114 iter=4
+[LOG] atende condicao (id: 265) virar pra esquerda
+[LOG] executa mudanca (id: 265) jogada='virar pra esquerda'
+[LOG] simulando futuro (id: 265) jogada='virar pra esquerda' n_passos=115
+[LOG] (id: 265) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] (id: 266) atingiu limite de recursão
+[LOG] amorizar_calculo dist=4.995 pos=105.00300000000135 pos_after=215.0010000000027
+[LOG] atende condicao (id: 265) seguir em frente
+[LOG] executa mudanca (id: 265) jogada='seguir em frente'
+[LOG] simulando futuro (id: 265) jogada='seguir em frente' n_passos=225
+[LOG] (id: 265) IS CARRO NO DESTINO 105.00300000000135 1 110 0 True
+[LOG] (id: 267) atingiu limite de recursão
+[LOG] (id: 265) ret none
+[LOG] atende condicao (id: 264) seguir em frente
+[LOG] executa mudanca (id: 264) jogada='seguir em frente'
+[LOG] simulando futuro (id: 264) jogada='seguir em frente' n_passos=114
+[LOG] (id: 264) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] ====== prever_melhor_jogada (id: 268) nome=player_frente pos=104.95800000000135 passos=114 iter=4
+[LOG] atende condicao (id: 268) virar pra direita
+[LOG] executa mudanca (id: 268) jogada='virar pra direita'
+[LOG] simulando futuro (id: 268) jogada='virar pra direita' n_passos=115
+[LOG] (id: 268) IS CARRO NO DESTINO 105.00300000000135 1 110 4 False
+[LOG] (id: 269) atingiu limite de recursão
+[LOG] atende condicao (id: 268) seguir em frente
+[LOG] executa mudanca (id: 268) jogada='seguir em frente'
+[LOG] simulando futuro (id: 268) jogada='seguir em frente' n_passos=115
+[LOG] (id: 268) IS CARRO NO DESTINO 104.95800000000135 0 110 5 False
+[LOG] (id: 270) atingiu limite de recursão
+[LOG] (id: 268) ret none
+[LOG] (id: 264) ret none
+[LOG] (id: 257) ret player_frente 2 114 virar pra direita
+[LOG] (id: 246) ret player_frente 1 114 virar pra direita
+[LOG] < -------- jogada encontrada: {jogadas[0].nome}

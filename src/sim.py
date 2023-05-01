@@ -341,22 +341,20 @@ class Simulation:
             )
 
             if carro_alem_da_pista:
-                proximas_pistas = []
+                # [TODO] implentação de update em múltiplas pistas
                 # pega as proximas pistas
                 # existe alguma pista?
                 #  se não: volta na faixa sentido contrário
                 #   se não tem: adicionar alguma flag de "stuck"
                 #  se sim: quantas?
                 #   se 1: vai pra ela
-                #   se >: 
+                #   se >:
                 #       se tem decisão feita: usa
                 #       se não: dijkstra
                 #           se não tem caminho: volta na faixa sentido contrário
                 #               se tem faixa sentido contrário: volta
                 #               se não: adicionar alguma flag de "stuck"
                 #           se tem: usa
-
-                if proxima_pista:
 
                 carro.posicao = carro.pista.get_comprimento() - COMPRIMENTO_CARRO
             elif carro_a_frente is not None:

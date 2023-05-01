@@ -2,50 +2,13 @@
   "pistas": [
     {
       "p1": [10, 50],
-      "p2": [90, 50],
+      "p2": [150, 50],
       "velocidade_maxima": 80,
       "faixas": [
         {
           "tipo": "geral",
           "sentido": "normal"
         },
-        {
-          "tipo": "geral",
-          "sentido": "normal"
-        }
-      ]
-    },
-    {
-      "p1": [90, 50],
-      "p2": [160, 50],
-      "velocidade_maxima": 80,
-      "faixas": [
-        {
-          "tipo": "geral",
-          "sentido": "normal"
-        },
-        {
-          "tipo": "geral",
-          "sentido": "normal"
-        }
-      ]
-    },
-    {
-      "p1": [90, 50],
-      "p2": [100, 60],
-      "velocidade_maxima": 80,
-      "faixas": [
-        {
-          "tipo": "geral",
-          "sentido": "normal"
-        }
-      ]
-    },
-    {
-      "p1": [100, 60],
-      "p2": [140, 60],
-      "velocidade_maxima": 80,
-      "faixas": [
         {
           "tipo": "geral",
           "sentido": "normal"
@@ -67,14 +30,14 @@
       },
       "destino": {
         "pista": 0,
-        "faixa": 0,
+        "faixa": 1,
         "posicao": 117
       }
     },
     {
       "nome": "player_frente",
       "cor": "#ff8899",
-      "velocidade": 1.8,
+      "velocidade": 1.5,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
       "origem": {
@@ -83,9 +46,9 @@
         "posicao": 50
       },
       "destino": {
-        "pista": 2,
-        "faixa": 0,
-        "posicao": 100
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 110
       }
     },
     {
@@ -96,12 +59,12 @@
       "aceleracao": "4.0",
       "origem": {
         "pista": 0,
-        "faixa": 0,
+        "faixa": 1,
         "posicao": 5
       },
       "destino": {
         "pista": 0,
-        "faixa": 1,
+        "faixa": 0,
         "posicao": 110
       }
     }

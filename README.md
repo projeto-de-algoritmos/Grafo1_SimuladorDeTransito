@@ -35,7 +35,8 @@ O objetivo do projeto é **calcular a estratégia ótima que carros dirigindo em
 
 Isso é feito a partir de um processo de **simulação**. Cada carro possui parâmetros de como irá dirigir (por exemplo, a velocidade máxima que ele se sente confortável em acelerar dentro da via), e o projeto **assume que todos os carros querem chegar ao seu destino o mais rápido possível**.
 
-As decisões que um carro pode tomar são apenas 3, cada uma caso a possibilidade se faça presente:
+As decisões que um carro pode tomar são apenas essas, cada uma caso a possibilidade se faça presente:
+- Seguir em frente.
 - Virar para esquerda.
 - Virar para direita.
 - Seguir para outra pista.

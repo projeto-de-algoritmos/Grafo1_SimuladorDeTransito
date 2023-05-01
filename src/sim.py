@@ -351,6 +351,10 @@ class Simulation:
                 #   se >: 
                 #       se tem decisão feita: usa
                 #       se não: dijkstra
+                #           se não tem caminho: volta na faixa sentido contrário
+                #               se tem faixa sentido contrário: volta
+                #               se não: adicionar alguma flag de "stuck"
+                #           se tem: usa
 
                 if proxima_pista:
 

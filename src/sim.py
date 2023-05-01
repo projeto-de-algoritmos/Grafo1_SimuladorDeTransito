@@ -188,31 +188,27 @@ class Simulation:
 
     grafo_pista: Grafo
 
-    bfs_index: int
-
     next_jogadas_ignoradas: dict[str, int]  # [nome_do_carro]next_cooldown
     prever_jogada_cooldown: int
     skip_prever_jogada_for_ms: int
     time_init: datetime.datetime
+    limite_de_recursao: int
 
     def __init__(
         self,
         cenario_file,
         tick=DEFAULT_TICK,
+        limite_de_recursao=0,
         prever_jogada_cooldown=0,
         skip_prever_jogada_for_ms=0,
     ):
         self.next_jogadas_ignoradas = {}
-
-        pistas, carros = self.read(cenario_file)
-
-        self.pistas = pistas
-        self.carros = carros
+        self.prever_jogada_cooldown = prever_jogada_cooldown
 
         self.running = True
-        self.prever_jogada_cooldown = prever_jogada_cooldown
         self.skip_prever_jogada_for_ms = skip_prever_jogada_for_ms
         self.time_init = datetime.datetime.now()
+        self.limite_de_recursao = limite_de_recursao
 
         self.tick = tick
         self.tick_rate = 1000 / tick
@@ -221,6 +217,11 @@ class Simulation:
 
         global BFS_I
         BFS_I = 0
+
+        pistas, carros = self.read(cenario_file)
+
+        self.pistas = pistas
+        self.carros = carros
 
     def clonar(self) -> "Simulation":
         return copy.deepcopy(self)
@@ -234,7 +235,8 @@ class Simulation:
         pistas = []
         carros: dict[str, Carro] = {}
 
-        for carro in data["carros"]:
+        for i in range(len(data["carros"])):
+            carro = data["carros"][i]
             nome = carro["nome"]
 
             origem = Local(
@@ -263,7 +265,14 @@ class Simulation:
             )
 
             carros[nome] = carro_obj
-            self.next_jogadas_ignoradas[nome] = 0
+
+            # isso daqui define o cooldown de previsões de futuro para cada carro
+            # fazemos aqui dessa forma para que cada carro tenha seu calculo realizado
+            # em um momento diferente. quando o cálculo é pesado, isso remove um gargalo
+            # incial na simulação. para entender intuitivamente, altere o valor para 0.
+            self.next_jogadas_ignoradas[nome] = int(
+                self.prever_jogada_cooldown * i / len(data["carros"])
+            )
 
         for i in range(len(data["pistas"])):
             pista = data["pistas"][i]
@@ -305,13 +314,18 @@ class Simulation:
 
             velocidade, carro_a_frente = self.get_carro_velocidade(carro)
 
-            if carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO:
+            aproximacao_maxima = COMPRIMENTO_CARRO + DISTANCIA_MINIMA_CARRO_A_FRENTE
+
+            carro_alem_da_pista = (
+                carro.posicao > carro.pista.get_comprimento() - COMPRIMENTO_CARRO
+            )
+
+            if carro_alem_da_pista:
                 carro.posicao = carro.pista.get_comprimento() - COMPRIMENTO_CARRO
+            elif carro_a_frente is not None:
+                carro.posicao = carro_a_frente.posicao - aproximacao_maxima
             else:
-                if carro_a_frente is not None:
-                    carro.posicao = carro_a_frente.posicao - COMPRIMENTO_CARRO
-                else:
-                    carro.posicao += velocidade * self.delta_t
+                carro.posicao += velocidade * self.delta_t
 
             if (
                 prever_jogada
@@ -489,7 +503,7 @@ class Simulation:
         id = BFS_I
 
         # se superamos a quantidade de iteração, retornamos
-        if iter > MAX_SIM_ITER_COUNT:
+        if iter > self.limite_de_recursao:
             lprint(f"(id: {id}) atingiu limite de recursão")
             return [], 1e18
 

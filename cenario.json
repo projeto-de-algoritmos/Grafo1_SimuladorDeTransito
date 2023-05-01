@@ -19,15 +19,13 @@
   "carros": [
     {
       "nome": "player_atras",
-      "cor": "#99aaff",
+      "cor": "#99ddff",
       "velocidade": 4.11,
       "max_rvel": 1.2,
       "aceleracao": "4.0",
       "origem": {
         "pista": 0,
-        "faixa": 1
-        
-        ,
+        "faixa": 0,
         "posicao": 15
       },
       "destino": {
@@ -44,12 +42,29 @@
       "aceleracao": "4.0",
       "origem": {
         "pista": 0,
-        "faixa": 1,
+        "faixa": 0,
         "posicao": 50
       },
       "destino": {
         "pista": 0,
         "faixa": 1,
+        "posicao": 110
+      }
+    },
+    {
+      "nome": "player_mais_atras",
+      "cor": "#ff8899",
+      "velocidade": 5.1,
+      "max_rvel": 1.2,
+      "aceleracao": "4.0",
+      "origem": {
+        "pista": 0,
+        "faixa": 1,
+        "posicao": 5
+      },
+      "destino": {
+        "pista": 0,
+        "faixa": 0,
         "posicao": 110
       }
     }

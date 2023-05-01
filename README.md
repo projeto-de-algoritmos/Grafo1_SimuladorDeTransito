@@ -159,12 +159,12 @@ Essa parametrização dos atributos da simulação nesse projeto foi feito à pa
 
 Uma potencial expansão do projeto seria incluir na decisão ótima local um certo nível de iterações de cálculo da decisão ótima local de outros carros. Ou seja, cada carro calculará uma decisão ótima local mais simples para cada outro carro durante cada passo da simulação separadamente (como um motorista faria). Claramente, a complexidade assintótica disso é alta demais e preferi não o fazer.
 
-O programa deve ser capaz de dar instruções em texto do que deveria ser feito.
-
 Todos os carros médios tem 4 metros de comprimento.
 Todos os carros mantem um distância mínima de 1 metro.
 Todos os carros calculam e mudam de velocidade instantaneamenete.
 A posição de um carro é dada pela sua frente.
+
+No atual estado do projeto, ele **não é determinístico**. Ou seja, o mesmo cenário pode "acontecer" de formas diferentes. O motivo é porque o tempo de execução do programa causa efeitos colaterais, como o tempo para a primeira previsão de jogada do `skip_prever_jogada_for_ms`. O computador pode executar a previsão de jogada para um carro de forma imprevisível antes de outro, e daí executar uma ação que o carro realiza. O conserto de problema seria simplesmente evitar que um chamada para `Simulation.update()` possa calcular um carro fora da ordem em relação a outro. Escolhi não fazer esse conserto pois fica mais dinâmico a cada execução.
 
 ### Configuração do app
 
@@ -178,6 +178,7 @@ A posição de um carro é dada pela sua frente.
 - **max_fps**: fps máximo (quanto mais, mais o computador vai se esforçar pra reproduzir a simulação)
 - **tick**: milissegundos entre cada passo da simulação (taxa de atualização da física)
 - **cenario_file**: nome do arquivo de cenário
+- **limite_de_recursao**: quantos passos no futuro o carro tentará prever (menor ~ mais performático)
 - **prever_jogada_cooldown**: número de vezes evitará recalcular rota de um carro com tentativa recente
 - **skip_prever_jogada_for_ms**: pula previsão de jogadas nos primeiros milissegundos de exceução, para observar-mos o que ocorre logo nas primeiras decisões visualmente.
 

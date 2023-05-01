@@ -1,6 +1,6 @@
 # Simulador De Trânsito
 
-**Número da Lista**: 5 Turma T02
+**Número da Lista**: 5 (T02)<br>
 **Conteúdo da Disciplina**: Projetos de Algoritmos<br>
 
 ## Alunos

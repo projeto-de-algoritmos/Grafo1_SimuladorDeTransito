@@ -14,21 +14,16 @@
 
 ## Screenshots
 
-*Execução do exemplo do cenário T1*
-
-![pa_g2](https://user-images.githubusercontent.com/45462822/235490452-987bafa9-0be6-4870-a414-874a4500001c.gif)
-
-
 *Execução do exemplo do cenário T2*
-
-![pa_g1](https://user-images.githubusercontent.com/45462822/235490452-987bafa9-0be6-4870-a414-874a4500001c.gif)
-
+![t2](https://user-images.githubusercontent.com/45462822/235520419-e84d74fb-02b9-4484-b64d-883f76aa1ada.gif)
 
 *Execução do exemplo do cenário T3*
 
-![pa_g3](https://user-images.githubusercontent.com/45462822/235490452-987bafa9-0be6-4870-a414-874a4500001c.gif)
+![t3](https://user-images.githubusercontent.com/45462822/235520424-0a2474c7-d7ce-4f22-b6df-761f1b13859a.gif)
 
+*Execução do exemplo do cenário T4*
 
+![t4](https://user-images.githubusercontent.com/45462822/235521288-aaf55163-6271-44a1-8fc9-0a1fa996c7c6.gif)
 
 ### Nota para o avaliador
 

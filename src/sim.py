@@ -341,6 +341,19 @@ class Simulation:
             )
 
             if carro_alem_da_pista:
+                proximas_pistas = []
+                # pega as proximas pistas
+                # existe alguma pista?
+                #  se não: volta na faixa sentido contrátio
+                #   se não tem: stuck
+                #  se sim: quantas?
+                #   se 1: vai pra ela
+                #   se >: 
+                #       se tem decisão feita: usa
+                #       se não: dijkstra
+
+                if proxima_pista:
+
                 carro.posicao = carro.pista.get_comprimento() - COMPRIMENTO_CARRO
             elif carro_a_frente is not None:
                 carro.posicao = carro_a_frente.posicao - aproximacao_maxima

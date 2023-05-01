@@ -1,11 +1,11 @@
 {
   "resolution": [800, 600],
-  "render_scale": 4,
+  "render_scale": 4.5,
   "fullscreen": false,
   "max_fps": 60,
   "tick": 10,
   "cenario_file": "cenario.json",
   "limite_de_recursao": 5,
   "prever_jogada_cooldown": 100,
-  "skip_prever_jogada_for_ms": 1000
+  "skip_prever_jogada_for_ms": 500
 }

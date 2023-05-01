@@ -1,6 +1,6 @@
 # config
 DEBUG = True
-LOG_ENABLED = True
+LOG_ENABLED = False
 
 # tempo EM MICROSSEGUNDOS
 SEC_IN_MICROSECONDS = 10e6
@@ -21,7 +21,7 @@ def scaled(x):
 
 
 # tamanho físico (da simulação) EM METROS
-LARGURA_DIVISORIA = 1
+LARGURA_DIVISORIA = 0.3
 LARGURA_FAIXA = 3
 LARGURA_CARRO = 2
 COMPRIMENTO_CARRO = 5  # metros

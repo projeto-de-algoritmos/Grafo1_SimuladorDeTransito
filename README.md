@@ -11,7 +11,7 @@
 
 ## Sobre 
 
-![output](https://user-images.githubusercontent.com/45462822/234572198-92541791-dfe1-40c4-8ca3-9baee5ac4f16.gif)
+![pa_g2](https://user-images.githubusercontent.com/45462822/235490452-987bafa9-0be6-4870-a414-874a4500001c.gif)
 
 ### Nota para o avaliador
 

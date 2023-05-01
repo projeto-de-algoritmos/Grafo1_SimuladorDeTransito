@@ -344,8 +344,8 @@ class Simulation:
                 proximas_pistas = []
                 # pega as proximas pistas
                 # existe alguma pista?
-                #  se não: volta na faixa sentido contrátio
-                #   se não tem: stuck
+                #  se não: volta na faixa sentido contrário
+                #   se não tem: adicionar alguma flag de "stuck"
                 #  se sim: quantas?
                 #   se 1: vai pra ela
                 #   se >: 

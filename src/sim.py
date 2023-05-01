@@ -291,11 +291,30 @@ class Simulation:
 
             pistas.append(pista)
 
+        # self.contruir_grafo_pistas(pistas)
+
         return pistas, carros
 
     def contruir_grafo_pistas(self, pistas):
-        print(pistas)
-        pass
+        grafo = Grafo()
+        grafo.add_nodes(len(pistas))
+
+        for i in range(len(pistas)):
+            for j in range(len(pistas)):
+                if i == j:
+                    continue
+
+                if (
+                    pistas[i].p1 == pistas[j].p1
+                    or pistas[i].p1 == pistas[j].p2
+                    or pistas[i].p2 == pistas[j].p1
+                    or pistas[i].p2 == pistas[j].p2
+                ):
+                    # [TODO] fazer checagem se edge é possível, como numa pista de
+                    # mão única que desemboca em outra, nunca é possível entrar nela,
+                    # portanto a aresta não existe
+                    grafo.add_edge(i, j)
+                    grafo.add_edge(j, i)
 
     def read_and_parse_json_file(self, path):
         with open(path, "r") as f:

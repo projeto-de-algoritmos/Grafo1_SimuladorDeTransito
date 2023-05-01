@@ -2,6 +2,21 @@
   "pistas": [
     {
       "p1": [10, 50],
+      "p2": [90, 50],
+      "velocidade_maxima": 80,
+      "faixas": [
+        {
+          "tipo": "geral",
+          "sentido": "normal"
+        },
+        {
+          "tipo": "geral",
+          "sentido": "normal"
+        }
+      ]
+    },
+    {
+      "p1": [90, 50],
       "p2": [160, 50],
       "velocidade_maxima": 80,
       "faixas": [

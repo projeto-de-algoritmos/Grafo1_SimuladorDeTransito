@@ -6,11 +6,19 @@
       "velocidade_maxima": 80,
       "faixas": [
         {
+          "tipo": "acostamento",
+          "sentido": "normal"
+        },
+        {
           "tipo": "geral",
           "sentido": "normal"
         },
         {
           "tipo": "geral",
+          "sentido": "contrario"
+        },
+        {
+          "tipo": "acostamento",
           "sentido": "normal"
         }
       ]

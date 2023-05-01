@@ -27,6 +27,16 @@ class DrawItem:
             item[1] *= RENDER_SCALE
 
         pygame.draw.polygon(scr, cor, rect)
+        global I_R
+        try:
+            I_R
+        except:
+            I_R = 1
+        I_R = I_R + 1
+        if I_R > 10 and type(cor) is not str and cor[1] == 180:
+            pygame.display.flip()
+            time.sleep(10000)
+            exit(0)
 
 
 class Drawer:
@@ -106,10 +116,12 @@ class PistaDrawer(DrawItem):
         for faixa in self.pista.faixas:
             if last_faixa is not None:
                 dlt = fx * LARGURA_FAIXA + dv * LARGURA_DIVISORIA
+                dprint(f"calling draw_divisoria with dlt={dlt}")
                 self.draw_divisoria(dlt, scr, last_faixa, faixa)
                 dv += 1
 
             dlt = fx * LARGURA_FAIXA + dv * LARGURA_DIVISORIA
+            dprint(f"calling draw_faixa with dlt={dlt}")
             self.draw_faixa(dlt, scr, faixa)
 
             last_faixa = faixa
@@ -141,6 +153,7 @@ class PistaDrawer(DrawItem):
     def montar_faixa_divisoria_retangulo(
         self, p1: point, p2: point, dlt: float, clargura: float
     ) -> poligno:
+        dprint(f"montar_rect p1={p1} p2={p2} dlt={dlt} clargura={clargura}")
         # vetor perpendicular a pista, seu tamanho é metade da largura da pista
         v12 = get_vetor(p1, p2)
         v12 = rotacionar_vetor_horario(v12, rad=math.pi / 2)
@@ -220,13 +233,14 @@ class PistaDrawer(DrawItem):
         faixa_anterior: Faixa,
         faixa_proxima: Faixa,
     ):
+        dprint(f"draw divisoria dlt={dlt}")
         cor = self.get_cor_divisoria(faixa_anterior, faixa_proxima)
 
         rect = self.montar_faixa_divisoria_retangulo(
             self.pista.p1, self.pista.p2, dlt, LARGURA_DIVISORIA
         )
 
-        # dprint("draw divisoria color", cor, rect)
+        dprint("draw divisoria color", cor, rect)
         self.draw_polygon(scr, cor, rect)
 
     def draw_faixa(self, dlt: float, scr: pygame.Surface, faixa: Faixa):
@@ -240,10 +254,8 @@ class PistaDrawer(DrawItem):
             self.pista.p1, self.pista.p2, dlt, LARGURA_FAIXA
         )
 
-        # dprint("draw faixa color", cor, rect)
+        dprint(f"draw faixa rect={rect}")
         self.draw_polygon(scr, cor, rect)
-
-        return dlt
 
     def draw_carro(self, scr: pygame.Surface, carro: Carro):
         rect = self.montar_carro_retangulo2(carro)

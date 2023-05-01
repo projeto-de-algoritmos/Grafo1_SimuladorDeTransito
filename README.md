@@ -71,23 +71,43 @@ O projeto também possui uma interface gráfica, onde a simulação é executava
 
 ### Configurar ambiente
 
-Você pode usar um virtual environment ou rodar na sua máquina instalando o pacote diretamente de com pip.
+O projeto usa:
+- python3 (3.10.6)
+- pip3 (22.0.2)
+- make (4.3)
 
+Se não quiser usar o make, basta rodar: 
 ```
 pip install -r requirements.txt
 ```
 
-Dependências: `pygame`.
+Se quiser usar o make, instale com: 
+
+```sh
+# windows
+choco install make
+
+# ubuntu
+sudo apt install make
+```
+
+E rode:
+
+```
+make deps
+```
+
+Dependências pip: `pygame`.
 
 ### Executar
 
 Basta rodar:
 
 ```bash
-python src/main.py
+python3 -m src
 ```
 
-Ou
+Com make:
 
 ```bash
 make run

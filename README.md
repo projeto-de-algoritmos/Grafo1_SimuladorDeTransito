@@ -8,9 +8,6 @@
 | ---------- | -------------------- |
 | 18/0027239 | Renato Britto Araujo |
 
-## Sobre 
-
-"[...] dispusestes tudo com **medida, quantidade e peso**" - Sabedoria 11:20, Bíblia Católica.
 
 ## Screenshots
 
@@ -24,6 +21,8 @@
 *Execução do exemplo do cenário T4*
 
 ![t4](https://user-images.githubusercontent.com/45462822/235521288-aaf55163-6271-44a1-8fc9-0a1fa996c7c6.gif)
+
+## Sobre 
 
 ### Nota para o avaliador
 
@@ -57,13 +56,12 @@ O cenário é feita a partir de um arquivo json. No geral, criar um cenário nov
 
 O projeto também possui uma interface gráfica, onde a simulação é executava visualmente para ficar intuitivo o uso.
 
-## Instalação 
+"[...] dispusestes tudo com **medida, quantidade e peso**" - Sabedoria 11:20, Bíblia Católica.
+
+## Instalação & Uso
+
 **Linguagem**: Python3<br>
 **Framework**: Pygame<br>
-
-<!-- Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários. -->
-
-## Uso 
 
 ### Configurar ambiente
 
@@ -202,9 +200,6 @@ No atual estado do projeto, ele **não é determinístico**. Ou seja, o mesmo ce
   - Caso encontre uma solução, pare a exploração (ou seja, todas os passos devem consumir o mesmo "tempo" para poder parar na primeira solução).
   - Caso demore demais, decida baseado no limite máximo de exploração
   - Uma solução impossível = Uma solução que demorou demais.
-
-
-
 
 ### Falhas do modelo
 

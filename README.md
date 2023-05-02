@@ -175,7 +175,7 @@ No atual estado do projeto, ele **não é determinístico**. Ou seja, o mesmo ce
 - **cenario_file**: nome do arquivo de cenário
 - **limite_de_recursao**: quantos passos no futuro o carro tentará prever (menor ~ mais performático)
 - **prever_jogada_cooldown**: número de vezes evitará recalcular rota de um carro com tentativa recente
-- **skip_prever_jogada_for_ms**: pula previsão de jogadas nos primeiros milissegundos de exceução, para observar-mos o que ocorre logo nas primeiras decisões visualmente.
+- **skip_prever_jogada_for_ms**: pula previsão de jogadas nos primeiros milissegundos de exceução, para observarmos o que ocorre logo nas primeiras decisões visualmente.
 
 ### Lista de tarefas
 

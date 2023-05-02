@@ -12,6 +12,7 @@
 ## Screenshots
 
 *Execução do exemplo do cenário T2*
+
 ![t2](https://user-images.githubusercontent.com/45462822/235520419-e84d74fb-02b9-4484-b64d-883f76aa1ada.gif)
 
 *Execução do exemplo do cenário T3*

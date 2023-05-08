@@ -29,6 +29,8 @@
 
 No arquivo `src/sim.py`, função `prever_melhor_jogada()`, você pode encontrar o DFS, que seria o objetivo do projeto.
 
+**O vídeo mostrando o código rodando ainda não está feito!**
+
 ### Simulação
 
 O objetivo do projeto é **calcular a estratégia ótima que carros dirigindo em pistas irão adotar em múltiplos cenários adversariais** (todos contra todos). Atingidos esse objetivos, isso nos permite analisar e teorizar heurísticas para decisões efetivas num contexto de trânsito, sendo o projeto um estudo de teoria dos jogos.

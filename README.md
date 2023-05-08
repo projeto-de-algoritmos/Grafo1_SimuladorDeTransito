@@ -29,7 +29,7 @@
 
 No arquivo `src/sim.py`, função `prever_melhor_jogada()`, você pode encontrar o DFS, que seria o objetivo do projeto.
 
-**O vídeo mostrando o código rodando ainda não está feito!**
+Video a `v1` desse projeto na pasta `video`.
 
 ### Simulação
 
